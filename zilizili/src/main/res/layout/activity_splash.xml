@@ -16,6 +16,6 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="10dp"
-        android:src="@mipmap/ic_splash_icon" />
+        android:src="@drawable/ic_splash_icon" />
 
 </RelativeLayout>
