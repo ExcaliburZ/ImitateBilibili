@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<level-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ic_ar_adjust_video" android:maxLevel="0" />
+    <item android:drawable="@drawable/ic_ar_adjust_screen" android:maxLevel="1" />
+    <item android:drawable="@drawable/ic_ar_4_3_inside" android:maxLevel="2" />
+    <item android:drawable="@drawable/ic_ar_16_9_inside" android:maxLevel="3" />
+    <item android:drawable="@drawable/ic_ar_4_3_crop" android:maxLevel="4" />
+    <item android:drawable="@drawable/ic_ar_16_9_crop" android:maxLevel="5" />
+</level-list>

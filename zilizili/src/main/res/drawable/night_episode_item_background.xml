@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_selected="false" android:state_pressed="true">
+        <shape>
+            <corners android:radius="3.0dip" />
+            <padding android:left="4.0dip" android:top="4.0dip" android:right="4.0dip" android:bottom="4.0dip" />
+            <solid android:color="@color/pink_trans" />
+        </shape>
+    </item>
+    <item android:state_selected="true" android:state_pressed="true">
+        <shape>
+            <corners android:radius="3.0dip" />
+            <padding android:left="4.0dip" android:top="4.0dip" android:right="4.0dip" android:bottom="4.0dip" />
+            <solid android:color="@color/pink_dark" />
+        </shape>
+    </item>
+    <item android:state_selected="true">
+        <shape>
+            <corners android:radius="3.0dip" />
+            <padding android:left="4.0dip" android:top="4.0dip" android:right="4.0dip" android:bottom="4.0dip" />
+            <stroke android:width="1.0dip" android:color="@color/pink_dark" />
+            <solid android:color="@color/gray_trans" />
+        </shape>
+    </item>
+    <item>
+        <shape>
+            <corners android:radius="3.0dip" />
+            <stroke android:width="1.0px" android:color="@color/gray_trans" />
+            <padding android:left="4.0dip" android:top="4.0dip" android:right="4.0dip" android:bottom="4.0dip" />
+            <solid android:color="@color/gray_trans" />
+        </shape>
+    </item>
+</selector>

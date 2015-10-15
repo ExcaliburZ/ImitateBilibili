@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:state_focused="true" android:state_pressed="true" android:drawable="@drawable/bili_player_control_item_background_transition" />
+    <item android:state_focused="false" android:state_pressed="true" android:drawable="@drawable/bili_player_control_item_background_transition" />
+    <item android:state_focused="true" android:drawable="@drawable/bili_player_control_item_background_focused" />
+    <item android:drawable="@android:color/transparent" />
+</selector>

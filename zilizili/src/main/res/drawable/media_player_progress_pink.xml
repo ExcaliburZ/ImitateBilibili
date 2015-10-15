@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:id="@android:id/background" android:top="@dimen/player_seekbar_inset_value" android:bottom="@dimen/player_seekbar_inset_value">
+        <inset android:insetTop="@dimen/player_seekbar_inset_value" android:insetBottom="@dimen/player_seekbar_inset_value">
+            <shape android:shape="rectangle">
+                <solid android:color="@color/_progress__alpha_gray" />
+            </shape>
+        </inset>
+    </item>
+    <item android:id="@android:id/secondaryProgress" android:top="@dimen/player_seekbar_inset_value" android:bottom="@dimen/player_seekbar_inset_value">
+        <clip>
+            <inset android:insetTop="@dimen/player_seekbar_inset_value" android:insetBottom="@dimen/player_seekbar_inset_value">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/_progress__aplha_pink" />
+                </shape>
+            </inset>
+        </clip>
+    </item>
+    <item android:id="@android:id/progress" android:top="@dimen/player_seekbar_inset_value" android:bottom="@dimen/player_seekbar_inset_value">
+        <clip>
+            <inset android:insetTop="@dimen/player_seekbar_inset_value" android:insetBottom="@dimen/player_seekbar_inset_value">
+                <shape android:shape="rectangle">
+                    <solid android:color="@color/_progress__pink" />
+                </shape>
+            </inset>
+        </clip>
+    </item>
+</layer-list>
