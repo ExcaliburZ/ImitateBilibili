@@ -1,9 +1,14 @@
 <resources>
+
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
         <item name="splashImage">@drawable/ic_splash_default</item>
+        <!-- Button的默认背景 -->
+        <item name="android:colorButtonNormal">@color/gray</item>
+        <!-- 控件按压时颜色，会影响水波纹效果，继承自colorAccent  -->
+        <item name="android:colorControlHighlight">#a000</item>
     </style>
 </resources>

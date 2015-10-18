@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
     <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,6 +11,7 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:fitsSystemWindows="true"
         tools:context=".MainActivity">
 
         <android.support.design.widget.AppBarLayout
@@ -24,9 +24,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:navigationIcon="@drawable/bili_default_avatar"
+                app:navigationIcon="@drawable/abc_btn_check_to_on_mtrl_000"
                 app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="未注册" />
+                app:title="未登录" />
         </android.support.design.widget.AppBarLayout>
 
         <include layout="@layout/content_main" />
@@ -43,9 +43,10 @@
 
     <include
         layout="@layout/menu_left"
-        android:layout_width="250dp"
+        android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start" />
+
 </android.support.v4.widget.DrawerLayout>
 
 
