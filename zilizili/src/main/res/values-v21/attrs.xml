@@ -13,8 +13,10 @@
     <attr name="stringValue" format="string" />
     <attr name="referenceValue" format="color|reference" />
     <attr name="imageValue" format="reference" />
-
+    <attr name="tab_text_selector" format="reference" />
+    <attr name="pop_menu_style" format="reference" />
     <attr name="splashImage" format="reference" />
+    <attr name="theme_color_primary" format="color" />
 
     <attr name="curVisibility">
         <enum name="show" value="0" />

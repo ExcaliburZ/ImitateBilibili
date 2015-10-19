@@ -9,6 +9,18 @@
         <!-- Button，textView的文字颜色  -->
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">12sp</item>
+        <item name="tab_text_selector">@color/daily_tab_text_color</item>
+        <item name="pop_menu_style">@style/AppTheme.Light.Pink.PopMenu</item>
+        <item name="theme_color_primary">@color/colorPrimary</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+    </style>
+
+    <style name="AppTheme.Light.Pink.PopMenu" parent="@style/ThemeOverlay.AppCompat.Light">
+        <item name="android:listSelector">@drawable/item_background</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/item_background</item>
+        <item name="colorControlNormal">@color/gray_dark</item>
+        <item name="colorControlActivated">?theme_color_primary</item>
+        <item name="colorControlHighlight">@color/gray_trans</item>
     </style>
 
     <style name="menu_item">
@@ -24,8 +36,56 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+
+
+    <style name="Widget.App.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:background">?colorPrimary</item>
+        <item name="contentInsetStart">0.0dip</item>
+        <item name="popupTheme">?pop_menu_style</item>
+        <item name="titleTextAppearance">@style/TextAppearance.App.Topbar.Title</item>
+        <item name="subtitleTextAppearance">@style/TextAppearance.App.Topbar.Subtitle</item>
+        <item name="titleMargins">4.0dip</item>
+        <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="TextAppearance.App.Topbar.Subtitle" parent="@style/TextAppearance.App.Subtitle">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
+    <style name="TextAppearance.App.Medium" parent="@style/TextAppearance.App">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
+
+    <style name="TextAppearance.App.Subtitle" parent="@style/TextAppearance.App.Medium" />
+
+    <style name="TextAppearance.App.Tab.Title" parent="@style/TextAppearance.App.Title">
+        <item name="android:textColor">?tab_text_selector</item>
+    </style>
+
+    <style name="TextAppearance.App.Title" parent="@style/TextAppearance.App.Large">
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.App.Topbar.Title" parent="@style/TextAppearance.App.XLarge">
+        <item name="android:textColor">@color/white</item>
+    </style>
+
     <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light">
         <item name="android:textSize">30sp</item>
+    </style>
+
+    <style name="TextAppearance.App.Large" parent="@style/TextAppearance.App">
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="TextAppearance.App.XLarge" parent="@style/TextAppearance.App">
+        <item name="android:textSize">@dimen/text_size_xlarge</item>
+        <item name="android:textColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="TextAppearance.App" parent="@style/TextAppearance.AppCompat">
+        <item name="android:textSize">@dimen/text_size_medium</item>
     </style>
 
     <style name="AppTheme.NoActionBar.FullScreen" parent="@style/AppTheme.NoActionBar">

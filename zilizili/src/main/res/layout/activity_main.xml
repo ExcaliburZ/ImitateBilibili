@@ -18,15 +18,20 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:theme="@style/AppTheme.AppBarOverlay">
-
+            <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
+                style="?attr/toolbarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 android:background="?attr/colorPrimary"
-                app:navigationIcon="@drawable/abc_btn_check_to_on_mtrl_000"
-                app:popupTheme="@style/AppTheme.PopupOverlay"
-                app:title="未登录" />
+                app:navigationIcon="@drawable/bili_default_avatar"
+                app:title="未登录" >
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:src="@drawable/ic_star_black_24dp"  />
+            </android.support.v7.widget.Toolbar>
         </android.support.design.widget.AppBarLayout>
 
         <include layout="@layout/content_main" />
