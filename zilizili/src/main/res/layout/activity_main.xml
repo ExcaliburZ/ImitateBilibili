@@ -41,11 +41,18 @@
             android:visibility="invisible" />
     </android.support.design.widget.CoordinatorLayout>
 
-    <include
+    <!--<include
         layout="@layout/menu_left"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
-        android:layout_gravity="start" />
+        android:layout_gravity="start" />-->
+    <fragment
+        android:id="@+id/fg_left_menu"
+        android:name="com.wings.zilizili.fragment.LeftMenuFragment"
+        android:layout_width="@dimen/navigation_drawer_width"
+        android:layout_height="match_parent"
+        android:layout_gravity="start"
+        android:tag="com.wings.leftmenu" />
 
 </android.support.v4.widget.DrawerLayout>
 

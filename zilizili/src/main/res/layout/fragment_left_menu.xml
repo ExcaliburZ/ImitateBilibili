@@ -83,85 +83,32 @@
             android:id="@+id/ll_menu"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="#a000"
+            android:layout_marginTop="10dp"
+            android:background="#fff"
             android:orientation="vertical">
 
-            <TextView
+            <Button
+                android:id="@+id/bt_left_home"
                 style="@style/menu_item"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:layout_marginTop="10dp"
+                android:background="?android:attr/selectableItemBackground"
                 android:drawableLeft="@drawable/ic_home_grey600_24dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
-
-            <TextView
-                style="@style/menu_item"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginBottom="10dp"
-                android:layout_marginTop="10dp"
-                android:background="#3000"
-                android:paddingLeft="5dp" />
-
-            <TextView
-                style="@style/menu_item"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@drawable/selector_menu_item"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
+                android:paddingLeft="20dp"
+                android:text="        首页" />
 
             <Button
-                style="?android:attr/borderlessButtonStyle"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页"
-                android:textColor="#000" />
-
-            <TextView
+                android:id="@+id/bt_left_download"
                 style="@style/menu_item"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
-
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_file_download_grey600_24dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
+                android:paddingLeft="20dp"
+                android:text="        离线管理" />
 
-            <TextView
-                style="@style/menu_item"
-                android:layout_width="match_parent"
-
-                android:layout_height="50dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
-
-            <TextView
-                style="@style/menu_item"
-                android:layout_width="match_parent"
-
-                android:layout_height="50dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
-                android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
 
             <ImageView
                 android:layout_width="match_parent"
@@ -171,33 +118,90 @@
                 android:background="#3000"
                 android:paddingLeft="5dp" />
 
-            <TextView
+            <Button
+                android:id="@+id/bt_left_collect"
                 style="@style/menu_item"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_star_grey600_24dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
+                android:paddingLeft="20dp"
+                android:text="        我的收藏" />
 
-            <TextView
+            <Button
+                android:id="@+id/bt_left_history"
                 style="@style/menu_item"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_history_grey600_24dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
+                android:paddingLeft="20dp"
+                android:text="        历史记录" />
 
-            <TextView
+            <Button
+                android:id="@+id/bt_left_follow"
                 style="@style/menu_item"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_people_grey600_24dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="        关注的人" />
+
+            <Button
+                android:id="@+id/bt_left_consume"
+                style="@style/menu_item"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_account_balance_wallet_grey600_24dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="        消费记录" />
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
                 android:layout_marginBottom="10dp"
-                android:drawableLeft="@drawable/ic_home_grey600_24dp"
+                android:layout_marginTop="10dp"
+                android:background="#3000"
+                android:paddingLeft="5dp" />
+
+            <Button
+                android:id="@+id/bt_left_theme"
+                style="@style/menu_item"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_color_lens_grey600_24dp"
                 android:gravity="center_vertical"
-                android:paddingLeft="10dp"
-                android:text="       首页" />
+                android:paddingLeft="20dp"
+                android:text="        主题选择" />
+
+            <Button
+                android:id="@+id/bt_left_setting"
+                style="@style/menu_item"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_settings_grey600_24dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="        设置" />
+
+            <Button
+                android:id="@+id/bt_left_help"
+                style="@style/menu_item"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="?android:attr/selectableItemBackground"
+                android:drawableLeft="@drawable/ic_help_grey600_24dp"
+                android:gravity="center_vertical"
+                android:paddingLeft="20dp"
+                android:text="        帮助与反馈" />
         </LinearLayout>
 
     </LinearLayout>
