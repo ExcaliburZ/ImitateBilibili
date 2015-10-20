@@ -5,6 +5,9 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -14,6 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.wings.zilizili.fragment.DramaFragment;
 import com.wings.zilizili.fragment.LeftMenuFragment;
 
 import java.util.ArrayList;
@@ -27,6 +31,8 @@ public class MainActivity extends AppCompatActivity implements LeftMenuFragment.
     private TabLayout mTabLayout;
     private ViewPager mMainContent;
     private ArrayList<String> mTabLists;
+    private FragmentManager mFragmentManager;
+    private ArrayList<Fragment> mFragmentLists;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +54,14 @@ public class MainActivity extends AppCompatActivity implements LeftMenuFragment.
             add("关注");
             add("发现");
         }};
+        mFragmentManager = getSupportFragmentManager();
+        mFragmentLists = new ArrayList<Fragment>() {{
+            add(new DramaFragment());
+            add(new DramaFragment());
+            add(new DramaFragment());
+            add(new DramaFragment());
+            add(new DramaFragment());
+        }};
     }
 
     private void init() {
@@ -58,10 +72,13 @@ public class MainActivity extends AppCompatActivity implements LeftMenuFragment.
         setListener();
     }
 
+
     private void initViewPager() {
-        for (String tab : mTabLists) {
-            mTabLayout.addTab(mTabLayout.newTab().setText(tab));
-        }
+        HomeAdapter homeAdapter = new HomeAdapter(mFragmentManager);
+        mMainContent.setAdapter(homeAdapter);
+//        mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
+        mTabLayout.setupWithViewPager(mMainContent);//将TabLayout和ViewPager关联起来。
+        mTabLayout.setTabsFromPagerAdapter(homeAdapter);//给Tabs设置适配器
     }
 
     private void setListener() {
@@ -81,6 +98,28 @@ public class MainActivity extends AppCompatActivity implements LeftMenuFragment.
                 R.string.drawer_close);
         mDrawerToggle.syncState();
         mDrawerLayout.setDrawerListener(mDrawerToggle);
+    }
+
+    class HomeAdapter extends FragmentPagerAdapter {
+
+        public HomeAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentLists.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentLists.size();
+        }
+
+        @Override
+        public CharSequence getPageTitle(int position) {
+            return mTabLists.get(position);
+        }
     }
 
 

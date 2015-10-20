@@ -24,20 +24,18 @@
                 style="?attr/toolbarStyle"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
-                android:background="?attr/colorPrimary">
-
-                <ImageView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:src="@drawable/ic_star_black_24dp" />
-            </android.support.v7.widget.Toolbar>
+                android:background="?attr/colorPrimary"
+                android:title="@string/home_top_default_nickname" />
 
             <android.support.design.widget.TabLayout
                 android:id="@+id/tab_layout"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:layout_scrollFlags="scroll|enterAlways"
+                app:tabBackground="@android:color/transparent"
                 app:tabIndicatorColor="@color/white"
+                app:tabPaddingEnd="20dp"
+                app:tabPaddingStart="20dp"
                 app:tabSelectedTextColor="@color/white"
                 app:tabTextAppearance="@style/TabText"
                 app:tabTextColor="@color/white_trans" />
@@ -49,8 +47,6 @@
             android:layout_height="wrap_content"
             app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
-        <!--<include layout="@layout/content_main" />-->
-
         <android.support.design.widget.FloatingActionButton
             android:id="@+id/fab"
             android:layout_width="wrap_content"
@@ -58,14 +54,9 @@
             android:layout_gravity="bottom|end"
             android:layout_margin="@dimen/fab_margin"
             android:src="@android:drawable/ic_menu_add"
-            android:visibility="invisible" />
+            android:visibility="gone" />
     </android.support.design.widget.CoordinatorLayout>
 
-    <!--<include
-        layout="@layout/menu_left"
-        android:layout_width="@dimen/navigation_drawer_width"
-        android:layout_height="match_parent"
-        android:layout_gravity="start" />-->
     <fragment
         android:id="@+id/fg_left_menu"
         android:name="com.wings.zilizili.fragment.LeftMenuFragment"

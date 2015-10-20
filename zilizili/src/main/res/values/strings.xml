@@ -13,7 +13,7 @@
     <string name="abc_searchview_description_voice">Voice search</string>
     <string name="abc_shareactionprovider_share_with">Share with</string>
     <string name="abc_shareactionprovider_share_with_application">Share with %s</string>
-    <string name="app_name">哔哩哔哩动画</string>
+    <string name="app_name">ZiliZili</string>
     <string name="home_top_default_nickname">未登录</string>
     <string name="logout">注销</string>
     <string name="main_page_attentions">关注</string>
@@ -1124,5 +1124,7 @@
     <string name="action_settings">设置</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
-    <string name="username">未登录</string>
+
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment1</string>
 </resources>
