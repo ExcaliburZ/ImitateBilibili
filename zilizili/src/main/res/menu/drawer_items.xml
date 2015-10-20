@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:checkableBehavior="single">
+    <group
+        android:id="@+id/nav_group1"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_home"
+            android:checkable="true"
+            android:icon="@drawable/ic_home_black_24dp"
+            android:title="@string/nav_home" />
+        <item
+            android:id="@+id/nav_offline_manager"
+            android:checkable="false"
+            android:icon="@drawable/ic_file_download_black_24dp"
+            android:title="@string/nav_offline_manager" />
+    </group>
+    <group
+        android:id="@+id/nav_group2"
+        android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_favorites"
+            android:checkable="true"
+            android:icon="@drawable/ic_star_black_24dp"
+            android:title="@string/nav_favorites" />
+        <item
+            android:id="@+id/nav_histories"
+            android:checkable="true"
+            android:icon="@drawable/ic_history_black_24dp"
+            android:title="@string/nav_histories" />
+        <item
+            android:id="@+id/nav_following"
+            android:checkable="true"
+            android:icon="@drawable/ic_people_black_24dp"
+            android:title="@string/nav_following" />
+        <item
+            android:id="@+id/nav_pay"
+            android:checkable="true"
+            android:icon="@drawable/ic_account_balance_wallet_black_24dp"
+            android:title="@string/nav_pay" />
+    </group>
+    <group android:id="@+id/nav_group3">
+        <item
+            android:id="@+id/nav_theme"
+            android:checkable="true"
+            android:icon="@drawable/ic_color_lens_black_24dp"
+            android:title="@string/title_theme_store" />
+        <item
+            android:id="@+id/nav_settings"
+            android:checkable="false"
+            android:icon="@drawable/ic_settings_black_24dp"
+            android:title="@string/nav_settings" />
+        <item
+            android:id="@+id/nav_help"
+            android:checkable="false"
+            android:icon="@drawable/ic_help_black_24dp"
+            android:title="@string/nav_help" />
+    </group>
+</menu>

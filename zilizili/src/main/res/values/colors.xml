@@ -4,6 +4,7 @@
     <color name="colorPrimaryDark">#145A92</color>
     <color name="colorAccent">#FF4081</color>
 
+    <color name="blue">#00ff00</color>
     <color name="TextColorBlack">#ff000000</color>
     <color name="_bkgd__black">#ff101010</color>
     <color name="_bkgd__black_abs">#ff000000</color>
