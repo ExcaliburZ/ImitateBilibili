@@ -87,6 +87,7 @@
     <color name="global__text">@color/_text__gray_very_dark</color>
     <color name="gray">#ffbbbbbb</color>
     <color name="gray_dark">#ff999999</color>
+    <color name="gray_back">#BBBBBB</color>
     <color name="gray_light">#ffdcdcdc</color>
     <color name="gray_lighter">#ffeaeaea</color>
     <color name="gray_trans">#44999999</color>

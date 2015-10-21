@@ -2,8 +2,6 @@ package com.wings.zilizili;
 
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -27,7 +25,7 @@ public class MainActivity extends AppCompatActivity implements LeftMenuFragment.
     private ActionBarDrawerToggle mDrawerToggle;
     private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
-    private FloatingActionButton mFab;
+    //    private FloatingActionButton mFab;
     private TabLayout mTabLayout;
     private ViewPager mMainContent;
     private ArrayList<String> mTabLists;
@@ -44,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements LeftMenuFragment.
     private void findView() {
         mToolbar = $(R.id.toolbar);
         mDrawerLayout = $(R.id.dl_main);
-        mFab = $(R.id.fab);
+//        mFab = $(R.id.fab);
         mTabLayout = $(R.id.tab_layout);
         mMainContent = $(R.id.vp_main);
         mTabLists = new ArrayList<String>() {{
@@ -82,13 +80,13 @@ public class MainActivity extends AppCompatActivity implements LeftMenuFragment.
     }
 
     private void setListener() {
-        mFab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+//        mFab.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+//            }
+//        });
     }
 
     private void setToggleLeftDrawer() {
