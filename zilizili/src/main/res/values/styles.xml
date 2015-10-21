@@ -15,6 +15,8 @@
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
     </style>
 
+    <style name="Widget.App.Toolbar.Home" parent="@style/Widget.App.Toolbar" />
+
     <style name="AppTheme.Light.Pink.PopMenu" parent="@style/ThemeOverlay.AppCompat.Light">
         <item name="android:listSelector">@drawable/item_background</item>
         <item name="android:listChoiceBackgroundIndicator">@drawable/item_background</item>
@@ -35,7 +37,6 @@
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
-
 
 
     <style name="Widget.App.Toolbar" parent="@style/Widget.AppCompat.Toolbar">

@@ -1,132 +1,94 @@
-<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    tools:context=".MainActivity">
+    android:background="@color/main_background_daily"
+    android:orientation="vertical"
+    tools:context="com.wings.zilizili.fragment.DramaFragment">
 
-    <android.support.design.widget.AppBarLayout
+    <!-- TODO: Update blank fragment layout -->
+    <!--<ViewPager
+        android:id="@+id/vp_recommend"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/drawer_header_height"
+        android:visibility="invisible" />-->
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-        <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            style="?attr/toolbarStyle"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            android:title="@string/home_top_default_nickname"
-            app:layout_scrollFlags="scroll|enterAlways" />
+        android:layout_margin="10dp"
+        android:orientation="horizontal">
 
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_layout"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabBackground="@android:color/transparent"
-            app:tabIndicatorColor="@color/white"
-            app:tabPaddingEnd="20dp"
-            app:tabPaddingStart="20dp"
-            app:tabSelectedTextColor="@color/white"
-            app:tabTextAppearance="@style/TabText"
-            app:tabTextColor="@color/white_trans" />
-
-
-    </android.support.design.widget.AppBarLayout>
-
-    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/main_background_daily"
-        android:orientation="vertical"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior"
-        tools:context="com.wings.zilizili.fragment.DramaFragment">
-
-        <!-- TODO: Update blank fragment layout -->
-        <!--<ViewPager
-            android:id="@+id/vp_recommend"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/drawer_header_height"
-            android:visibility="invisible" />-->
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="horizontal">
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/navigation_bottom_bar_size"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                app:cardCornerRadius="5dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bangumi_timeline_background"
-                    android:clickable="true"
-                    android:padding="10dp"
-                    android:src="@drawable/bangumi_timeline_text" />
-            </android.support.v7.widget.CardView>
-
-            <android.support.v7.widget.CardView
-                android:layout_width="0dp"
-                android:layout_height="@dimen/navigation_bottom_bar_size"
-                android:layout_margin="5dp"
-                android:layout_weight="1"
-                android:background="?android:attr/selectableItemBackground"
-                android:clickable="true"
-                app:cardCornerRadius="5dp">
-
-                <ImageView
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:background="@drawable/bangumi_index_background"
-                    android:padding="10dp"
-                    android:src="@drawable/bangumi_index_text" />
-            </android.support.v7.widget.CardView>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp"
-            android:layout_marginTop="10dp"
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/navigation_bottom_bar_size"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
             android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            android:gravity="center_vertical">
+            app:cardCornerRadius="5dp">
 
             <ImageView
-                android:layout_width="25dp"
-                android:layout_height="25dp"
-                android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_header_online" />
-
-            <TextView
-                style="@style/menu_item"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:paddingLeft="15dp"
-                android:text="大家都在看" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="5dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="5dp"
-                android:background="@drawable/gray_background"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bangumi_timeline_background"
                 android:clickable="true"
-                android:padding="5dp"
-                android:text="进去看看"
-                android:textColor="#FEFEFE" />
-        </LinearLayout>
+                android:padding="10dp"
+                android:src="@drawable/bangumi_timeline_text" />
+        </android.support.v7.widget.CardView>
+
+        <android.support.v7.widget.CardView
+            android:layout_width="0dp"
+            android:layout_height="@dimen/navigation_bottom_bar_size"
+            android:layout_margin="5dp"
+            android:layout_weight="1"
+            android:background="?android:attr/selectableItemBackground"
+            android:clickable="true"
+            app:cardCornerRadius="5dp">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/bangumi_index_background"
+                android:padding="10dp"
+                android:src="@drawable/bangumi_index_text" />
+        </android.support.v7.widget.CardView>
     </LinearLayout>
-</android.support.design.widget.CoordinatorLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_header_online" />
+
+        <TextView
+            style="@style/menu_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:text="大家都在看" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/gray_background"
+            android:clickable="true"
+            android:padding="5dp"
+            android:text="进去看看"
+            android:textColor="#FEFEFE" />
+    </LinearLayout>
+
+</LinearLayout>
