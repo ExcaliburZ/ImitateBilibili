@@ -38,6 +38,7 @@ public class LeftMenuFragment extends Fragment {
     private void init() {
         mNavigationView = $(R.id.nv_main);
         mActivity = (MainActivity) getActivity();
+        mNavigationView.setCheckedItem(R.id.nav_home);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.
                 OnNavigationItemSelectedListener() {
             @Override
@@ -49,6 +50,18 @@ public class LeftMenuFragment extends Fragment {
                         break;
                     case R.id.nav_histories:
                         mActivity.changeFragment(GlobalConstant.HISTORYFRAGMENT);
+                        break;
+                    case R.id.nav_favorites:
+                        mActivity.changeFragment(2);
+                        break;
+                    case R.id.nav_following:
+                        mActivity.changeFragment(3);
+                        break;
+                    case R.id.nav_pay:
+                        mActivity.changeFragment(4);
+                        break;
+                    case R.id.nav_theme:
+                        mActivity.changeFragment(5);
                         break;
                     //android:checkable="false"
                     //可以响应点击事件,但是不会被选中

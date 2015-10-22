@@ -3,15 +3,17 @@ package com.wings.zilizili.activity;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.FrameLayout;
 
 import com.wings.zilizili.R;
+import com.wings.zilizili.customView.NoScrollViewPager;
 import com.wings.zilizili.fragment.HistoryFragment;
 import com.wings.zilizili.fragment.HomeFragment;
 import com.wings.zilizili.utils.ToastUtils;
@@ -23,6 +25,8 @@ public class MainActivity extends AppCompatActivity {
     private FragmentManager mFragmentManager;
     private ArrayList<Fragment> mFragmentLists;
     private DrawerLayout mDrawerLayout;
+    private FrameLayout mContent;
+    private NoScrollViewPager vp_content;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,23 +36,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        mDrawerLayout = (DrawerLayout) $(R.id.dl_main);
-
+        System.out.println("init");
+        mDrawerLayout = $(R.id.dl_main);
+//        mContent = $(R.id.content_layout);
+        vp_content = $(R.id.vp_content);
         mFragmentLists = new ArrayList<Fragment>() {
             {
                 add(new HomeFragment());
                 add(new HistoryFragment());
+                add(new HistoryFragment());
+                add(new HistoryFragment());
+                add(new HistoryFragment());
+                add(new HistoryFragment());
             }
         };
-        changeFragment(0);
+        vp_content.setAdapter(new MainAdapter(getSupportFragmentManager()));
+        vp_content.setOffscreenPageLimit(10);
+//        mContent.addView(mViewPager);
+//        changeFragment(0);
     }
 
     public void changeFragment(int position) {
-        mFragmentManager = getSupportFragmentManager();
-        FragmentTransaction transaction = mFragmentManager.beginTransaction();
-        transaction.replace(R.id.content_layout, mFragmentLists.get(position));
-//        transaction.add(R.id.content_layout, mFragmentLists.get(position));
-        transaction.commit();
+//        mFragmentManager = getSupportFragmentManager();
+//        FragmentTransaction transaction = mFragmentManager.beginTransaction();
+//        transaction.replace(R.id.content_layout, mFragmentLists.get(position));
+//        transaction.commit();
+        vp_content.setCurrentItem(position, false);
     }
 
     @Override
@@ -96,6 +109,22 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
+    class MainAdapter extends FragmentStatePagerAdapter {
+
+        public MainAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentLists.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentLists.size();
+        }
+    }
 
     private <T extends View> T $(int resId) {
         return (T) super.findViewById(resId);

@@ -69,10 +69,10 @@
                     android:id="@+id/nick_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginLeft="10.0dip"
+                    android:layout_marginLeft="15.0dip"
                     android:singleLine="true"
-                    android:text="未登录"
-                    android:textAppearance="@style/TextAppearance.App.Topbar.Title" />
+                    style="@style/TextAppearance.App.Topbar.Title"
+                    android:text="未登录" />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
 

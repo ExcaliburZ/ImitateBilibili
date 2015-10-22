@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
@@ -43,7 +43,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setRetainInstance(true);
         System.out.println("Home onCreate:::::");
     }
 
@@ -79,7 +78,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStop() {
         super.onStop();
-        SavedState savedState = mFragmentManager.saveFragmentInstanceState(this);
+        mMainContent = null;
     }
 
     private void findView() {
@@ -140,7 +139,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
-    class HomeAdapter extends FragmentPagerAdapter {
+    class HomeAdapter extends FragmentStatePagerAdapter {
 
         public HomeAdapter(FragmentManager fm) {
             super(fm);

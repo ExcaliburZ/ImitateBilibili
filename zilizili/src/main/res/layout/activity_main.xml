@@ -4,11 +4,20 @@
     android:id="@+id/dl_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     tools:context=".MainActivity">
-    <FrameLayout
-        android:id="@+id/content_layout"
+
+    <!--<FrameLayout-->
+    <!--android:id="@+id/content_layout"-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="match_parent">-->
+
+    <com.wings.zilizili.customView.NoScrollViewPager
+        android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
+    <!--</FrameLayout>-->
+
     <fragment
         android:id="@+id/fg_left_menu"
         android:name="com.wings.zilizili.fragment.LeftMenuFragment"
