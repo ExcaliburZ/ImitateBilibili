@@ -37,12 +37,12 @@
                     android:id="@+id/iv_drawer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:paddingRight="15dp"
                     android:src="@drawable/ic_drawer_home" />
 
                 <FrameLayout
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="15dp">
+                    android:layout_height="wrap_content">
 
                     <android.support.v7.widget.CardView
                         android:id="@+id/avatar"

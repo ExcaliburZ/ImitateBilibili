@@ -10,5 +10,7 @@
         <item name="android:colorButtonNormal">@color/white</item>
         <!-- 控件按压时颜色，会影响水波纹效果，继承自colorAccent  -->
         <item name="android:colorControlHighlight">#3000</item>
+        <item name="selectableItemBackground">?android:selectableItemBackgroundBorderless</item>
+
     </style>
 </resources>

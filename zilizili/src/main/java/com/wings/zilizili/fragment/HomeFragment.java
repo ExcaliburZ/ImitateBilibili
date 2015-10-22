@@ -7,17 +7,15 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.widget.Toolbar;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.wings.zilizili.MainActivity;
 import com.wings.zilizili.R;
+import com.wings.zilizili.activity.MainActivity;
 
 import java.util.ArrayList;
 
@@ -27,7 +25,6 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private View mContentView;
     private ActionBarDrawerToggle mDrawerToggle;
-    private DrawerLayout mDrawerLayout;
     private Toolbar mToolbar;
     private TabLayout mTabLayout;
     private ViewPager mMainContent;
@@ -36,26 +33,40 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Fragment> mFragmentLists;
     private MainActivity mActivity;
     private ImageView homeDrawer;
+    private HomeAdapter mHomeAdapter;
 
 
     public HomeFragment() {
         // Required empty public constructor
     }
 
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setRetainInstance(true);
+        System.out.println("Home onCreate:::::");
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mContentView = inflater.inflate(R.layout.fragment_home, container, false);
+        mActivity = (MainActivity) getActivity();
+        init();
         return mContentView;
     }
+
 
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        mActivity = (MainActivity) getActivity();
-        init();
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        System.out.println("mFragmentLists :: " + mFragmentLists.size());
     }
 
     private void init() {
@@ -65,9 +76,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         setListener();
     }
 
+    @Override
+    public void onStop() {
+        super.onStop();
+        SavedState savedState = mFragmentManager.saveFragmentInstanceState(this);
+    }
+
     private void findView() {
         mToolbar = $(R.id.toolbar);
-        mDrawerLayout = (DrawerLayout) mActivity.findViewById(R.id.dl_main);
         mTabLayout = $(R.id.tab_layout);
         mMainContent = $(R.id.vp_main);
         homeDrawer = $(R.id.iv_drawer);
@@ -78,6 +94,8 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             add("关注");
             add("发现");
         }};
+        assert mTabLists.size() == 5 : "mTabLists has error size";
+
         mFragmentManager = mActivity.getSupportFragmentManager();
         mFragmentLists = new ArrayList<Fragment>() {{
             add(new DramaFragment());
@@ -86,14 +104,16 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             add(new DramaFragment());
             add(new DramaFragment());
         }};
+        assert mFragmentLists.size() == 5 : "mFragmentLists has error size";
+
     }
 
     private void initViewPager() {
-        HomeAdapter homeAdapter = new HomeAdapter(mFragmentManager);
-        mMainContent.setAdapter(homeAdapter);
+        mHomeAdapter = new HomeAdapter(mFragmentManager);
+        mMainContent.setAdapter(mHomeAdapter);
 //        mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
         mTabLayout.setupWithViewPager(mMainContent);//将TabLayout和ViewPager关联起来。
-        mTabLayout.setTabsFromPagerAdapter(homeAdapter);//给Tabs设置适配器
+        mTabLayout.setTabsFromPagerAdapter(mHomeAdapter);//给Tabs设置适配器
     }
 
     private void setListener() {
@@ -115,12 +135,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_drawer:
-                boolean isLeftMenuOpen = mDrawerLayout.isDrawerOpen(Gravity.LEFT);
-                if (isLeftMenuOpen) {
-                    mDrawerLayout.closeDrawer(Gravity.LEFT);
-                } else {
-                    mDrawerLayout.openDrawer(Gravity.LEFT);
-                }
+                mActivity.changeLeftMenuState();
                 break;
         }
     }
@@ -144,6 +159,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         @Override
         public CharSequence getPageTitle(int position) {
             return mTabLists.get(position);
+        }
+
+
+        @Override
+        public void destroyItem(ViewGroup container, int position, Object object) {
+//             super.destroyItem(container, position, object);
         }
     }
 
