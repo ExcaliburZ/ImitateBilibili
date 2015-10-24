@@ -10,7 +10,8 @@
         android:id="@+id/vp_main"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        app:layout_scrollFlags="enterAlways|scroll" />
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -21,7 +22,7 @@
             android:id="@+id/toolbar"
             style="@style/Widget.App.Toolbar.Home"
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
+            android:layout_height="?navigationTopBarSize"
             android:background="?attr/colorPrimary"
             android:title="@string/home_top_default_nickname"
             app:layout_scrollFlags="enterAlways|scroll">
@@ -67,11 +68,11 @@
 
                 <TextView
                     android:id="@+id/nick_name"
+                    style="@style/TextAppearance.App.Topbar.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15.0dip"
                     android:singleLine="true"
-                    style="@style/TextAppearance.App.Topbar.Title"
                     android:text="未登录" />
             </LinearLayout>
         </android.support.v7.widget.Toolbar>
@@ -79,8 +80,7 @@
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_scrollFlags="scroll|enterAlways"
+            android:layout_height="40.0dip"
             app:tabBackground="@android:color/transparent"
             app:tabIndicatorColor="@color/white"
             app:tabPaddingEnd="20dp"
@@ -98,4 +98,5 @@
         android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_menu_add"
         android:visibility="gone" />
+
 </android.support.design.widget.CoordinatorLayout>

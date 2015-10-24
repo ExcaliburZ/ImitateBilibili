@@ -12,6 +12,7 @@
         <item name="tab_text_selector">@color/daily_tab_text_color</item>
         <item name="pop_menu_style">@style/AppTheme.Light.Pink.PopMenu</item>
         <item name="theme_color_primary">@color/colorPrimary</item>
+        <item name="navigationTopBarSize">@dimen/navigation_top_bar_size</item>
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
         <item name="selectableItemBackgroundBorderless">@drawable/item_background_borderless</item>
         <!--<item name="selectableItemBackground">?android:attr/selectableItemBackground</item>-->

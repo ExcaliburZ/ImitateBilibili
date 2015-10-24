@@ -75,6 +75,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         setListener();
     }
 
+
     @Override
     public void onStop() {
         super.onStop();
@@ -104,7 +105,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             add(new DramaFragment());
         }};
         assert mFragmentLists.size() == 5 : "mFragmentLists has error size";
-
     }
 
     private void initViewPager() {
@@ -117,6 +117,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void setListener() {
         homeDrawer.setOnClickListener(this);
+
     }
 
     private void setToggleLeftDrawer() {

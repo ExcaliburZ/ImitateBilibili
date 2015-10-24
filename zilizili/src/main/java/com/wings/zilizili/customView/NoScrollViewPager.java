@@ -21,14 +21,14 @@ public class NoScrollViewPager extends ViewPager {
     @Override
     public boolean onTouchEvent(MotionEvent ev) {
         //True if the event was handled, false otherwise.
-        System.out.println("onTouchEvent");
+//        System.out.println("onTouchEvent");
         return true;
     }
 
 
     @Override
     public boolean onInterceptTouchEvent(MotionEvent ev) {
-        System.out.println("onInterceptHoverEvent");
+//        System.out.println("onInterceptHoverEvent");
         return false;
     }
 }

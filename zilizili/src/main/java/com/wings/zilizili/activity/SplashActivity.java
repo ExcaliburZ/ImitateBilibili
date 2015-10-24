@@ -1,6 +1,7 @@
 package com.wings.zilizili.activity;
 
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
@@ -33,6 +34,12 @@ public class SplashActivity extends AppCompatActivity {
     }
 
     private void doInBackground() {
+    }
 
+    class WebTask extends AsyncTask<String, Void, String> {
+        @Override
+        protected String doInBackground(String... params) {
+            return null;
+        }
     }
 }
