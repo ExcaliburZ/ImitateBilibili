@@ -158,4 +158,5 @@
     <dimen name="umeng_socialize_pad_window_height">350.0dip</dimen>
     <dimen name="umeng_socialize_pad_window_width">580.0dip</dimen>
     <dimen name="umeng_socialize_shareboard_size">80.0dip</dimen>
+    <dimen name="spacing">10dp</dimen>
 </resources>

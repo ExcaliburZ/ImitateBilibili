@@ -9,5 +9,5 @@ public class Data {
     public String more;
     public ArrayList<TopNewsItem> topnews;
     public ArrayList<RecommendItem> recomment;
-    public ArrayList<RecommendItem> drama;
+    public ArrayList<DramaItem> drama;
 }
