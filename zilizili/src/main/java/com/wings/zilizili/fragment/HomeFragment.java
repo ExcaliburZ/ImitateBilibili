@@ -12,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.wings.zilizili.R;
@@ -34,6 +35,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private MainActivity mActivity;
     private ImageView homeDrawer;
     private HomeAdapter mHomeAdapter;
+    private FrameLayout mAvatar;
 
 
     public HomeFragment() {
@@ -65,7 +67,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onStart() {
         super.onStart();
-        System.out.println("mFragmentLists :: " + mFragmentLists.size());
+//        System.out.println("mFragmentLists :: " + mFragmentLists.size());
     }
 
     private void init() {
@@ -87,6 +89,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         mTabLayout = $(R.id.tab_layout);
         mMainContent = $(R.id.vp_main);
         homeDrawer = $(R.id.iv_drawer);
+        mAvatar = $(R.id.fl_avatar);
         mTabLists = new ArrayList<String>() {{
             add("番剧");
             add("推荐");
@@ -117,7 +120,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
     private void setListener() {
         homeDrawer.setOnClickListener(this);
-
+        mAvatar.setOnClickListener(this);
     }
 
     private void setToggleLeftDrawer() {
@@ -135,6 +138,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_drawer:
+            case R.id.fl_avatar:
                 mActivity.changeLeftMenuState();
                 break;
         }

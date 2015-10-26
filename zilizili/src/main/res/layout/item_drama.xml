@@ -4,6 +4,7 @@
     android:layout_width="150dp"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
+    android:background="?attr/selectableItemBackgroundBorderless"
     app:cardElevation="5dp">
 
     <LinearLayout
@@ -18,6 +19,7 @@
             android:layout_height="wrap_content"
             android:scaleType="fitStart" />
 
+
         <TextView
             android:id="@+id/tv_title"
             style="@style/TextAppearance.App.Subtitle"
@@ -25,10 +27,12 @@
             android:layout_height="wrap_content"
             android:background="@android:color/white"
             android:gravity="center_vertical"
+            android:maxLines="2"
             android:paddingBottom="10dp"
-            android:paddingLeft="15dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="20dp"
             android:paddingTop="10dp"
-            android:text="学站都市" />
+            android:text=" 【10月】  彗星路西法 04 【BiliBili正版】" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

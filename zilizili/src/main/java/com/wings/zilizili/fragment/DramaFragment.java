@@ -48,6 +48,7 @@ import java.util.ArrayList;
 public class DramaFragment extends Fragment {
     private MySwipeRefreshLayout mRefreshLayout;
     private DramaRecyclerView mRecyclerView;
+    private RecyclerView mGridView;
     private ViewPager topNews;
     private CirclePageIndicator indicator;
     private Boolean isRefreshing;
@@ -57,7 +58,7 @@ public class DramaFragment extends Fragment {
     private long startTime;
     private View mHeadView;
     private ArrayList<TopNewsItem> topNewsList;
-    private ArrayList<RecommendItem> mRecommentList;
+    private ArrayList<RecommendItem> mRecommendList;
     private ArrayList<DramaItem> mDramaList;
     private MainActivity mActivity;
     private GridLayoutManager mGridManager;
@@ -65,6 +66,7 @@ public class DramaFragment extends Fragment {
     private boolean isFirst;
     private TopNewsAdapter mTopNewsAdapter;
     private DramaAdapter mDramaAdapter;
+    private RecommendAdapter mRecommendAdapter;
 
 
     public DramaFragment() {
@@ -91,11 +93,12 @@ public class DramaFragment extends Fragment {
         mHeadView = LayoutInflater.from(mActivity).inflate(R.layout.header_drama, null);
         topNews = F(R.id.vp_top);
         indicator = F(R.id.indicator);
+        mGridView = F(R.id.rv_grid);
         mRecyclerView = $(R.id.rv_drama);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mGridManager = new GridLayoutManager(mActivity, 2);
-//        mStaggeredGridLayoutManager.
-//        mRecyclerView.setLayoutManager(mGridManager)
+
+        mGridView.setLayoutManager(mGridManager);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         //设置箭头的颜色
         mRecyclerView.setHasFixedSize(false);
@@ -112,11 +115,10 @@ public class DramaFragment extends Fragment {
                 isRefreshing = true;
                 isFirst = true;
                 getDataFromServer();
-//                loadData(true);
             }
         });
         topNewsList = new ArrayList<>();
-        mRecommentList = new ArrayList<>();
+        mRecommendList = new ArrayList<>();
         mDramaList = new ArrayList<>();
     }
 
@@ -172,9 +174,14 @@ public class DramaFragment extends Fragment {
         mTopNewsAdapter = new TopNewsAdapter(mActivity);
         topNews.setAdapter(mTopNewsAdapter);
         indicator.setViewPager(topNews);
-        mRefreshLayout.setRefreshing(false);
+
+//        mRefreshLayout.setRefreshing(false);
+
         mDramaAdapter = new DramaAdapter(mHeadView);
         mRecyclerView.setAdapter(mDramaAdapter);
+
+        mRecommendAdapter = new RecommendAdapter();
+        mGridView.setAdapter(mRecommendAdapter);
 
     }
 
@@ -233,16 +240,10 @@ public class DramaFragment extends Fragment {
 //            mTopNewsAdapter.notifyDataSetChanged();
 //            mDramaAdapter.notifyDataSetChanged();
 //        }
-        System.out.println("First");
         mTopNewsAdapter.notifyDataSetChanged();
         mDramaAdapter.notifyDataSetChanged();
-//        mTopNewsAdapter = new TopNewsAdapter(mActivity);
-//        topNews.setAdapter(mTopNewsAdapter);
-//        indicator.setViewPager(topNews);
-//        mDramaAdapter = new DramaAdapter(mHeadView);
-//        mRecyclerView.setAdapter(mDramaAdapter);
+        mRecommendAdapter.notifyDataSetChanged();
         mRefreshLayout.setRefreshing(false);
-//
         isRefreshing = false;
         isFirst = false;
 
@@ -254,7 +255,7 @@ public class DramaFragment extends Fragment {
         if (dataInfo.retcode / 100 == 2) {
             data = dataInfo.data;
             topNewsList = data.topnews;
-            mRecommentList = data.recomment;
+            mRecommendList = data.recomment;
             mDramaList = data.drama;
         }
     }
@@ -303,7 +304,7 @@ public class DramaFragment extends Fragment {
         }
     }
 
-    class DramaAdapter extends RecyclerView.Adapter<ViewHolder> {
+    class DramaAdapter extends RecyclerView.Adapter<DramaViewHolder> {
         private View headView;
         private BitmapUtils bitmapUtils;
         public int HEADER = 0;
@@ -326,17 +327,17 @@ public class DramaFragment extends Fragment {
         }
 
         @Override
-        public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        public DramaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == HEADER) {
-                return new ViewHolder(headView);
+                return new DramaViewHolder(headView);
             }
             View view = LayoutInflater.from(mActivity).inflate(R.layout.item_drama, parent, false);
-            ViewHolder holder = new ViewHolder(view);
+            DramaViewHolder holder = new DramaViewHolder(view);
             return holder;
         }
 
         @Override
-        public void onBindViewHolder(ViewHolder holder, int position) {
+        public void onBindViewHolder(DramaViewHolder holder, int position) {
             if (isHeader(position)) {
                 StaggeredGridLayoutManager.LayoutParams params = new StaggeredGridLayoutManager.LayoutParams
                         (ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);
@@ -383,16 +384,64 @@ public class DramaFragment extends Fragment {
         }
     }
 
-    private class ViewHolder extends RecyclerView.ViewHolder {
+    private class DramaViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
         public ImageView image;
         public View view;
 
-        public ViewHolder(View itemView) {
+        public DramaViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             title = (TextView) itemView.findViewById(R.id.tv_title);
             image = (ImageView) itemView.findViewById(R.id.iv_item);
+        }
+    }
+
+
+    class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> {
+        private BitmapUtils bitmapUtils;
+
+        public RecommendAdapter() {
+            bitmapUtils = new BitmapUtils(mActivity);
+        }
+
+        @Override
+        public RecommendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+
+            View view = LayoutInflater.from(mActivity).inflate(R.layout.item_recomment, parent, false);
+            return new RecommendViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(RecommendViewHolder holder, int position) {
+            holder.title.setText("\u3000" + mRecommendList.get(position).name);
+            ImageView imageView = holder.image;
+            bitmapUtils.display(imageView, mRecommendList.get(position).topimage);
+            holder.online.setText(mRecommendList.get(position).playCount);
+        }
+
+
+        @Override
+        public long getItemId(int position) {
+            return super.getItemId(position);
+        }
+
+        @Override
+        public int getItemCount() {
+            return mRecommendList.size();
+        }
+    }
+
+    private class RecommendViewHolder extends RecyclerView.ViewHolder {
+        public TextView title;
+        public ImageView image;
+        public TextView online;
+
+        public RecommendViewHolder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.tv_title);
+            image = (ImageView) itemView.findViewById(R.id.iv_item);
+            online = (TextView) itemView.findViewById(R.id.tv_online);
         }
     }
 }

@@ -10,4 +10,5 @@ public class Data {
     public ArrayList<TopNewsItem> topnews;
     public ArrayList<RecommendItem> recomment;
     public ArrayList<DramaItem> drama;
+    public int id;
 }

@@ -9,6 +9,7 @@
         android:id="@+id/rv_drama"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:background="@color/main_background_daily"
         android:columnWidth="130dp"
         android:gravity="center_horizontal"
         android:horizontalSpacing="35dp"

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/main_background_daily"
     android:orientation="vertical"
     app:layout_scrollFlags="enterAlways|scroll"
     tools:context="com.wings.zilizili.fragment.DramaFragment">
@@ -43,7 +42,7 @@
             android:layout_height="@dimen/navigation_bottom_bar_size"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="?attr/selectableItemBackgroundBorderless"
             app:cardCornerRadius="5dp">
 
             <ImageView
@@ -60,7 +59,6 @@
             android:layout_height="@dimen/navigation_bottom_bar_size"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
             android:clickable="true"
             app:cardCornerRadius="5dp">
 
@@ -108,4 +106,49 @@
             android:text="进去看看"
             android:textColor="#FEFEFE" />
     </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rv_grid"
+        android:layout_width="match_parent"
+        android:layout_height="320dp"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="10dp"
+        android:background="?android:attr/selectableItemBackground"
+        android:clickable="true"
+        android:gravity="center_vertical">
+
+        <ImageView
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_header_hot" />
+
+        <TextView
+            style="@style/menu_item"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:paddingLeft="15dp"
+            android:text="推荐番剧" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="5dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/gray_background"
+            android:clickable="true"
+            android:padding="5dp"
+            android:text="更多"
+            android:textColor="#FEFEFE" />
+    </LinearLayout>
+
 </LinearLayout>
