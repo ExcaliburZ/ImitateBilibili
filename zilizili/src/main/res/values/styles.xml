@@ -4,14 +4,77 @@
     <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorPrimary</item>
         <!-- Button，textView的文字颜色  -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
         <item name="android:textColor">#fff</item>
         <item name="android:textSize">12sp</item>
         <item name="tab_text_selector">@color/daily_tab_text_color</item>
         <item name="pop_menu_style">@style/AppTheme.Light.Pink.PopMenu</item>
         <item name="theme_color_primary">@color/colorPrimary</item>
+        <item name="navigationTopBarSize">@dimen/navigation_top_bar_size</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+        <item name="selectableItemBackgroundBorderless">@drawable/item_background_borderless</item>
+        <item name="selectableItemBackground">@drawable/item_background</item>
+    </style>
+
+    <!--<style name="AppTheme.NoActionBar.Pink" parent="@style/PinkTheme">-->
+    <!--<item name="android:windowNoTitle">true</item>-->
+    <!--<item name="android:fitsSystemWindows">false</item>-->
+    <!--<item name="windowActionBar">false</item>-->
+    <!--<item name="windowNoTitle">true</item>-->
+    <!--</style>-->
+
+    <style name="AppTheme.NoActionBar.AppTheme" parent="@style/AppTheme">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:textAppearance">@style/TextAppearance.App</item>
+        <item name="android:textColorSecondary">@color/gray_dark</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearance.App.Large</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.App.Medium</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/item_background</item>
+        <item name="selectableItemBackground">@drawable/item_background</item>
+        <item name="selectableItemBackgroundBorderless">@drawable/item_background_borderless</item>
+        <item name="colorPrimary">?theme_color_primary</item>
+        <item name="colorPrimaryDark">?theme_color_primary_dark</item>
+        <item name="colorAccent">?theme_color_primary</item>
+        <item name="navigationTopBarSize">@dimen/navigation_top_bar_size</item>
+    </style>
+
+    <style name="AppTheme.Light" parent="@style/AppBaseTheme"></style>
+
+    <style name="AppTheme.Light.Pink" parent="@style/AppTheme.Light">
+        <item name="theme_color_primary">@color/pink</item>
+        <item name="theme_color_primary_dark">@color/pink_dark</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Pink" parent="@style/AppTheme.Light.Pink">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="PinkTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimaryDark">@color/pink_dark</item>
+        <item name="colorPrimary">@color/pink</item>
+        <item name="colorAccent">@color/colorPrimary</item>
+        <!-- Button，textView的文字颜色  -->
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">12sp</item>
+        <item name="tab_text_selector">@color/daily_tab_text_color</item>
+        <item name="pop_menu_style">@style/AppTheme.Light.Pink.PopMenu</item>
+        <item name="theme_color_primary">@color/_bkgd__pink_light</item>
         <item name="navigationTopBarSize">@dimen/navigation_top_bar_size</item>
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
         <item name="selectableItemBackgroundBorderless">@drawable/item_background_borderless</item>
@@ -36,7 +99,6 @@
     <style name="AppTheme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
-        <item name="splashImage">@drawable/ic_splash_default</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -96,7 +158,23 @@
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
 
-    <style name="AppTheme.NoActionBar.FullScreen" parent="@style/AppTheme.NoActionBar">
+
+    <style name="AppTheme.NoActionBar.FullScreen" parent="AppTheme.NoActionBar.AppTheme">
         <item name="android:windowFullscreen">true</item>
+        <item name="splashImage">@drawable/ic_splash_default</item>
     </style>
+
+    <style name="AppTheme.Light.Blue" parent="@style/AppTheme.Light">
+        <item name="theme_color_primary">@color/colorPrimary</item>
+        <item name="theme_color_primary_dark">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar.Blue" parent="@style/AppTheme.Light.Blue">
+        <item name="android:windowNoTitle">true</item>
+        <item name="android:fitsSystemWindows">false</item>
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+
 </resources>

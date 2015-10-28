@@ -29,4 +29,5 @@ dependencies {
     compile project(':ViewPagerIndicatorLib')
     compile files('libs/xUtils-2.6.14.jar')
     compile files('libs/gson-2.3.1.jar')
+    compile files('libs/systembartint-1.0.4.jar')
 }

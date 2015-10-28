@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
@@ -13,12 +14,12 @@
         app:layout_behavior="@string/appbar_scrolling_view_behavior"
         app:layout_scrollFlags="enterAlways|scroll" />
 
-    <android.support.design.widget.AppBarLayout
+    <derson.com.multipletheme.colorUi.widget.ColorAppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-        <!--app:popupTheme="@style/AppTheme.PopupOverlay"-->
-        <android.support.v7.widget.Toolbar
+        android:background="?attr/colorPrimary">
+
+        <derson.com.multipletheme.colorUi.widget.ColorToolbar
             android:id="@+id/toolbar"
             style="@style/Widget.App.Toolbar.Home"
             android:layout_width="match_parent"
@@ -27,10 +28,11 @@
             android:title="@string/home_top_default_nickname"
             app:layout_scrollFlags="enterAlways|scroll">
 
-            <LinearLayout
+            <derson.com.multipletheme.colorUi.widget.ColorLinerLayout
                 android:id="@+id/navigation"
                 android:layout_width="wrap_content"
                 android:layout_height="fill_parent"
+                android:background="?attr/colorPrimary"
                 android:gravity="center_vertical"
                 android:orientation="horizontal">
 
@@ -75,8 +77,8 @@
                     android:layout_marginLeft="15.0dip"
                     android:singleLine="true"
                     android:text="未登录" />
-            </LinearLayout>
-        </android.support.v7.widget.Toolbar>
+            </derson.com.multipletheme.colorUi.widget.ColorLinerLayout>
+        </derson.com.multipletheme.colorUi.widget.ColorToolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
@@ -89,7 +91,7 @@
             app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/TabText"
             app:tabTextColor="@color/white_trans" />
-    </android.support.design.widget.AppBarLayout>
+    </derson.com.multipletheme.colorUi.widget.ColorAppBarLayout>
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fab"

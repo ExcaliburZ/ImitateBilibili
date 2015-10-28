@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
 import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
@@ -16,10 +17,11 @@ import com.wings.zilizili.activity.MainActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class LeftMenuFragment extends Fragment {
+public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     private NavigationView mNavigationView;
     private View mContentView;
     private MainActivity mActivity;
+    private ImageView iv_theme;
 
 
     public LeftMenuFragment() {
@@ -37,6 +39,8 @@ public class LeftMenuFragment extends Fragment {
 
     private void init() {
         mNavigationView = $(R.id.nv_main);
+        iv_theme = $(R.id.iv_night);
+        iv_theme.setOnClickListener(this);
         mActivity = (MainActivity) getActivity();
         mNavigationView.setCheckedItem(R.id.nav_home);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.
@@ -86,4 +90,11 @@ public class LeftMenuFragment extends Fragment {
         return (T) mContentView.findViewById(resId);
     }
 
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
+            case  R.id.iv_night:
+                mActivity.changeTheme();
+        }
+    }
 }

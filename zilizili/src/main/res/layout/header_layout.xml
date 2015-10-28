@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<derson.com.multipletheme.colorUi.widget.ColorRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/navigation_drawer_width"
     android:layout_height="192dp"
-    android:background="@color/colorPrimary"
+    android:fitsSystemWindows="true"
+    android:background="?attr/colorPrimary"
     android:paddingLeft="20dp"
     android:paddingTop="@dimen/staff_group_margin_top">
 
@@ -69,4 +70,4 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
     </LinearLayout>
-</RelativeLayout>
+</derson.com.multipletheme.colorUi.widget.ColorRelativeLayout>

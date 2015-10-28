@@ -4,6 +4,7 @@
     android:id="@+id/nv_main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fitsSystemWindows="true"
     app:headerLayout="@layout/header_layout"
     app:itemTextAppearance="@style/menu_item"
     app:menu="@menu/drawer_items" />
