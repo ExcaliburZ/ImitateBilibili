@@ -22,6 +22,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     private View mContentView;
     private MainActivity mActivity;
     private ImageView iv_theme;
+    private ViewGroup container;
 
 
     public LeftMenuFragment() {
@@ -32,7 +33,8 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mContentView = inflater.inflate(R.layout.navigation_layout, container, false);
+        this.container = container;
+        mContentView = inflater.inflate(R.layout.navigation_layout, this.container, false);
         init();
         return mContentView;
     }
@@ -92,8 +94,9 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
-            case  R.id.iv_night:
+        switch (v.getId()) {
+            case R.id.iv_night:
+                this.mContentView = mActivity.getLayoutInflater().inflate(R.layout.navigation_layout, container, false);
                 mActivity.changeTheme();
         }
     }

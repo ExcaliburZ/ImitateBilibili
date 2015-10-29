@@ -77,7 +77,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         setListener();
     }
 
-
     @Override
     public void onStop() {
         super.onStop();
@@ -107,12 +106,14 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             add(new DramaFragment());
             add(new DramaFragment());
         }};
+
         assert mFragmentLists.size() == 5 : "mFragmentLists has error size";
     }
 
     private void initViewPager() {
         mHomeAdapter = new HomeAdapter(mFragmentManager);
         mMainContent.setAdapter(mHomeAdapter);
+        mMainContent.setOffscreenPageLimit(1);
 //        mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
         mTabLayout.setupWithViewPager(mMainContent);//将TabLayout和ViewPager关联起来。
         mTabLayout.setTabsFromPagerAdapter(mHomeAdapter);//给Tabs设置适配器

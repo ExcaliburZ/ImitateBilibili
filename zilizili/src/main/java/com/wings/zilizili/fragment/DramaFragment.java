@@ -2,35 +2,24 @@ package com.wings.zilizili.fragment;
 
 
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.viewpagerindicator.CirclePageIndicator;
-import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
-import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.customView.DramaRecyclerView;
 import com.wings.zilizili.customView.MySwipeRefreshLayout;
 import com.wings.zilizili.domain.Data;
@@ -39,28 +28,24 @@ import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.TopNewsItem;
 import com.wings.zilizili.utils.MyPauseOnScrollListener;
+import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
  */
-public class DramaFragment extends Fragment {
-    private MySwipeRefreshLayout mRefreshLayout;
+public class DramaFragment extends BaseFragment {
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
     private ViewPager topNews;
     private CirclePageIndicator indicator;
-    private Boolean isRefreshing;
-    private String URL = "list_1.json";
-    private View mContentView;
     private Data data;
     private long startTime;
     private View mHeadView;
     private ArrayList<TopNewsItem> topNewsList;
     private ArrayList<RecommendItem> mRecommendList;
     private ArrayList<DramaItem> mDramaList;
-    private MainActivity mActivity;
     private GridLayoutManager mGridManager;
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private boolean isFirst;
@@ -73,23 +58,9 @@ public class DramaFragment extends Fragment {
         // Required empty public constructor
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        mContentView = inflater.inflate(R.layout.fragment_drama, container, false);
-        mActivity = (MainActivity) getActivity();
-        init();
-        return mContentView;
-    }
 
-    private void init() {
-        initView();
-        setListener();
-    }
-
-    private void initView() {
-        mRefreshLayout = $(R.id.sl_refresh);
+    protected void initView() {
+        super.initView();
         mHeadView = LayoutInflater.from(mActivity).inflate(R.layout.header_drama, null);
         topNews = F(R.id.vp_top);
         indicator = F(R.id.indicator);
@@ -97,29 +68,25 @@ public class DramaFragment extends Fragment {
         mRecyclerView = $(R.id.rv_drama);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mGridManager = new GridLayoutManager(mActivity, 2);
-
         mGridView.setLayoutManager(mGridManager);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         //设置箭头的颜色
         mRecyclerView.setHasFixedSize(false);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
-
-        mRefreshLayout.setColorSchemeColors(Color.BLUE);
-
-        mContentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                mContentView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
-                mRefreshLayout.setRefreshing(true);
-                isRefreshing = true;
-                isFirst = true;
-                getDataFromServer();
-            }
-        });
         topNewsList = new ArrayList<>();
         mRecommendList = new ArrayList<>();
         mDramaList = new ArrayList<>();
+    }
+
+    @Override
+    protected MySwipeRefreshLayout initRootView(LayoutInflater inflater, ViewGroup container) {
+        return (MySwipeRefreshLayout) inflater.inflate(R.layout.fragment_drama, container, false);
+    }
+
+    @Override
+    protected String initURL() {
+        return "list_1.json";
     }
 
     public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
@@ -158,25 +125,26 @@ public class DramaFragment extends Fragment {
         }
     }
 
-    private void setListener() {
-        //设置监听器
-        mRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-            @Override //刷新时回调方法
-            public void onRefresh() {
-                System.out.println("onRefresh");
-                if (isRefreshing) {
-                    return;
-                }
-                getDataFromServer();
-            }
-        });
+    protected void setListener() {
+        super.setListener();
+//        //设置监听器
+//        mContentView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+//            @Override //刷新时回调方法
+//            public void onRefresh() {
+//                System.out.println("onRefresh");
+//                if (isRefreshing) {
+//                    return;
+//                }
+//                getDataFromServer();
+//            }
+//        });
 
         mTopNewsAdapter = new TopNewsAdapter(mActivity);
         topNews.setAdapter(mTopNewsAdapter);
         indicator.setViewPager(topNews);
 
 //        mRefreshLayout.setRefreshing(false);
-
+        mRecyclerView.setVisibility(View.INVISIBLE);
         mDramaAdapter = new DramaAdapter(mHeadView);
         mRecyclerView.setAdapter(mDramaAdapter);
 
@@ -186,12 +154,8 @@ public class DramaFragment extends Fragment {
     }
 
 
-    @Override
-    public void onActivityCreated(Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
 
-    private void getDataFromServer() {
+    /*private void getDataFromServer() {
         startTime = SystemClock.uptimeMillis();
         HttpUtils http = new HttpUtils();
         http.send(HttpRequest.HttpMethod.GET,
@@ -214,7 +178,7 @@ public class DramaFragment extends Fragment {
                                 mActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
-                                        setAdapter();
+                                        notifyDataRefresh();
                                     }
                                 });
                             }
@@ -225,7 +189,7 @@ public class DramaFragment extends Fragment {
                     public void onFailure(HttpException error, String msg) {
                     }
                 });
-    }
+    }*/
 
     private void sleepMoment() {
         long endTime = SystemClock.uptimeMillis();
@@ -235,7 +199,8 @@ public class DramaFragment extends Fragment {
         }
     }
 
-    private void setAdapter() {
+    @Override
+    protected void notifyDataRefresh() {
 //        if (!isFirst) {
 //            mTopNewsAdapter.notifyDataSetChanged();
 //            mDramaAdapter.notifyDataSetChanged();
@@ -243,13 +208,15 @@ public class DramaFragment extends Fragment {
         mTopNewsAdapter.notifyDataSetChanged();
         mDramaAdapter.notifyDataSetChanged();
         mRecommendAdapter.notifyDataSetChanged();
-        mRefreshLayout.setRefreshing(false);
+        mRecyclerView.setVisibility(View.VISIBLE);
+        mContentView.setRefreshing(false);
         isRefreshing = false;
         isFirst = false;
 
     }
 
-    private void decodeResult(String result) {
+    @Override
+    protected void decodeResult(String result) {
         Gson gson = new Gson();
         DataInfo dataInfo = gson.fromJson(result, DataInfo.class);
         if (dataInfo.retcode / 100 == 2) {
@@ -260,9 +227,6 @@ public class DramaFragment extends Fragment {
         }
     }
 
-    private <T extends View> T $(int resId) {
-        return (T) mContentView.findViewById(resId);
-    }
 
     private <T extends View> T F(int resId) {
         return (T) mHeadView.findViewById(resId);
@@ -305,7 +269,7 @@ public class DramaFragment extends Fragment {
     }
 
     class DramaAdapter extends RecyclerView.Adapter<DramaViewHolder> {
-        private View headView;
+        private View rootView;
         private BitmapUtils bitmapUtils;
         public int HEADER = 0;
         public int ITEM = 1;
@@ -313,7 +277,7 @@ public class DramaFragment extends Fragment {
         public DramaAdapter(View mHeadView) {
             bitmapUtils = new BitmapUtils(mActivity);
 //            bitmapUtils.configDefaultLoadingImage(R.drawable)
-            this.headView = mHeadView;
+            this.rootView = mHeadView;
             mRecyclerView.addOnScrollListener(new MyPauseOnScrollListener(bitmapUtils, false, true));
         }
 
@@ -329,7 +293,7 @@ public class DramaFragment extends Fragment {
         @Override
         public DramaViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
             if (viewType == HEADER) {
-                return new DramaViewHolder(headView);
+                return new DramaViewHolder(rootView);
             }
             View view = LayoutInflater.from(mActivity).inflate(R.layout.item_drama, parent, false);
             DramaViewHolder holder = new DramaViewHolder(view);
@@ -346,7 +310,7 @@ public class DramaFragment extends Fragment {
                 return;
             }
             //去掉头布局占得位置
-            position--;
+            final int index = --position;
             holder.title.setText(mDramaList.get(position).name);
             ImageView imageView = holder.image;
             bitmapUtils.display(imageView, mDramaList.get(position).topimage);
@@ -354,6 +318,12 @@ public class DramaFragment extends Fragment {
 
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
             params.height = height;
+            holder.view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtils.showToast(mActivity, "position :: " + index);
+                }
+            });
 //            imageView.setLayoutParams(params);
 
 //             = new StaggeredGridLayoutManager.LayoutParams
@@ -413,11 +383,17 @@ public class DramaFragment extends Fragment {
         }
 
         @Override
-        public void onBindViewHolder(RecommendViewHolder holder, int position) {
+        public void onBindViewHolder(RecommendViewHolder holder, final int position) {
             holder.title.setText("\u3000" + mRecommendList.get(position).name);
             ImageView imageView = holder.image;
             bitmapUtils.display(imageView, mRecommendList.get(position).topimage);
             holder.online.setText(mRecommendList.get(position).playCount);
+            holder.rootView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ToastUtils.showToast(mActivity, "av :: " + mRecommendList.get(position).av);
+                }
+            });
         }
 
 
@@ -436,9 +412,11 @@ public class DramaFragment extends Fragment {
         public TextView title;
         public ImageView image;
         public TextView online;
+        public View rootView;
 
         public RecommendViewHolder(View itemView) {
             super(itemView);
+            this.rootView = itemView;
             title = (TextView) itemView.findViewById(R.id.tv_title);
             image = (ImageView) itemView.findViewById(R.id.iv_item);
             online = (TextView) itemView.findViewById(R.id.tv_online);

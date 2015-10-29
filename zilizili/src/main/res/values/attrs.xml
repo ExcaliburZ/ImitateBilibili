@@ -19,6 +19,7 @@
     <attr name="theme_color_primary" format="color" />
     <attr name="navigationTopBarSize" format="reference" />
     <attr name="theme_color_primary_dark" format="color" />
+    <attr name="view_background" format="reference" />
     <attr name="curVisibility">
         <enum name="show" value="0" />
         <!-- Not displayed, but taken into account during layout (space is left for it). -->
