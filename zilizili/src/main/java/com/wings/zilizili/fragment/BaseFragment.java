@@ -14,9 +14,10 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.wings.zilizili.global.GlobalConstant;
+import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.customView.MySwipeRefreshLayout;
+import com.wings.zilizili.global.GlobalConstant;
 
 /**
  * Created by wing on 2015/10/28.
@@ -26,6 +27,7 @@ import com.wings.zilizili.customView.MySwipeRefreshLayout;
 public abstract class BaseFragment extends Fragment {
 
     protected MySwipeRefreshLayout mContentView;
+    protected View mRootView;
     protected MainActivity mActivity;
     protected String URL;
     protected boolean isRefreshing;
@@ -34,13 +36,13 @@ public abstract class BaseFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        mContentView = initRootView(inflater, container);
+        mRootView = initRootView(inflater, container);
         mActivity = (MainActivity) getActivity();
         init();
         return mContentView;
     }
 
-    protected abstract MySwipeRefreshLayout initRootView(LayoutInflater inflater, ViewGroup container);
+    protected abstract View initRootView(LayoutInflater inflater, ViewGroup container);
 
     protected void init() {
         initView();
@@ -63,8 +65,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected void initView() {
         URL = initURL();
+        mContentView = (MySwipeRefreshLayout) mRootView.findViewById(R.id.sl_refresh);
         mContentView.setColorSchemeColors(Color.BLUE);
-        mContentView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+        mRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
                 mContentView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
@@ -78,9 +81,7 @@ public abstract class BaseFragment extends Fragment {
     protected abstract String initURL();
 
 
-    protected <T extends View> T $(int resId) {
-        return (T) mContentView.findViewById(resId);
-    }
+
 
     protected void getDataFromServer() {
         HttpUtils http = new HttpUtils();

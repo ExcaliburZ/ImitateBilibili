@@ -23,9 +23,16 @@ public class DramaRecyclerView extends RecyclerView {
     }
 
     @Override
-    public boolean onInterceptHoverEvent(MotionEvent event) {
+    public boolean onInterceptTouchEvent(MotionEvent event) {
         //申请父控件不要拦截自己的触碰事件
         getParent().requestDisallowInterceptTouchEvent(true);
-        return super.onInterceptHoverEvent(event);
+        System.out.println("onInterceptTouchEvent");
+        return super.onInterceptTouchEvent(event);
+    }
+
+    @Override
+    public boolean onTouchEvent(MotionEvent e) {
+        System.out.println("DramaRecyclerView onTouchEvent");
+        return super.onTouchEvent(e);
     }
 }

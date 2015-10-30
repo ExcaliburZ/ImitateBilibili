@@ -7,5 +7,5 @@ package com.wings.zilizili.global;
 public interface GlobalConstant {
     int HOMEFRAGMENT = 0;
     int HISTORYFRAGMENT = 1;
-    String SERVER_URL="http://45.78.36.211:8080/";
+    String SERVER_URL="http://182.254.156.215:8080/";
 }

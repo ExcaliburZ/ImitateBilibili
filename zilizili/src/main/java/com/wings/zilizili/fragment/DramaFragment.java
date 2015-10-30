@@ -20,13 +20,12 @@ import com.lidroid.xutils.BitmapUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.wings.zilizili.R;
 import com.wings.zilizili.customView.DramaRecyclerView;
-import com.wings.zilizili.customView.MySwipeRefreshLayout;
+import com.wings.zilizili.customView.MyPauseOnScrollListener;
 import com.wings.zilizili.domain.Data;
 import com.wings.zilizili.domain.DataInfo;
 import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.TopNewsItem;
-import com.wings.zilizili.customView.MyPauseOnScrollListener;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -81,8 +80,8 @@ public class DramaFragment extends BaseFragment {
     }
 
     @Override
-    protected MySwipeRefreshLayout initRootView(LayoutInflater inflater, ViewGroup container) {
-        return (MySwipeRefreshLayout) inflater.inflate(R.layout.fragment_drama, container, false);
+    protected View initRootView(LayoutInflater inflater, ViewGroup container) {
+        return inflater.inflate(R.layout.fragment_drama, container, false);
     }
 
     @Override
@@ -367,7 +366,9 @@ public class DramaFragment extends BaseFragment {
             image = (ImageView) itemView.findViewById(R.id.iv_item);
         }
     }
-
+    protected <T extends View> T $(int resId) {
+        return (T) mRootView.findViewById(resId);
+    }
 
     class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> {
         private BitmapUtils bitmapUtils;

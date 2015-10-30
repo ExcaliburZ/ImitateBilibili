@@ -20,8 +20,9 @@ public class MySwipeRefreshLayout extends SwipeRefreshLayout {
     }
 
     @Override
-    public boolean onInterceptHoverEvent(MotionEvent event) {
+    public boolean onInterceptTouchEvent(MotionEvent event) {
 //        getParent().requestDisallowInterceptTouchEvent(true);
-        return true;
+        return false;
     }
+
 }
