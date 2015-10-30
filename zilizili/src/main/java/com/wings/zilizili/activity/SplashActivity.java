@@ -9,7 +9,9 @@ import com.wings.zilizili.R;
 
 import java.util.Timer;
 import java.util.TimerTask;
-
+/**
+ * SplashActivity,进入的Splash页
+* */
 public class SplashActivity extends AppCompatActivity {
 
     @Override

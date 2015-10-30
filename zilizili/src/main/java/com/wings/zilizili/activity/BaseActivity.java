@@ -18,6 +18,7 @@ import derson.com.multipletheme.colorUi.util.SharedPreferencesMgr;
 
 /**
  * Created by wing on 2015/10/27.
+ * 实现换肤和提供通用方法的Activity的基类
  */
 public class BaseActivity extends AppCompatActivity {
     public final int BLUE_THEME = 0;
@@ -32,6 +33,8 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //以下三行初始化SystemBarTintManager
+        //用来动态改变状态栏的颜色
         // create our manager instance after the content view is set
         tintManager = new SystemBarTintManager(this);
         // enable status bar tint
@@ -39,6 +42,7 @@ public class BaseActivity extends AppCompatActivity {
         // enable navigation bar tint
         tintManager.setNavigationBarTintEnabled(true);
 
+        //读取SharedPreferences中的配置并应用相应的皮肤
         if (SharedPreferencesMgr.getInt("theme", 0) == BLUE_THEME) {
             changeTheme(BLUE_THEME);
         } else {
@@ -58,6 +62,11 @@ public class BaseActivity extends AppCompatActivity {
         changeColor();
     }
 
+    /**
+     * 根据传入的参数调换皮肤,设置状态栏颜色
+     *
+     * @param type 需要更换的皮肤
+     */
     public void changeTheme(int type) {
         if (type == PINK_THEME) {
             setTheme(R.style.AppTheme_NoActionBar_Pink);

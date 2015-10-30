@@ -18,7 +18,9 @@ import com.wings.zilizili.fragment.HomeFragment;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
-
+/**
+* 应用的主Activity,使用MainContent部分ViewPager和侧边栏Fragment来构成主要界面
+* */
 public class MainActivity extends BaseActivity {
 
     private FragmentManager mFragmentManager;

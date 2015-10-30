@@ -21,7 +21,8 @@ import com.wings.zilizili.activity.MainActivity;
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
+ * MainActivity的ViewPager中默认显示的主页Fragment
+ * 含有一个FragmentList组成ViewPager来构成五个标签页
  */
 public class HomeFragment extends Fragment implements View.OnClickListener {
     private View mContentView;

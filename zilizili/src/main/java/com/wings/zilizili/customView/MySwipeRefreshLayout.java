@@ -7,7 +7,9 @@ import android.view.MotionEvent;
 
 /**
  * Created by wing on 2015/10/24.
+ * 不拦截子控件TouchEvent的SwipeRefreshLayout
  */
+
 public class MySwipeRefreshLayout extends SwipeRefreshLayout {
     public MySwipeRefreshLayout(Context context) {
         super(context);

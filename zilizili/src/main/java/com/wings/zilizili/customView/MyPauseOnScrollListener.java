@@ -1,7 +1,8 @@
-package com.wings.zilizili.utils;
+package com.wings.zilizili.customView;
 
 /**
  * Created by wing on 2015/10/25.
+ * 为BitmapUtils实现的PauseOnScrollListener
  */
 //
 // Source code recreated from a .class file by IntelliJ IDEA

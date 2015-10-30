@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 /**
  * Created by wing on 2015/10/24.
+ * 联网工具还没用上..
  */
 public class NetUtils {
 

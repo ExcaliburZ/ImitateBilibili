@@ -14,12 +14,14 @@ import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
 import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
-import com.wings.zilizili.GlobalConstant;
+import com.wings.zilizili.global.GlobalConstant;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.customView.MySwipeRefreshLayout;
 
 /**
  * Created by wing on 2015/10/28.
+ * HomeFragment中显示大量信息的Fragment的基类
+ * 抽取了自动刷新的SwipeRefreshLayout,请求数据地址URL
  */
 public abstract class BaseFragment extends Fragment {
 

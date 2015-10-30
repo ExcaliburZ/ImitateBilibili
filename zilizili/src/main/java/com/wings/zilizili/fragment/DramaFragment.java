@@ -4,7 +4,6 @@ package com.wings.zilizili.fragment;
 import android.content.Context;
 import android.graphics.Rect;
 import android.os.SystemClock;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.GridLayoutManager;
@@ -27,13 +26,15 @@ import com.wings.zilizili.domain.DataInfo;
 import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.TopNewsItem;
-import com.wings.zilizili.utils.MyPauseOnScrollListener;
+import com.wings.zilizili.customView.MyPauseOnScrollListener;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
 
 /**
- * A simple {@link Fragment} subclass.
+ * DramaFragment,HomeFragment中的番剧标签页Fragment
+ * 主要利用为一个RecyclerView添加头布局完成主体设计
+ * 头布局中又自带一个TopNews滚动条的ViewPager和其他一些数据
  */
 public class DramaFragment extends BaseFragment {
     private DramaRecyclerView mRecyclerView;

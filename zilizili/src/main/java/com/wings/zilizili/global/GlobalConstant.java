@@ -1,7 +1,8 @@
-package com.wings.zilizili;
+package com.wings.zilizili.global;
 
 /**
  * Created by wing on 2015/10/22.
+ * 存放一些运行中需要的全局常量,如服务器的地址等
  */
 public interface GlobalConstant {
     int HOMEFRAGMENT = 0;

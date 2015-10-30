@@ -10,12 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 
-import com.wings.zilizili.GlobalConstant;
+import com.wings.zilizili.global.GlobalConstant;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 
 /**
- * A simple {@link Fragment} subclass.
+ * 在MainActivity中加载的侧边栏Fragment
  */
 public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     private NavigationView mNavigationView;

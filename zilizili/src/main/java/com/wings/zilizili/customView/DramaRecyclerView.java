@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 
 /**
  * Created by wing on 2015/10/25.
+ * 申请父控件不要拦截自己的触碰事件的RecyclerView
  */
 public class DramaRecyclerView extends RecyclerView {
     public DramaRecyclerView(Context context) {
@@ -23,6 +24,7 @@ public class DramaRecyclerView extends RecyclerView {
 
     @Override
     public boolean onInterceptHoverEvent(MotionEvent event) {
+        //申请父控件不要拦截自己的触碰事件
         getParent().requestDisallowInterceptTouchEvent(true);
         return super.onInterceptHoverEvent(event);
     }

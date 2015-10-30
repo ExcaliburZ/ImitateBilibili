@@ -14,7 +14,8 @@ import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 
 /**
- * A simple {@link Fragment} subclass.
+ * MainActivity的ViewPager中可以选择显示的历史Fragment
+ *
  */
 public class HistoryFragment extends Fragment implements View.OnClickListener {
 
