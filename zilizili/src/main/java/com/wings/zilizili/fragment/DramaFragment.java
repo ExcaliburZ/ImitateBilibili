@@ -26,6 +26,7 @@ import com.wings.zilizili.domain.DataInfo;
 import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.TopNewsItem;
+import com.wings.zilizili.utils.SingleBitmapUtils;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -60,20 +61,24 @@ public class DramaFragment extends BaseFragment {
 
 
     protected void initView() {
+        //调用父类的方法,初始化一些通用的控件
         super.initView();
+        //初始化头布局及其控件
         mHeadView = LayoutInflater.from(mActivity).inflate(R.layout.header_drama, null);
         topNews = F(R.id.vp_top);
         indicator = F(R.id.indicator);
         mGridView = F(R.id.rv_grid);
-        mRecyclerView = $(R.id.rv_drama);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mGridManager = new GridLayoutManager(mActivity, 2);
         mGridView.setLayoutManager(mGridManager);
+        //初始化RecyclerView及其LayoutManager
+        mRecyclerView = $(R.id.rv_drama);
+        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         //设置箭头的颜色
         mRecyclerView.setHasFixedSize(false);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        //初始化需要存放数据的List,防止空指针
         topNewsList = new ArrayList<>();
         mRecommendList = new ArrayList<>();
         mDramaList = new ArrayList<>();
@@ -127,17 +132,6 @@ public class DramaFragment extends BaseFragment {
 
     protected void setListener() {
         super.setListener();
-//        //设置监听器
-//        mContentView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
-//            @Override //刷新时回调方法
-//            public void onRefresh() {
-//                System.out.println("onRefresh");
-//                if (isRefreshing) {
-//                    return;
-//                }
-//                getDataFromServer();
-//            }
-//        });
 
         mTopNewsAdapter = new TopNewsAdapter(mActivity);
         topNews.setAdapter(mTopNewsAdapter);
@@ -153,43 +147,6 @@ public class DramaFragment extends BaseFragment {
 
     }
 
-
-
-    /*private void getDataFromServer() {
-        startTime = SystemClock.uptimeMillis();
-        HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.GET,
-                GlobalConstant.SERVER_URL + URL,
-                new RequestCallBack<String>() {
-                    @Override
-                    public void onLoading(long total, long current, boolean isUploading) {
-                    }
-
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        final String result = responseInfo.result;
-//                        System.out.println("result ::" + result);
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                decodeResult(result);
-                                //                        sleepMoment();
-                                System.out.println("over");
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        notifyDataRefresh();
-                                    }
-                                });
-                            }
-                        }).start();
-                    }
-
-                    @Override
-                    public void onFailure(HttpException error, String msg) {
-                    }
-                });
-    }*/
 
     private void sleepMoment() {
         long endTime = SystemClock.uptimeMillis();
@@ -239,8 +196,7 @@ public class DramaFragment extends BaseFragment {
 
         TopNewsAdapter(Context context) {
             this.context = context;
-            utils = new BitmapUtils(context);
-            utils.configDefaultLoadingImage(R.drawable.topnews_item_default);
+            utils = SingleBitmapUtils.getInstance().getBitmapUtils();
         }
 
         @Override
@@ -275,8 +231,7 @@ public class DramaFragment extends BaseFragment {
         public int ITEM = 1;
 
         public DramaAdapter(View mHeadView) {
-            bitmapUtils = new BitmapUtils(mActivity);
-//            bitmapUtils.configDefaultLoadingImage(R.drawable)
+            bitmapUtils = SingleBitmapUtils.getInstance().getBitmapUtils();
             this.rootView = mHeadView;
             mRecyclerView.addOnScrollListener(new MyPauseOnScrollListener(bitmapUtils, false, true));
         }
@@ -365,9 +320,6 @@ public class DramaFragment extends BaseFragment {
             title = (TextView) itemView.findViewById(R.id.tv_title);
             image = (ImageView) itemView.findViewById(R.id.iv_item);
         }
-    }
-    protected <T extends View> T $(int resId) {
-        return (T) mRootView.findViewById(resId);
     }
 
     class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> {

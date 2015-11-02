@@ -63,6 +63,9 @@ public abstract class BaseFragment extends Fragment {
         });
     }
 
+    /**
+     * 初始化需要的控件
+     */
     protected void initView() {
         URL = initURL();
         mContentView = (MySwipeRefreshLayout) mRootView.findViewById(R.id.sl_refresh);
@@ -81,12 +84,13 @@ public abstract class BaseFragment extends Fragment {
     protected abstract String initURL();
 
 
-
-
+    /**
+     * 根据URL从服务器获取数据,并调用解析数据和刷新界面的方法
+     */
     protected void getDataFromServer() {
         HttpUtils http = new HttpUtils();
         http.send(HttpRequest.HttpMethod.GET,
-                GlobalConstant.SERVER_URL + URL,
+                GlobalConstant.TX_URL + URL,
                 new RequestCallBack<String>() {
                     @Override
                     public void onLoading(long total, long current, boolean isUploading) {
@@ -116,11 +120,22 @@ public abstract class BaseFragment extends Fragment {
                 });
     }
 
+    /**
+     * 获取到的数据解析完毕,可以刷新界面了
+     */
     protected void notifyDataRefresh() {
 
     }
 
+    /**
+     * 解析获取到的JSON数据
+     */
     protected void decodeResult(String result) {
 
     }
+
+    protected <T extends View> T $(int resId) {
+        return (T) mRootView.findViewById(resId);
+    }
+
 }

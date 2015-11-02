@@ -8,4 +8,5 @@ public interface GlobalConstant {
     int HOMEFRAGMENT = 0;
     int HISTORYFRAGMENT = 1;
     String SERVER_URL="http://182.254.156.215:8080/";
+    String TX_URL="http://182.254.156.215:8080/";
 }

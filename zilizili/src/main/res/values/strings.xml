@@ -1125,6 +1125,5 @@
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
 
-<!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment1</string>
 </resources>

@@ -42,7 +42,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
     }
 
     private void init() {
-        findView();
+        initView();
         setToggleLeftDrawer();
         setListener();
     }
@@ -56,7 +56,7 @@ public class HistoryFragment extends Fragment implements View.OnClickListener {
         //mActivity.setSupportActionBar(mToolbar);
     }
 
-    private void findView() {
+    private void initView() {
         mToolbar = $(R.id.toolbar);
         ib_menu = $(R.id.ib_menu);
     }
