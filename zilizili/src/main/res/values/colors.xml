@@ -217,4 +217,5 @@
     <color name="yellow">#ffffd11b</color>
     <color name="yellow_dark">#ffffa500</color>
     <color name="daily_tab_text_color">#fff</color>
+    <color name="white_text_color">#fff</color>
 </resources>

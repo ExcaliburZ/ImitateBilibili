@@ -18,6 +18,25 @@
         </item>
     </style>
 
+    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
+        <item name="android:textAppearance">@style/TextAppearance.App</item>
+        <item name="android:textColorSecondary">@color/gray_dark</item>
+        <item name="android:textAppearanceLarge">@style/TextAppearance.App.Large</item>
+        <item name="android:textAppearanceMedium">@style/TextAppearance.App.Medium</item>
+        <item name="android:listChoiceBackgroundIndicator">@drawable/item_background</item>
+        <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+        <item name="button_background">@drawable/tint_button_background</item>
+        <item name="colorPrimary">?theme_color_primary</item>
+        <item name="colorPrimaryDark">?theme_color_primary_dark</item>
+        <item name="colorAccent">?theme_color_primary</item>
+        <item name="view_background">@color/view_background_daily</item>
+        <item name="navigationTopBarSize">@dimen/navigation_top_bar_size</item>
+        <item name="selectableItemBackground">?android:selectableItemBackground</item>
+        <item name="selectableItemBackgroundBorderless">
+            ?android:selectableItemBackgroundBorderless
+        </item>
+    </style>
+
     <style name="AppTheme.NoActionBar.Pink" parent="@style/AppTheme.Light.Pink">
         <item name="android:windowNoTitle">true</item>
         <!-- 设置导航栏和状态栏成半透明的 -->

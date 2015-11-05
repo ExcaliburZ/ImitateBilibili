@@ -2,6 +2,7 @@ package com.wings.zilizili.fragment;
 
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Rect;
 import android.os.SystemClock;
 import android.support.v4.view.PagerAdapter;
@@ -19,6 +20,7 @@ import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
 import com.viewpagerindicator.CirclePageIndicator;
 import com.wings.zilizili.R;
+import com.wings.zilizili.activity.VideoDetailActivity;
 import com.wings.zilizili.customView.DramaRecyclerView;
 import com.wings.zilizili.customView.MyPauseOnScrollListener;
 import com.wings.zilizili.domain.Data;
@@ -27,7 +29,6 @@ import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.TopNewsItem;
 import com.wings.zilizili.utils.SingleBitmapUtils;
-import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
 
@@ -208,6 +209,12 @@ public class DramaFragment extends BaseFragment {
         public Object instantiateItem(ViewGroup container, int position) {
             View view = View.inflate(context, R.layout.item_top_news, null);
             View iv = view.findViewById(R.id.iv_item);
+            iv.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    startActivity(new Intent(getContext(), VideoDetailActivity.class));
+                }
+            });
             utils.display(iv, topNewsList.get(position).topimage);
             container.addView(view);
             return view;
@@ -276,7 +283,8 @@ public class DramaFragment extends BaseFragment {
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtils.showToast(mActivity, "position :: " + index);
+//                    ToastUtils.showToast(mActivity, "position :: " + index);
+                    startActivity(new Intent(getContext(), VideoDetailActivity.class));
                 }
             });
 //            imageView.setLayoutParams(params);
@@ -345,7 +353,8 @@ public class DramaFragment extends BaseFragment {
             holder.rootView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    ToastUtils.showToast(mActivity, "av :: " + mRecommendList.get(position).av);
+                    startActivity(new Intent(getContext(), VideoDetailActivity.class));
+//                    ToastUtils.showToast(mActivity, "av :: " + mRecommendList.get(position).av);
                 }
             });
         }

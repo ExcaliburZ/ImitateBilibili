@@ -62,8 +62,9 @@
         <item name="android:textAppearanceLarge">@style/TextAppearance.App.Large</item>
         <item name="android:textAppearanceMedium">@style/TextAppearance.App.Medium</item>
         <item name="android:listChoiceBackgroundIndicator">@drawable/item_background</item>
-        <item name="selectableItemBackground">@drawable/item_background</item>
         <item name="toolbarStyle">@style/Widget.App.Toolbar</item>
+        <item name="button_background">@drawable/tint_button_background</item>
+        <item name="selectableItemBackground">@drawable/item_background</item>
         <item name="selectableItemBackgroundBorderless">@drawable/item_background_borderless</item>
         <item name="colorPrimary">?theme_color_primary</item>
         <item name="colorPrimaryDark">?theme_color_primary_dark</item>
@@ -152,4 +153,35 @@
         <item name="android:textSize">@dimen/text_size_large</item>
     </style>
 
+    <style name="Widget.App.Button.Pink" parent="@style/Widget.App.Button">
+        <item name="android:disabledAlpha">0.3</item>
+        <item name="android:textColor">@color/white_text_color</item>
+    </style>
+    <!--<item name="android:minWidth">70.0dip</item>-->
+    <!--<item name="android:minHeight">36.0dip</item>-->
+    <style name="Widget.App.Button" parent="@style/Widget.AppCompat.Button">
+        <item name="android:textAppearance">@style/TextAppearance.App.Title</item>
+        <item name="color_disable">@color/pink</item>
+        <item name="colorControlHighlight">@color/pink_dark</item>
+        <item name="colorButtonNormal">@color/pink</item>
+    </style>
+
+    <style name="Widget.App.ImageView.Gray" parent="@style/Widget.App.ImageView">
+        <item name="colorControlNormal">@color/gray_dark</item>
+        <item name="colorControlHighlight">@color/gray_dark</item>
+    </style>
+
+    <style name="Widget.App.ImageView.NoBackground" parent="@style/Widget.App.ImageView">
+        <item name="android:background">@null</item>
+    </style>
+
+    <style name="Widget.App.ImageView" parent="">
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
+        <item name="android:clickable">true</item>
+        <item name="android:scaleType">centerInside</item>
+        <item name="color_disable">@color/gray_dark</item>
+        <item name="colorControlNormal">@color/pink</item>
+        <item name="colorControlActivated">@color/pink</item>
+        <item name="colorControlHighlight">@color/pink_dark</item>
+    </style>
 </resources>
