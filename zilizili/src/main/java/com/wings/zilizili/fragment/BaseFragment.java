@@ -16,7 +16,7 @@ import com.lidroid.xutils.http.callback.RequestCallBack;
 import com.lidroid.xutils.http.client.HttpRequest;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
-import com.wings.zilizili.customView.MySwipeRefreshLayout;
+import com.wings.zilizili.customView.LowPrioritySwipeRefreshLayout;
 import com.wings.zilizili.global.GlobalConstant;
 
 /**
@@ -26,7 +26,7 @@ import com.wings.zilizili.global.GlobalConstant;
  */
 public abstract class BaseFragment extends Fragment {
 
-    protected MySwipeRefreshLayout mContentView;
+    protected LowPrioritySwipeRefreshLayout mContentView;
     protected View mRootView;
     protected MainActivity mActivity;
     protected String URL;
@@ -68,7 +68,7 @@ public abstract class BaseFragment extends Fragment {
      */
     protected void initView() {
         URL = initURL();
-        mContentView = (MySwipeRefreshLayout) mRootView.findViewById(R.id.sl_refresh);
+        mContentView = (LowPrioritySwipeRefreshLayout) mRootView.findViewById(R.id.sl_refresh);
         mContentView.setColorSchemeColors(Color.BLUE);
         mRootView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
@@ -81,6 +81,11 @@ public abstract class BaseFragment extends Fragment {
         });
     }
 
+    /**
+     * 初始化获取数据的地址
+     *
+     * @return 地址的URL
+     */
     protected abstract String initURL();
 
 

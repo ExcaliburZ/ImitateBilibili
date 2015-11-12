@@ -35,6 +35,7 @@
         <item name="selectableItemBackgroundBorderless">
             ?android:selectableItemBackgroundBorderless
         </item>
+        <item name="boWenItemBackground">?android:attr/selectableItemBackgroundBorderless</item>
     </style>
 
     <style name="AppTheme.NoActionBar.Pink" parent="@style/AppTheme.Light.Pink">

@@ -10,12 +10,12 @@ import android.view.MotionEvent;
  * 不拦截子控件TouchEvent的SwipeRefreshLayout
  */
 
-public class MySwipeRefreshLayout extends SwipeRefreshLayout {
-    public MySwipeRefreshLayout(Context context) {
+public class LowPrioritySwipeRefreshLayout extends SwipeRefreshLayout {
+    public LowPrioritySwipeRefreshLayout(Context context) {
         super(context);
     }
 
-    public MySwipeRefreshLayout(Context context, AttributeSet attrs) {
+    public LowPrioritySwipeRefreshLayout(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 

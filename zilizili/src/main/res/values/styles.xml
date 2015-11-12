@@ -71,6 +71,7 @@
         <item name="colorAccent">?theme_color_primary</item>
         <item name="view_background">@color/view_background_daily</item>
         <item name="navigationTopBarSize">@dimen/navigation_top_bar_size</item>
+        <item name="boWenItemBackground">?android:attr/selectableItemBackground</item>
     </style>
 
     <style name="AppTheme.Light" parent="@style/AppBaseTheme"></style>

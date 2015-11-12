@@ -4,6 +4,7 @@ package com.wings.zilizili.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.graphics.drawable.RippleDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -15,6 +16,7 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -40,6 +42,7 @@ import java.util.ArrayList;
  * 头布局中又自带一个TopNews滚动条的ViewPager和其他一些数据
  */
 public class DramaFragment extends BaseFragment {
+
     private static String TAG = "DramaFragment";
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
@@ -61,11 +64,21 @@ public class DramaFragment extends BaseFragment {
     //TopNews点指示器间距
     private int itemSpacing;
     private int itemSize;
+
+    private static final int START_AUTO_PLAY = 0;
     private Handler mHandler = new Handler() {
 
         @Override
         public void handleMessage(Message msg) {
-            super.handleMessage(msg);
+            switch (msg.what) {
+                case START_AUTO_PLAY:
+                    int currentItem = topNews.getCurrentItem();
+                    topNews.setCurrentItem(++currentItem);
+                    this.sendEmptyMessageDelayed(START_AUTO_PLAY, 3000);
+                    break;
+                default:
+                    throw new RuntimeException("can not handler null message");
+            }
         }
     };
 
@@ -80,20 +93,25 @@ public class DramaFragment extends BaseFragment {
         //初始化头布局及其控件
         mHeadView = LayoutInflater.from(mActivity).inflate(R.layout.header_drama, null);
         topNews = findViewInHeadView(R.id.vp_top);
+        rlPointSet = findViewInHeadView(R.id.rl_point_set);
+
         mGridView = findViewInHeadView(R.id.rv_grid);
         mGridManager = new GridLayoutManager(mActivity, 2);
         mGridView.setLayoutManager(mGridManager);
+
         //初始化RecyclerView及其LayoutManager
         mRecyclerView = $(R.id.rv_drama);
-        rlPointSet = findViewInHeadView(R.id.rl_point_set);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         //设置箭头的颜色
         mRecyclerView.setHasFixedSize(false);
+
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
+        mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        //填充需要的数据
         itemSpacing = getResources().getDimensionPixelSize(R.dimen.spacing_item);
         itemSize = getResources().getDimensionPixelSize(R.dimen.point_item_size);
-        mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+
         //初始化需要存放数据的List,防止空指针
         topNewsList = new ArrayList<>();
         mRecommendList = new ArrayList<>();
@@ -110,7 +128,7 @@ public class DramaFragment extends BaseFragment {
         return "list_1.json";
     }
 
-
+    //设置各个Item之间的间距
     public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
         private int space;
@@ -160,6 +178,13 @@ public class DramaFragment extends BaseFragment {
 
         mRecommendAdapter = new RecommendAdapter();
         mGridView.setAdapter(mRecommendAdapter);
+        //点击后取消自动播放
+        topNews.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
 
         topNews.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -213,6 +238,9 @@ public class DramaFragment extends BaseFragment {
         //初始化TopNews的指示器并选中第一个
         initRelativePointSet();
         topNews.setCurrentItem(topNewsList.size() * 1000);
+
+        //开启自动播放
+        mHandler.sendEmptyMessageDelayed(START_AUTO_PLAY, 3000);
     }
 
     private void initRelativePointSet() {
@@ -274,7 +302,12 @@ public class DramaFragment extends BaseFragment {
                 return null;
             }
             position = position % topNewsList.size();
-            View view = View.inflate(context, R.layout.item_top_news, null);
+            FrameLayout view = (FrameLayout) View.inflate(context, R.layout.item_top_news, null);
+            RippleDrawable drawable = (RippleDrawable) mActivity.getResources()
+                    .getDrawable(R.drawable.ripple_background);
+
+            view.setClickable(true);// if we don't set it true, ripple will not be played
+            view.setForeground(drawable);
             View iv = view.findViewById(R.id.iv_item);
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -452,7 +485,7 @@ public class DramaFragment extends BaseFragment {
             online = (TextView) itemView.findViewById(R.id.tv_online);
         }
     }
-    
+
     //从HeadView中获取控件
     private <T extends View> T findViewInHeadView(int resId) {
         return (T) mHeadView.findViewById(resId);
