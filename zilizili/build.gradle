@@ -26,7 +26,6 @@ dependencies {
     compile 'com.android.support:design:23.0.1'
     compile 'com.android.support:cardview-v7:23.1.0'
     compile 'com.android.support:recyclerview-v7:23.1.0'
-    compile project(':ViewPagerIndicatorLib')
     compile files('libs/xUtils-2.6.14.jar')
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/systembartint-1.0.4.jar')

@@ -20,9 +20,8 @@ public class SingleBitmapUtils {
         File file = new File(cachePath);
         if (!file.exists()) {
             file.mkdir();
+            System.out.println(file.getAbsolutePath());
         }
-        System.out.println(file.getAbsolutePath());
-        System.out.println(file.getPath());
         mBitmapUtils = new BitmapUtils(context, file.getAbsolutePath());
 //        mBitmapUtils.configDefaultLoadingImage(R.drawable.topnews_item_default);
 //        mBitmapUtils.clearDiskCache();

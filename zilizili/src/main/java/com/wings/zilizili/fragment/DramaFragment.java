@@ -4,6 +4,8 @@ package com.wings.zilizili.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Handler;
+import android.os.Message;
 import android.os.SystemClock;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -14,11 +16,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.gson.Gson;
 import com.lidroid.xutils.BitmapUtils;
-import com.viewpagerindicator.CirclePageIndicator;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.VideoDetailActivity;
 import com.wings.zilizili.customView.DramaRecyclerView;
@@ -38,10 +40,10 @@ import java.util.ArrayList;
  * 头布局中又自带一个TopNews滚动条的ViewPager和其他一些数据
  */
 public class DramaFragment extends BaseFragment {
+    private static String TAG = "DramaFragment";
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
     private ViewPager topNews;
-    private CirclePageIndicator indicator;
     private Data data;
     private long startTime;
     private View mHeadView;
@@ -50,34 +52,47 @@ public class DramaFragment extends BaseFragment {
     private ArrayList<DramaItem> mDramaList;
     private GridLayoutManager mGridManager;
     private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
-    private boolean isFirst;
     private TopNewsAdapter mTopNewsAdapter;
     private DramaAdapter mDramaAdapter;
     private RecommendAdapter mRecommendAdapter;
+    private RelativeLayout rlPointSet;
+
+    private View redPoint;
+    //TopNews点指示器间距
+    private int itemSpacing;
+    private int itemSize;
+    private Handler mHandler = new Handler() {
+
+        @Override
+        public void handleMessage(Message msg) {
+            super.handleMessage(msg);
+        }
+    };
 
 
     public DramaFragment() {
         // Required empty public constructor
     }
 
-
     protected void initView() {
         //调用父类的方法,初始化一些通用的控件
         super.initView();
         //初始化头布局及其控件
         mHeadView = LayoutInflater.from(mActivity).inflate(R.layout.header_drama, null);
-        topNews = F(R.id.vp_top);
-        indicator = F(R.id.indicator);
-        mGridView = F(R.id.rv_grid);
+        topNews = findViewInHeadView(R.id.vp_top);
+        mGridView = findViewInHeadView(R.id.rv_grid);
         mGridManager = new GridLayoutManager(mActivity, 2);
         mGridView.setLayoutManager(mGridManager);
         //初始化RecyclerView及其LayoutManager
         mRecyclerView = $(R.id.rv_drama);
+        rlPointSet = findViewInHeadView(R.id.rl_point_set);
         mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         //设置箭头的颜色
         mRecyclerView.setHasFixedSize(false);
         int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
+        itemSpacing = getResources().getDimensionPixelSize(R.dimen.spacing_item);
+        itemSize = getResources().getDimensionPixelSize(R.dimen.point_item_size);
         mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
         //初始化需要存放数据的List,防止空指针
         topNewsList = new ArrayList<>();
@@ -95,7 +110,9 @@ public class DramaFragment extends BaseFragment {
         return "list_1.json";
     }
 
+
     public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+
         private int space;
 
         public SpacesItemDecoration(int space) {
@@ -136,15 +153,40 @@ public class DramaFragment extends BaseFragment {
 
         mTopNewsAdapter = new TopNewsAdapter(mActivity);
         topNews.setAdapter(mTopNewsAdapter);
-        indicator.setViewPager(topNews);
 
-//        mRefreshLayout.setRefreshing(false);
         mRecyclerView.setVisibility(View.INVISIBLE);
         mDramaAdapter = new DramaAdapter(mHeadView);
         mRecyclerView.setAdapter(mDramaAdapter);
 
         mRecommendAdapter = new RecommendAdapter();
         mGridView.setAdapter(mRecommendAdapter);
+
+        topNews.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                //小红点跟随移动代码
+//                RelativeLayout.LayoutParams params =
+//                        (RelativeLayout.LayoutParams) redPoint.getLayoutParams();
+//                params.leftMargin = (int) ((position * mLen) + mLen * positionOffset);
+//                redPoint.setLayoutParams(params);
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                if (redPoint == null)
+                    return;
+                position = position % topNewsList.size();
+                RelativeLayout.LayoutParams params =
+                        (RelativeLayout.LayoutParams) redPoint.getLayoutParams();
+                params.leftMargin = (position * itemSpacing);
+                redPoint.setLayoutParams(params);
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+
+            }
+        });
 
     }
 
@@ -159,21 +201,41 @@ public class DramaFragment extends BaseFragment {
 
     @Override
     protected void notifyDataRefresh() {
-//        if (!isFirst) {
-//            mTopNewsAdapter.notifyDataSetChanged();
-//            mDramaAdapter.notifyDataSetChanged();
-//        }
+        //已经获取到了数据通知变化
         mTopNewsAdapter.notifyDataSetChanged();
         mDramaAdapter.notifyDataSetChanged();
         mRecommendAdapter.notifyDataSetChanged();
+
         mRecyclerView.setVisibility(View.VISIBLE);
         mContentView.setRefreshing(false);
         isRefreshing = false;
-        isFirst = false;
 
+        //初始化TopNews的指示器并选中第一个
+        initRelativePointSet();
+        topNews.setCurrentItem(topNewsList.size() * 1000);
+    }
+
+    private void initRelativePointSet() {
+        for (int i = 0; i < topNewsList.size(); i++) {
+            View point = new View(mActivity);
+            point.setBackgroundResource(R.drawable.shape_point_gray);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(itemSize, itemSize);
+            params.leftMargin = itemSpacing * i;
+            point.setLayoutParams(params);
+            rlPointSet.addView(point);
+        }
+        //有数据添加小红点
+        if (topNewsList.size() > 0) {
+            redPoint = new View(mActivity);
+            redPoint.setBackgroundResource(R.drawable.shape_point_red);
+            RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(itemSize, itemSize);
+            redPoint.setLayoutParams(params);
+            rlPointSet.addView(redPoint);
+        }
     }
 
     @Override
+    //解析获取到的数据
     protected void decodeResult(String result) {
         Gson gson = new Gson();
         DataInfo dataInfo = gson.fromJson(result, DataInfo.class);
@@ -185,10 +247,6 @@ public class DramaFragment extends BaseFragment {
         }
     }
 
-
-    private <T extends View> T F(int resId) {
-        return (T) mHeadView.findViewById(resId);
-    }
 
     class TopNewsAdapter extends PagerAdapter {
 
@@ -202,11 +260,20 @@ public class DramaFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return topNewsList.size();
+            return topNewsList.size() == 0 ? 0 : Integer.MAX_VALUE;
+        }
+
+        @Override
+        public int getItemPosition(Object object) {
+            return super.getItemPosition(object);
         }
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
+            if (topNewsList.size() < 0) {
+                return null;
+            }
+            position = position % topNewsList.size();
             View view = View.inflate(context, R.layout.item_top_news, null);
             View iv = view.findViewById(R.id.iv_item);
             iv.setOnClickListener(new View.OnClickListener() {
@@ -385,4 +452,10 @@ public class DramaFragment extends BaseFragment {
             online = (TextView) itemView.findViewById(R.id.tv_online);
         }
     }
+    
+    //从HeadView中获取控件
+    private <T extends View> T findViewInHeadView(int resId) {
+        return (T) mHeadView.findViewById(resId);
+    }
+
 }

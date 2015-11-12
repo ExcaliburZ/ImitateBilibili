@@ -3,7 +3,6 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ImitateBilibili.iml" filepath="$PROJECT_DIR$/ImitateBilibili.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ViewPagerIndicatorLib/ViewPagerIndicatorLib.iml" filepath="$PROJECT_DIR$/ViewPagerIndicatorLib/ViewPagerIndicatorLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/zilizili/zilizili.iml" filepath="$PROJECT_DIR$/zilizili/zilizili.iml" />
     </modules>

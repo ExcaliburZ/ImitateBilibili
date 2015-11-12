@@ -17,18 +17,16 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 
-        <com.viewpagerindicator.CirclePageIndicator
-            android:id="@+id/indicator"
-            android:layout_width="60dp"
+        <RelativeLayout
+            android:id="@+id/rl_point_set"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
             android:layout_alignParentRight="true"
-            android:layout_marginLeft="5dp"
-            android:background="@android:color/transparent"
-            android:padding="5dp"
-            app:fillColor="?attr/theme_color_primary"
-            app:pageColor="#afff"
-            app:radius="3dp" />
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="8dp"
+            android:layout_marginRight="5dp"
+            android:gravity="center" />
     </RelativeLayout>
 
     <LinearLayout
