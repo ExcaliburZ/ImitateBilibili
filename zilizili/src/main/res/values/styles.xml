@@ -99,6 +99,7 @@
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+    <style name="Widget.AppCompat.Toolbar" parent="@style/Base.Widget.AppCompat.Toolbar" />
 
     <style name="Widget.App.Toolbar" parent="@style/Widget.AppCompat.Toolbar">
         <item name="android:gravity">center_vertical</item>
@@ -109,6 +110,32 @@
         <item name="subtitleTextAppearance">@style/TextAppearance.App.Topbar.Subtitle</item>
         <item name="titleMargins">4.0dip</item>
         <item name="theme">@style/ThemeOverlay.AppCompat.Dark.ActionBar</item>
+    </style>
+
+    <style name="common_text">
+        <item name="android:textColor">#fff</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:typeface">sans</item>
+    </style>
+
+    <style name="Base.Widget.AppCompat.Toolbar" parent="@android:style/Widget">
+        <item name="android:minHeight">?actionBarSize</item>
+        <item name="contentInsetStart">16.0dip</item>
+        <item name="titleTextAppearance">@style/TextAppearance.Widget.AppCompat.Toolbar.Title</item>
+        <item name="subtitleTextAppearance">
+            @style/TextAppearance.Widget.AppCompat.Toolbar.Subtitle
+        </item>
+        <item name="titleMargins">4.0dip</item>
+        <item name="maxButtonHeight">56.0dip</item>
+        <item name="collapseIcon">?homeAsUpIndicator</item>
+        <item name="collapseContentDescription">@string/abc_toolbar_collapse_description</item>
+    </style>
+
+
+    <style name="Base.Widget.AppCompat.Toolbar.Button.Navigation" parent="@android:style/Widget">
+        <item name="android:background">?selectableItemBackground</item>
+        <item name="android:scaleType">center</item>
+        <item name="android:minWidth">56.0dip</item>
     </style>
 
     <style name="TextAppearance.App.Topbar.Subtitle" parent="@style/TextAppearance.App.Subtitle">
@@ -184,5 +211,9 @@
         <item name="colorControlNormal">@color/pink</item>
         <item name="colorControlActivated">@color/pink</item>
         <item name="colorControlHighlight">@color/pink_dark</item>
+    </style>
+
+    <style name="Widget.App.Button.ToolBar" parent="">
+        <item name="android:background">?selectableItemBackgroundBorderless</item>
     </style>
 </resources>

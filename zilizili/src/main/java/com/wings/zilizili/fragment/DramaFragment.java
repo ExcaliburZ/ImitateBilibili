@@ -81,6 +81,7 @@ public class DramaFragment extends BaseFragment {
             }
         }
     };
+    public static final String IMAGE = "image";
 
 
     public DramaFragment() {
@@ -302,20 +303,29 @@ public class DramaFragment extends BaseFragment {
                 return null;
             }
             position = position % topNewsList.size();
+
+            //尝试Item Ripple效果
             FrameLayout view = (FrameLayout) View.inflate(context, R.layout.item_top_news, null);
             RippleDrawable drawable = (RippleDrawable) mActivity.getResources()
                     .getDrawable(R.drawable.ripple_background);
-
             view.setClickable(true);// if we don't set it true, ripple will not be played
             view.setForeground(drawable);
             View iv = view.findViewById(R.id.iv_item);
+
+
+            final TopNewsItem topNewsItem = topNewsList.get(position);
+            utils.display(iv, topNewsItem.topimage);
+
             iv.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getContext(), VideoDetailActivity.class));
+                    Intent intent = new Intent(getContext(), VideoDetailActivity.class);
+                    intent.putExtra("av", "654321");
+                    intent.putExtra(IMAGE, topNewsItem.topimage);
+                    startActivity(intent);
                 }
             });
-            utils.display(iv, topNewsList.get(position).topimage);
+
             container.addView(view);
             return view;
         }
@@ -373,18 +383,22 @@ public class DramaFragment extends BaseFragment {
             }
             //去掉头布局占得位置
             final int index = --position;
-            holder.title.setText(mDramaList.get(position).name);
+
+            final DramaItem dramaItem = mDramaList.get(position);
+            holder.title.setText(dramaItem.name);
             ImageView imageView = holder.image;
-            bitmapUtils.display(imageView, mDramaList.get(position).topimage);
-            Integer height = Integer.valueOf(mDramaList.get(position).height);
+            bitmapUtils.display(imageView, dramaItem.topimage);
+            Integer height = Integer.valueOf(dramaItem.height);
 
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
             params.height = height;
             holder.view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-//                    ToastUtils.showToast(mActivity, "position :: " + index);
-                    startActivity(new Intent(getContext(), VideoDetailActivity.class));
+                    Intent intent = new Intent(getContext(), VideoDetailActivity.class);
+                    intent.putExtra("av", "123456");
+                    intent.putExtra("image", dramaItem.topimage);
+                    startActivity(intent);
                 }
             });
 //            imageView.setLayoutParams(params);
@@ -446,14 +460,24 @@ public class DramaFragment extends BaseFragment {
 
         @Override
         public void onBindViewHolder(RecommendViewHolder holder, final int position) {
-            holder.title.setText("\u3000" + mRecommendList.get(position).name);
+            final RecommendItem recommendItem = mRecommendList.get(position);
+            holder.title.setText("\u3000" + recommendItem.name);
             ImageView imageView = holder.image;
-            bitmapUtils.display(imageView, mRecommendList.get(position).topimage);
-            holder.online.setText(mRecommendList.get(position).playCount);
+            bitmapUtils.display(imageView, recommendItem.topimage);
+            holder.online.setText(recommendItem.playCount);
+
+//            TypedValue typedValue = new TypedValue();
+//            mActivity.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
+//            Drawable background = getResources().getDrawable(typedValue.resourceId);
+//            Drawable background = getResources().getDrawable(R.drawable.ripple_background);
+//            holder.rootView.setBackground(background);
             holder.rootView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    startActivity(new Intent(getContext(), VideoDetailActivity.class));
+                    Intent intent = new Intent(getContext(), VideoDetailActivity.class);
+                    intent.putExtra("av", "123456");
+                    intent.putExtra("image", recommendItem.topimage);
+                    startActivity(intent);
 //                    ToastUtils.showToast(mActivity, "av :: " + mRecommendList.get(position).av);
                 }
             });

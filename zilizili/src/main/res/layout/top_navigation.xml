@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="40dp"
+    android:background="#a000"
+    android:gravity="center_vertical"
+    android:orientation="horizontal">
+
+
+    <ImageButton
+        android:id="@+id/ib_back"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:padding="15dp"
+        android:layout_marginLeft="10dp"
+        android:background="@drawable/back_selector"
+        android:scaleType="fitXY"
+        android:src="@mipmap/ic_arrow_back_white_48dp" />
+
+    <TextView
+        android:id="@+id/tv_title"
+        style="@style/common_text"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="20dp"
+        android:layout_weight="1"
+        android:text="title" />
+
+    <ImageView
+        android:id="@+id/iv_battery"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
+        android:layout_marginRight="15dp"
+        android:src="@mipmap/ic_battery_30_white_48dp" />
+
+    <TextView
+        android:id="@+id/tv_time"
+        style="@style/common_text"
+        android:text="20:00"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="15dp" />
+
+
+</LinearLayout>

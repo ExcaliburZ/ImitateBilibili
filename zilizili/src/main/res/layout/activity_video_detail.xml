@@ -7,42 +7,41 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <derson.com.multipletheme.colorUi.widget.ColorToolbar
+    <!--<derson.com.multipletheme.colorUi.widget.ColorToolbar
         android:id="@+id/toolbar"
         style="@style/Widget.App.Toolbar.Home"
         android:layout_width="match_parent"
         android:layout_height="?navigationTopBarSize"
-        android:background="?attr/colorPrimary"
-        android:title="@string/title_histories">
+        android:background="?attr/colorPrimary">
 
-        <RelativeLayout
-            android:id="@+id/navigation"
-            android:layout_width="wrap_content"
-            android:layout_height="fill_parent"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        &lt;!&ndash; <RelativeLayout
+             android:id="@+id/navigation"
+             android:layout_width="wrap_content"
+             android:layout_height="fill_parent"
+             android:gravity="center_vertical"
+             android:orientation="horizontal">
 
-            <ImageButton
-                android:id="@+id/ib_menu"
-                android:layout_width="33dp"
-                android:layout_height="match_parent"
-                android:layout_centerVertical="true"
-                android:background="?attr/selectableItemBackgroundBorderless"
-                android:paddingLeft="15dp"
-                android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha" />
+             <ImageButton
+                 android:id="@+id/ib_menu"
+                 android:layout_width="33dp"
+                 android:layout_height="match_parent"
+                 android:layout_centerVertical="true"
+                 android:paddingLeft="15dp"
+                 android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
+                 android:theme="@style/Widget.App.Button.ToolBar" />
 
-            <TextView
-                style="@style/TextAppearance.App.Topbar.Title"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="15dp"
-                android:layout_toRightOf="@id/ib_menu"
-                android:gravity="center_vertical"
-                android:text="av12345678" />
+             <TextView
+                 style="@style/TextAppearance.App.Topbar.Title"
+                 android:layout_width="wrap_content"
+                 android:layout_height="match_parent"
+                 android:layout_marginLeft="15dp"
+                 android:layout_toRightOf="@id/ib_menu"
+                 android:gravity="center_vertical"
+                 android:text="av12345678" />
 
 
-        </RelativeLayout>
-    </derson.com.multipletheme.colorUi.widget.ColorToolbar>
+         </RelativeLayout>&ndash;&gt;
+    </derson.com.multipletheme.colorUi.widget.ColorToolbar>-->
 
     <ScrollView
         android:layout_width="fill_parent"
@@ -82,7 +81,7 @@
                     android:maxLines="3"
                     android:paddingBottom="4.0dip"
                     android:paddingTop="4.0dip"
-                    android:text="Endless Tear"
+                    android:text="@string/author_video_loading"
                     android:textAppearance="@style/TextAppearance.App.Title" />
 
                 <derson.com.multipletheme.colorUi.widget.ColorTextView
@@ -91,7 +90,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cover"
                     android:layout_marginTop="8.0dip"
-                    android:text="UP主 : Bilibili番剧"
+                    android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary"
                     android:textColorLink="?colorPrimary" />
@@ -103,7 +102,7 @@
                     android:layout_below="@+id/nick"
                     android:layout_marginTop="4.0dip"
                     android:minWidth="50.0dip"
-                    android:text="播放 : 3477"
+                    android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary" />
 
@@ -115,7 +114,7 @@
                     android:layout_marginLeft="@dimen/item_spacing"
                     android:layout_marginTop="4.0dip"
                     android:layout_toRightOf="@+id/info_views"
-                    android:text="弹幕 : 139"
+                    android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary" />
 
@@ -125,7 +124,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/info_views"
                     android:layout_marginTop="4.0dip"
-                    android:text="发布于 : 昨天"
+                    android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary" />
 
@@ -137,7 +136,7 @@
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/item_spacing"
                     android:background="?button_background"
-                    android:enabled="false"
+                    android:clickable="false"
                     android:text="@string/play"
                     android:theme="@style/Widget.App.Button.Pink" />
             </RelativeLayout>
@@ -169,6 +168,8 @@
         </LinearLayout>
     </ScrollView>
 
+    <include layout="@layout/bili_app_layout_navigation_top_bar" />
+
     <FrameLayout
         android:layout_width="fill_parent"
         android:layout_height="@dimen/navigation_bottom_bar_size"
@@ -189,7 +190,7 @@
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
-                android:src="@drawable/ic_file_download_black_24dp"
+                android:src="@drawable/ic_file_download_grey600_24dp"
                 android:theme="@style/Widget.App.ImageView.Gray" />
 
             <derson.com.multipletheme.colorUi.widget.ColorImageView
@@ -197,7 +198,7 @@
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
-                android:src="@drawable/ic_star_black_24dp"
+                android:src="@drawable/ic_star_grey600_24dp"
                 android:theme="@style/Widget.App.ImageView.Gray" />
 
             <derson.com.multipletheme.colorUi.widget.ColorImageView
@@ -213,7 +214,7 @@
                 android:layout_width="0.0dip"
                 android:layout_height="fill_parent"
                 android:layout_weight="1.0"
-                android:src="@drawable/ic_menu_share"
+                android:src="@drawable/ic_share_grey600_24dp"
                 android:theme="@style/Widget.App.ImageView.Gray" />
         </LinearLayout>
 
