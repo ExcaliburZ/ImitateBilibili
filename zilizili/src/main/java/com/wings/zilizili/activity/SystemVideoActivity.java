@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.graphics.Point;
+import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
@@ -26,9 +27,9 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.wings.zilizili.R;
+import com.wings.zilizili.customView.CustomVideoView;
 import com.wings.zilizili.domain.VideoInfo;
 import com.wings.zilizili.utils.TimeUtils;
 import com.wings.zilizili.utils.ToastUtils;
@@ -44,7 +45,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private static final int HIDE_MESSAGE = 3;
     private static final int HIDE_LOCK = 4;
     private static final String TAG = "VideoActivity";
-    private VideoView mVideoView;
+    private CustomVideoView mVideoView;
     private TextView title;
     private TextView time;
     private TextView currentTime;
@@ -55,8 +56,10 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private ImageButton pre;
     private ImageButton pause;
     private ImageButton next;
-    private ImageButton fullqueen;
+    private ImageButton fullscreen;
+    private ImageButton loadingBack;
     private ImageView battery;
+    private ImageView loadImage;
     private ImageView iv_is_lock;
     private ImageView iv_is_lock2;
     private SeekBar process;
@@ -64,6 +67,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private AudioManager mAudioManager;
     private BatteryReceiver receiver;
     private RelativeLayout rl_controller;
+    private RelativeLayout rl_loading;
     private boolean isDestroy;
     private int position;
     private boolean isHide = true;
@@ -112,13 +116,12 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private SharedPreferences sp;
     private ArrayList<VideoInfo> mVideoInfoList;
     private VideoInfo info;
+    private AnimationDrawable rocketAnimation;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setNavigation();
-//        if (!LibsChecker.checkVitamioLibs(this))
-//            return;
         setContentView(R.layout.system_activity_video);
         init();
         getData();
@@ -273,17 +276,21 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         lock.setOnClickListener(this);
         pre.setOnClickListener(this);
         pause.setOnClickListener(this);
+        loadingBack.setOnClickListener(this);
         next.setOnClickListener(this);
-        fullqueen.setOnClickListener(this);
+        fullscreen.setOnClickListener(this);
         iv_is_lock.setOnClickListener(this);
         iv_is_lock2.setOnClickListener(this);
     }
 
     private void findView() {
         mVideoView = F(R.id.vv_content);
+        loadImage = F(R.id.iv_load);
+        rl_loading = F(R.id.rl_loading);
         message = F(R.id.tv_message);
         title = F(R.id.tv_title);
         time = F(R.id.tv_time);
+        loadingBack = F(R.id.ib_loading_back);
         currentTime = F(R.id.tv_current_time);
         totalTime = F(R.id.tv_total_time);
         battery = F(R.id.iv_battery);
@@ -293,7 +300,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         pre = F(R.id.iv_pre);
         pause = F(R.id.iv_pause);
         next = F(R.id.iv_next);
-        fullqueen = F(R.id.iv_full);
+        fullscreen = F(R.id.iv_full);
         rl_controller = F(R.id.rl_controller);
         iv_is_lock = F(R.id.iv_is_lock);
         iv_is_lock2 = F(R.id.iv_is_lock2);
@@ -350,7 +357,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private void updateProcess() {
         handler.removeMessages(UPDATE_PROCESS);
         process.setProgress(mVideoView.getCurrentPosition() > process.getProgress()
-                ? (int) mVideoView.getCurrentPosition() : process.getProgress());
+                ? mVideoView.getCurrentPosition() : process.getProgress());
 
         int bufferPercentage = mVideoView.getBufferPercentage();
         if (bufferPercentage != 0) {
@@ -364,6 +371,12 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     }
 
     private void setData() {
+        System.out.println("setData");
+        loadImage.setBackgroundResource(R.drawable.loading_tv_chan);
+
+        rocketAnimation = (AnimationDrawable) loadImage.getBackground();
+        rocketAnimation.start();
+
         if (uri == null) {
             mVideoView.setVideoURI(Uri.parse(info.getData()));
             title.setText(info.getTitle());
@@ -371,9 +384,6 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
             mVideoView.setVideoURI(uri);
             title.setText(uri.toString());
         }
-//        mVideoView.addTimedTextSource(Environment.getExternalStorageDirectory().getAbsolutePath() + "/1.ass");
-//        mVideoView.setTimedTextShown(true);
-
         time.setText(TimeUtils.getCurrentTime());
         perY = (int) (outSize.y / maxVolume / 1.5);
         preX = (outSize.x / 100);
@@ -381,12 +391,13 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
             @Override
             public void onPrepared(MediaPlayer mp) {
+                System.out.println("onPrepared");
+                rocketAnimation.stop();
+                rl_loading.setVisibility(View.INVISIBLE);
                 int duration = mp.getDuration();
                 totalTime.setText(TimeUtils.LongToStr((long) mp.getDuration()));
                 process.setMax(duration);
-//                mMediaPlayer = mVideoView.mMediaPlayer;
                 process.setProgress(0);
-//                mVideoView.setVideoQuality(MediaPlayer.VIDEOQUALITY_HIGH);
             }
         });
         mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -412,8 +423,8 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
 //                Log.i(TAG, "onSeekComplete");
 //            }
 //        });
+        System.out.println("start");
         mVideoView.start();
-
         process.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
@@ -536,6 +547,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         handler.removeMessages(HIDE_CONTROLLER);
         switch (v.getId()) {
             case R.id.ib_back:
+            case R.id.ib_loading_back:
                 finish();
                 break;
             case R.id.iv_lock:
@@ -580,13 +592,15 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
 
 
     private void changeScreenSize() {
-//        if (isFullScreen) {
-//            mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_SCALE, 0);
-//        } else {
-//            mVideoView.setVideoLayout(VideoView.VIDEO_LAYOUT_ZOOM, 0);
-//        }
         isFullScreen = !isFullScreen;
-        fullqueen.setImageResource(isFullScreen ? R.mipmap.ic_fullscreen_exit_white_36dp
+//        mVideoView.isFullScreen = isFullScreen;
+        if (isFullScreen) {
+            mVideoView.setVideoSize(outSize.y, outSize.x, true);
+        } else {
+            mVideoView.setVideoSize(
+                    mVideoView.getMeasuredHeight(), mVideoView.getMeasuredWidth(), true);
+        }
+        fullscreen.setImageResource(isFullScreen ? R.mipmap.ic_fullscreen_exit_white_36dp
                 : R.mipmap.ic_fullscreen_white_36dp);
     }
 

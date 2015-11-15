@@ -190,6 +190,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
 //                Intent intent = new Intent(this, VideoActivity.class);
                 Intent intent = new Intent(this, SystemVideoActivity.class);
                 intent.setData(Uri.parse(mVideoInfo.video_uri));
+//                intent.setData(Uri.parse(mVideoInfo.video_uri));
                 startActivity(intent);
                 break;
         }

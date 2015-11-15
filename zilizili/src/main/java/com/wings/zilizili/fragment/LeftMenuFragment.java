@@ -67,7 +67,9 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
                         mActivity.changeFragment(4);
                         break;
                     case R.id.nav_theme:
-                        mActivity.changeFragment(5);
+                        mActivity.changeTheme();
+
+//                        mActivity.changeFragment(5);
                         break;
                     //android:checkable="false"
                     //可以响应点击事件,但是不会被选中
@@ -96,8 +98,10 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.iv_night:
+            case R.id.iv_edit:
                 this.mContentView = mActivity.getLayoutInflater().inflate(R.layout.navigation_layout, container, false);
                 mActivity.changeTheme();
+                break;
         }
     }
 }

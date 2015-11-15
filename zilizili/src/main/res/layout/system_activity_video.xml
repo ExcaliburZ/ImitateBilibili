@@ -1,76 +1,113 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="#000">
-
-    <VideoView
-        android:id="@+id/vv_content"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center" />
-
-
-    <ImageView
-        android:id="@+id/iv_is_lock"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerVertical="true"
-        android:layout_marginLeft="-50dp"
-        android:background="@drawable/shape_circle_lock"
-        android:paddingLeft="50dp"
-        android:paddingRight="15dp"
-        android:src="@mipmap/ic_lock_outline_white_48dp"
-        android:visibility="invisible" />
-
-    <ImageView
-        android:id="@+id/iv_is_lock2"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_centerVertical="true"
-        android:layout_alignParentRight="true"
-        android:layout_marginRight="-50dp"
-        android:background="@drawable/shape_circle_lock"
-        android:paddingLeft="15dp"
-        android:paddingRight="50dp"
-        android:src="@mipmap/ic_lock_outline_white_48dp"
-        android:visibility="invisible" />
-
+    android:layout_height="match_parent">
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#000">
 
-        <RelativeLayout
-            android:id="@+id/rl_controller"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="invisible"
-            android:layout_alignParentTop="true"
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true">
-
-            <include
-                layout="@layout/top_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentTop="true" />
-
-            <include
-                layout="@layout/bottom_navigation"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true" />
-        </RelativeLayout>
-
-        <TextView
-            android:id="@+id/tv_message"
-            style="@style/common_text"
+        <com.wings.zilizili.customView.CustomVideoView
+            android:id="@+id/vv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_centerInParent="true"
-            android:background="@drawable/shape_message"
-            android:padding="10dp"
-            android:textSize="16sp"
+            android:layout_gravity="center" />
+
+        <ImageView
+            android:id="@+id/iv_is_lock"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="-50dp"
+            android:background="@drawable/shape_circle_lock"
+            android:paddingLeft="50dp"
+            android:paddingRight="15dp"
+            android:src="@mipmap/ic_lock_outline_white_48dp"
             android:visibility="invisible" />
+
+        <ImageView
+            android:id="@+id/iv_is_lock2"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="-50dp"
+            android:background="@drawable/shape_circle_lock"
+            android:paddingLeft="15dp"
+            android:paddingRight="50dp"
+            android:src="@mipmap/ic_lock_outline_white_48dp"
+            android:visibility="invisible" />
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <RelativeLayout
+                android:id="@+id/rl_controller"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:visibility="invisible">
+
+                <include
+                    layout="@layout/top_navigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentTop="true" />
+
+                <include
+                    layout="@layout/bottom_navigation"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true" />
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/tv_message"
+                style="@style/common_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:background="@drawable/shape_message"
+                android:padding="10dp"
+                android:textSize="16sp"
+                android:visibility="invisible" />
+        </RelativeLayout>
     </RelativeLayout>
-</RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/rl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#afff">
+
+        <ImageView
+            android:id="@+id/iv_load"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_centerInParent="true"
+            android:scaleType="center" />
+
+
+        <TextView
+            style="@style/menu_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:padding="10dp"
+            android:text="@string/VideoView_buffering" />
+
+        <ImageButton
+            android:id="@+id/ib_loading_back"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:padding="10dp"
+            android:src="@drawable/ica_light_ic_action_previous_item" />
+
+    </RelativeLayout>
+
+</FrameLayout>

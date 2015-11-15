@@ -216,4 +216,9 @@
     <style name="Widget.App.Button.ToolBar" parent="">
         <item name="android:background">?selectableItemBackgroundBorderless</item>
     </style>
+
+    <style name="FullScreen_video" parent="@android:style/Theme.NoTitleBar.Fullscreen">
+        <item name="selectableItemBackgroundBorderless">@drawable/item_background_borderless</item>
+        <item name="selectableItemBackground">@drawable/item_background</item>
+    </style>
 </resources>

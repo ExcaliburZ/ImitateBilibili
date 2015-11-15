@@ -320,7 +320,7 @@ public class DramaFragment extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                    intent.putExtra("av", "654321");
+                    intent.putExtra("av", "123456");
                     intent.putExtra(IMAGE, topNewsItem.topimage);
                     startActivity(intent);
                 }
