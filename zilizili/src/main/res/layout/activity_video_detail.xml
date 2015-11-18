@@ -135,11 +135,12 @@
                     android:layout_alignParentBottom="true"
                     android:layout_alignParentRight="true"
                     android:layout_marginRight="@dimen/item_spacing"
-                    android:background="?button_background"
+                    android:background="?colorPrimary"
                     android:clickable="false"
                     android:text="@string/play"
                     android:theme="@style/Widget.App.Button.Pink" />
             </RelativeLayout>
+
 
             <LinearLayout
                 android:layout_width="fill_parent"

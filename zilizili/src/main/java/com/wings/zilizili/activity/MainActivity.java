@@ -82,9 +82,9 @@ public class MainActivity extends BaseActivity {
                 ToastUtils.showToast(this, "game");
 //                Utils.changeToTheme(this, Utils.THEME_DEFAULT);
                 return true;
-            case R.id.action_download:
-//                Utils.changeToTheme(this, Utils.THEME_WHITE);
-                return true;
+//            case R.id.action_download:
+////                Utils.changeToTheme(this, Utils.THEME_WHITE);
+//                return true;
         }
         return super.onOptionsItemSelected(item);
 

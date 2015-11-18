@@ -4,7 +4,6 @@ package com.wings.zilizili.fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
-import android.graphics.drawable.RippleDrawable;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -306,10 +305,10 @@ public class DramaFragment extends BaseFragment {
 
             //尝试Item Ripple效果
             FrameLayout view = (FrameLayout) View.inflate(context, R.layout.item_top_news, null);
-            RippleDrawable drawable = (RippleDrawable) mActivity.getResources()
-                    .getDrawable(R.drawable.ripple_background);
+//            RippleDrawable drawable = (RippleDrawable) mActivity.getResources()
+//                    .getDrawable(R.drawable.ripple_background);
             view.setClickable(true);// if we don't set it true, ripple will not be played
-            view.setForeground(drawable);
+//            view.setForeground(drawable);
             View iv = view.findViewById(R.id.iv_item);
 
 
@@ -320,7 +319,7 @@ public class DramaFragment extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                    intent.putExtra("av", "123456");
+                    intent.putExtra("av", "654321");
                     intent.putExtra(IMAGE, topNewsItem.topimage);
                     startActivity(intent);
                 }

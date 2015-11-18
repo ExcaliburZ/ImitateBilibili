@@ -117,6 +117,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private ArrayList<VideoInfo> mVideoInfoList;
     private VideoInfo info;
     private AnimationDrawable rocketAnimation;
+    private boolean isPrepared;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -398,6 +399,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
                 totalTime.setText(TimeUtils.LongToStr((long) mp.getDuration()));
                 process.setMax(duration);
                 process.setProgress(0);
+                isPrepared = true;
             }
         });
         mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -414,15 +416,10 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
                 Toast.makeText(SystemVideoActivity.this, "播放失败", Toast.LENGTH_SHORT).show();
+                SystemVideoActivity.this.finish();
                 return true;
             }
         });
-//        mVideoView.setOnSeekCompleteListener(new MediaPlayer.OnSeekCompleteListener() {
-//            @Override
-//            public void onSeekComplete(MediaPlayer mp) {
-//                Log.i(TAG, "onSeekComplete");
-//            }
-//        });
         System.out.println("start");
         mVideoView.start();
         process.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -519,7 +516,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
 
     private void changeControllerState() {
         handler.removeMessages(HIDE_CONTROLLER);
-        if (isHide) {
+        if (isHide && isPrepared) {
             rl_controller.setVisibility(View.VISIBLE);
             isHide = false;
             sendHideMessage();
