@@ -288,7 +288,8 @@ public class DramaFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-            return topNewsList.size() == 0 ? 0 : Integer.MAX_VALUE;
+//            return topNewsList.size() == 0 ? 0 : Integer.MAX_VALUE;
+            return Integer.MAX_VALUE;
         }
 
         @Override
@@ -298,7 +299,7 @@ public class DramaFragment extends BaseFragment {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            if (topNewsList.size() < 0) {
+            if (topNewsList.size() == 0) {
                 return null;
             }
             position = position % topNewsList.size();
@@ -513,5 +514,4 @@ public class DramaFragment extends BaseFragment {
     private <T extends View> T findViewInHeadView(int resId) {
         return (T) mHeadView.findViewById(resId);
     }
-
 }

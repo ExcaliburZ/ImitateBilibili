@@ -46,7 +46,7 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        System.out.println("Home onCreate:::::");
+//        System.out.println("Home onCreate:::::");
     }
 
     @Override

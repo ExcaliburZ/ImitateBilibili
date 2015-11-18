@@ -14,6 +14,7 @@
         android:theme="@style/AppTheme.NoActionBar.Blue">
         <activity
             android:name=".activity.MainActivity"
+            android:launchMode="singleTask"
             android:theme="@style/AppTheme.NoActionBar.Blue">
 
             <!--
@@ -33,13 +34,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activity.VideoDetailActivity">
+
+
+        <activity
+            android:name=".activity.VideoDetailActivity"
+            android:parentActivityName=".activity.MainActivity">
+
             <!--<intent-filter>-->
             <!--<action android:name="android.intent.action.MAIN" />-->
 
             <!--<category android:name="android.intent.category.LAUNCHER" />-->
             <!--</intent-filter>-->
         </activity>
+
+
         <activity
             android:name=".activity.SystemVideoActivity"
             android:screenOrientation="landscape"

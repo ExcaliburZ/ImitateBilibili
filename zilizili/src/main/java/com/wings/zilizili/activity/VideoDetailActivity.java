@@ -56,11 +56,12 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
 
     private void initView() {
         mColorToolbar = $(R.id.nav_top_bar);
-        mColorToolbar.setNavigationIcon(R.drawable.abc_ic_ab_back_mtrl_am_alpha);
         mColorToolbar.setTitle("av" + av);
         setSupportActionBar(mColorToolbar);
         //设置取消默认标题
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         mCover = $(R.id.cover);
         String uri = getIntent().getStringExtra(DramaFragment.IMAGE);
         mBitmapUtils.display(mCover, uri);
@@ -167,10 +168,6 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.action_other:
                 ToastUtils.showToast(this, "action_other");
                 break;
-            case android.R.id.home:
-                back();
-                break;
-            default:
         }
         return super.onOptionsItemSelected(item);
     }

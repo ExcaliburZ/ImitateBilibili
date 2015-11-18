@@ -37,9 +37,7 @@ public class MainActivity extends BaseActivity {
     }
 
     private void init() {
-        System.out.println("init");
         mDrawerLayout = $(R.id.dl_main);
-//        mContent = $(R.id.content_layout);
         vp_content = $(R.id.vp_content);
         mFragmentLists = new ArrayList<Fragment>() {
             {
