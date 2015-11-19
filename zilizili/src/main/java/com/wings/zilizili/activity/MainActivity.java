@@ -1,11 +1,13 @@
 package com.wings.zilizili.activity;
 
 import android.os.Bundle;
+import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -18,9 +20,10 @@ import com.wings.zilizili.fragment.HomeFragment;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
+
 /**
-* 应用的主Activity,使用MainContent部分ViewPager和侧边栏Fragment来构成主要界面
-* */
+ * 应用的主Activity,使用MainContent部分ViewPager和侧边栏Fragment来构成主要界面
+ */
 public class MainActivity extends BaseActivity {
 
     private FragmentManager mFragmentManager;
@@ -28,6 +31,7 @@ public class MainActivity extends BaseActivity {
     private DrawerLayout mDrawerLayout;
     private FrameLayout mContent;
     private NoScrollViewPager vp_content;
+    private long[] mHits;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -39,6 +43,7 @@ public class MainActivity extends BaseActivity {
     private void init() {
         mDrawerLayout = $(R.id.dl_main);
         vp_content = $(R.id.vp_content);
+        mHits = new long[2];
         mFragmentLists = new ArrayList<Fragment>() {
             {
                 add(new HomeFragment());
@@ -89,7 +94,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     public void closeLeftMenu() {
         mDrawerLayout.closeDrawer(GravityCompat.START);
     }
@@ -112,7 +116,6 @@ public class MainActivity extends BaseActivity {
     }
 
 
-
     class MainAdapter extends FragmentStatePagerAdapter {
 
         public MainAdapter(FragmentManager fm) {
@@ -133,4 +136,24 @@ public class MainActivity extends BaseActivity {
     private <T extends View> T $(int resId) {
         return (T) super.findViewById(resId);
     }
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_BACK:
+                //Google 多击处理逻辑
+                System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
+                mHits[mHits.length - 1] = SystemClock.uptimeMillis();
+
+                if (mHits[0] >= (SystemClock.uptimeMillis() - 1000)) {
+                    //在(SystemClock.uptimeMillis()-1000) ~ SystemClock.uptimeMillis()之间
+                    finish();
+                } else {
+                    ToastUtils.showToast(this, "再按一次退出");
+                }
+                return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
 }
