@@ -1,21 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="?android:attr/selectableItemBackground">
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center_horizontal"
+    android:layout_margin="5dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:foreground="?android:attr/selectableItemBackground">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/iv_item"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/ripple_background"
-        android:clickable="true">
+        android:scaleType="fitXY" />
 
-        <ImageView
-            android:id="@+id/iv_item"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="?attr/selectableItemBackgroundBorderless"
-            android:scaleType="fitXY" />
-
-    </RelativeLayout>
-</FrameLayout>
+</android.support.v7.widget.CardView>

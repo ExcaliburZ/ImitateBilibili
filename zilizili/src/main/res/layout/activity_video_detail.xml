@@ -118,6 +118,19 @@
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary" />
 
+
+                <derson.com.multipletheme.colorUi.widget.ColorButton
+                    android:id="@+id/play"
+                    style="?android:attr/borderlessButtonStyle"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="@dimen/item_spacing"
+                    android:background="@drawable/ripple_background"
+                    android:text="@string/play"
+                    android:theme="@style/Widget.App.Button.Normal" />
+
                 <TextView
                     android:id="@+id/info_date"
                     android:layout_width="wrap_content"
@@ -127,18 +140,6 @@
                     android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary" />
-
-                <derson.com.multipletheme.colorUi.widget.ColorButton
-                    android:id="@+id/play"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="@dimen/item_spacing"
-                    android:background="?colorPrimary"
-                    android:clickable="false"
-                    android:text="@string/play"
-                    android:theme="@style/Widget.App.Button.Pink" />
             </RelativeLayout>
 
 

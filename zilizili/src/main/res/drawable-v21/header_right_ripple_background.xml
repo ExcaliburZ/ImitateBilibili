@@ -2,5 +2,5 @@
 <ripple xmlns:android="http://schemas.android.com/apk/res/android"
     android:color="#3fff"
     android:radius="4.0dp">
-    <item android:drawable="@drawable/tint_button_background" />
+    <item android:drawable="@drawable/bangumi_index_background" />
 </ripple>

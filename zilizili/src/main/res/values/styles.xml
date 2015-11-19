@@ -194,6 +194,15 @@
         <item name="colorButtonNormal">@color/pink</item>
     </style>
 
+    <style name="Widget.App.Button.Blue" parent="@style/Widget.AppCompat.Button">
+        <item name="android:textAppearance">@style/TextAppearance.App.Title</item>
+    </style>
+
+    <style name="Widget.App.Button.Normal" parent="@style/Widget.App.Button.Blue">
+        <item name="android:disabledAlpha">0.3</item>
+        <item name="android:textColor">@color/white_text_color</item>
+    </style>
+
     <style name="Widget.App.ImageView.Gray" parent="@style/Widget.App.ImageView">
         <item name="colorControlNormal">@color/gray_dark</item>
         <item name="colorControlHighlight">@color/gray_dark</item>

@@ -23,6 +23,7 @@ public class LowPrioritySwipeRefreshLayout extends SwipeRefreshLayout {
     public boolean onInterceptTouchEvent(MotionEvent event) {
 //        getParent().requestDisallowInterceptTouchEvent(true);
         return false;
+//        return super.onInterceptTouchEvent(event);
     }
 
 }

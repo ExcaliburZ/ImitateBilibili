@@ -26,6 +26,8 @@ import com.wings.zilizili.global.GlobalConstant;
  */
 public abstract class BaseFragment extends Fragment {
 
+    //TODO
+    //refresh may cause ANR ,caused by input event,need fixed.
     protected LowPrioritySwipeRefreshLayout mContentView;
     protected View mRootView;
     protected MainActivity mActivity;

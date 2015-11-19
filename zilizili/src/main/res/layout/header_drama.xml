@@ -37,38 +37,23 @@
         android:clickable="true"
         android:orientation="horizontal">
 
-        <android.support.v7.widget.CardView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="@dimen/navigation_bottom_bar_size"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            app:cardCornerRadius="5dp">
+            android:background="@drawable/header_ripple_background"
+            android:padding="10dp"
+            android:src="@drawable/bangumi_timeline_text" />
 
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bangumi_timeline_background"
-                android:clickable="true"
-                android:padding="10dp"
-                android:src="@drawable/bangumi_timeline_text" />
-        </android.support.v7.widget.CardView>
-
-        <android.support.v7.widget.CardView
+        <ImageButton
             android:layout_width="0dp"
             android:layout_height="@dimen/navigation_bottom_bar_size"
             android:layout_margin="5dp"
             android:layout_weight="1"
-            android:background="?android:attr/selectableItemBackground"
-            android:clickable="true"
-            app:cardCornerRadius="5dp">
-
-            <ImageView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@drawable/bangumi_index_background"
-                android:padding="10dp"
-                android:src="@drawable/bangumi_index_text" />
-        </android.support.v7.widget.CardView>
+            android:background="@drawable/header_right_ripple_background"
+            android:padding="10dp"
+            android:src="@drawable/bangumi_index_text" />
     </LinearLayout>
 
     <LinearLayout
@@ -93,7 +78,6 @@
             android:layout_weight="1"
             android:paddingLeft="15dp"
             android:text="大家都在看" />
-        <!--android:background="@drawable/gray_background"-->
 
         <TextView
             android:layout_width="wrap_content"
@@ -101,7 +85,7 @@
             android:layout_marginBottom="5dp"
             android:layout_marginRight="10dp"
             android:layout_marginTop="5dp"
-            android:background="?android:attr/selectableItemBackground"
+            android:background="@drawable/gray_background"
             android:clickable="true"
             android:padding="5dp"
             android:text="进去看看"
@@ -121,8 +105,6 @@
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:layout_marginTop="10dp"
-        android:background="?android:attr/selectableItemBackground"
-        android:clickable="true"
         android:gravity="center_vertical">
 
         <ImageView

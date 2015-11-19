@@ -5,22 +5,17 @@
     android:layout_height="match_parent"
     android:background="@color/main_background_daily">
 
-    <FrameLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <com.wings.zilizili.customView.DramaRecyclerView
-            android:id="@+id/rv_drama"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/main_background_daily"
-            android:columnWidth="130dp"
-            android:gravity="center_horizontal"
-            android:horizontalSpacing="35dp"
-            android:orientation="vertical"
-            android:scrollbarStyle="outsideOverlay"
-            android:scrollbars="vertical"
-            android:visibility="invisible" />
-    </FrameLayout>
+    <com.wings.zilizili.customView.DramaRecyclerView
+        android:id="@+id/rv_drama"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/main_background_daily"
+        android:columnWidth="130dp"
+        android:gravity="center_horizontal"
+        android:horizontalSpacing="35dp"
+        android:orientation="vertical"
+        android:scrollbarStyle="outsideOverlay"
+        android:scrollbars="vertical"
+        android:visibility="invisible" />
 
 </com.wings.zilizili.customView.LowPrioritySwipeRefreshLayout>

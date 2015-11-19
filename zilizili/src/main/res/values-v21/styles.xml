@@ -18,7 +18,7 @@
         </item>
     </style>
 
-    <style name="AppBaseTheme" parent="@style/Theme.AppCompat.Light">
+    <style name="AppBaseTheme" parent="Theme.AppCompat.Light">
         <item name="android:textAppearance">@style/TextAppearance.App</item>
         <item name="android:textColorSecondary">@color/gray_dark</item>
         <item name="android:textAppearanceLarge">@style/TextAppearance.App.Large</item>

@@ -15,7 +15,6 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -212,7 +211,13 @@ public class DramaFragment extends BaseFragment {
 
             }
         });
-
+//        findViewInHeadView(R.id.ripple).setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // handle me
+//                ToastUtils.showToast(mActivity, "ripple");
+//            }
+//        });
     }
 
 
@@ -304,19 +309,13 @@ public class DramaFragment extends BaseFragment {
             }
             position = position % topNewsList.size();
 
-            //尝试Item Ripple效果
-            FrameLayout view = (FrameLayout) View.inflate(context, R.layout.item_top_news, null);
-//            RippleDrawable drawable = (RippleDrawable) mActivity.getResources()
-//                    .getDrawable(R.drawable.ripple_background);
-            view.setClickable(true);// if we don't set it true, ripple will not be played
-//            view.setForeground(drawable);
+            View view = View.inflate(context, R.layout.item_top_news, null);
             View iv = view.findViewById(R.id.iv_item);
-
 
             final TopNewsItem topNewsItem = topNewsList.get(position);
             utils.display(iv, topNewsItem.topimage);
 
-            iv.setOnClickListener(new View.OnClickListener() {
+            view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
