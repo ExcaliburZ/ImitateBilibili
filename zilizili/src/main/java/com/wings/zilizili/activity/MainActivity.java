@@ -145,8 +145,8 @@ public class MainActivity extends BaseActivity {
                 System.arraycopy(mHits, 1, mHits, 0, mHits.length - 1);
                 mHits[mHits.length - 1] = SystemClock.uptimeMillis();
 
-                if (mHits[0] >= (SystemClock.uptimeMillis() - 1000)) {
-                    //在(SystemClock.uptimeMillis()-1000) ~ SystemClock.uptimeMillis()之间
+                if (mHits[0] >= (SystemClock.uptimeMillis() - 2000)) {
+                    //在(SystemClock.uptimeMillis()- 2000) ~ SystemClock.uptimeMillis()之间
                     finish();
                 } else {
                     ToastUtils.showToast(this, "再按一次退出");

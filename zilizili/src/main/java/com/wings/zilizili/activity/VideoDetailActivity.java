@@ -89,13 +89,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void setListener() {
-//        mPlayButton.setOnClickListener(this);
-        /*findViewById(R.id.ripple).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                ToastUtils.showToast(VideoDetailActivity.this, "aaa");
-            }
-        });*/
+        mPlayButton.setOnClickListener(this);
     }
 
     protected void getDataFromServer() {
