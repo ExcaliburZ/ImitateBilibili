@@ -57,7 +57,6 @@ public class BaseActivity extends AppCompatActivity {
         if (SharedPreferencesMgr.getInt("theme", 0) == BLUE_THEME) {
             changeTheme(PINK_THEME);
             SharedPreferencesMgr.setInt("theme", PINK_THEME);
-
         } else {
             changeTheme(BLUE_THEME);
             SharedPreferencesMgr.setInt("theme", BLUE_THEME);

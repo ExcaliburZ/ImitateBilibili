@@ -6,6 +6,7 @@ import android.os.SystemClock;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.transition.Fade;
@@ -32,7 +33,7 @@ import java.util.ArrayList;
  * 应用的主Activity,使用MainContent部分ViewPager和侧边栏Fragment来构成主要界面
  */
 public class MainActivity extends BaseActivity
-        implements LeftMenuFragment.onLeftMenuSelectedListener {
+        implements LeftMenuFragment.OnLeftMenuSelectedListener {
 
     private FragmentManager mFragmentManager;
     private ArrayList<Fragment> mFragmentLists;
@@ -46,6 +47,7 @@ public class MainActivity extends BaseActivity
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
+    private int mItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,15 +67,12 @@ public class MainActivity extends BaseActivity
             // set an exit transition
             getWindow().setExitTransition(new Fade());
             getWindow().setEnterTransition(new Fade());
-            System.out.println("setExitTransition");
         }
     }
 
     private void init() {
         mDrawerLayout = $(R.id.dl_main);
         vp_content = $(R.id.vp_content);
-        mLeftMenuFragment = (LeftMenuFragment)
-                getSupportFragmentManager().findFragmentByTag("com.wings.leftmenu");
         mHits = new long[2];
         mFragmentLists = new ArrayList<Fragment>() {
             {
@@ -112,7 +111,8 @@ public class MainActivity extends BaseActivity
 
         switch (id) {
             case R.id.action_game:
-                ToastUtils.showToast(this, "game");
+                changeTheme();
+                rebuildLeftMenuFragment();
                 return true;
             case R.id.action_download:
                 ToastUtils.showToast(this, "download");
@@ -120,6 +120,14 @@ public class MainActivity extends BaseActivity
         }
         return super.onOptionsItemSelected(item);
 
+    }
+
+    private void rebuildLeftMenuFragment() {
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        LeftMenuFragment leftMenuFragment = new LeftMenuFragment();
+        leftMenuFragment.setCurrentSelectedItemId(mItemId);
+        transaction.replace(R.id.fg_left_menu, leftMenuFragment, "com.wings.leftmenu");
+        transaction.commit();
     }
 
 
@@ -146,6 +154,7 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onLeftMenuSelected(int itemId) {
+        this.mItemId = itemId;
         switch (itemId) {
             case R.id.nav_home:
                 changeFragment(GlobalConstant.HOMEFRAGMENT);
@@ -164,8 +173,6 @@ public class MainActivity extends BaseActivity
                 break;
             case R.id.nav_theme:
                 changeTheme();
-//                        mNavigationView.invalidate();
-//                        changeFragment(5);
                 break;
             //android:checkable="false"
             //可以响应点击事件,但是不会被选中
@@ -182,6 +189,7 @@ public class MainActivity extends BaseActivity
             case R.id.iv_night:
             case R.id.iv_edit:
                 changeTheme();
+                rebuildLeftMenuFragment();
                 break;
         }
     }

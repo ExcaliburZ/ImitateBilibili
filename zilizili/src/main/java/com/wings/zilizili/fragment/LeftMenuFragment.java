@@ -5,6 +5,7 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -21,18 +22,26 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     private View mContentView;
     private ImageView iv_theme;
     private ViewGroup container;
-    private onLeftMenuSelectedListener mLeftMenuSelectedListner;
+    private OnLeftMenuSelectedListener mLeftMenuSelectedListener;
+    private int CurrentSelectedItemId = R.id.nav_home;
+    private String TAG = "LeftMenuFragment";
+    private final static String ITEMSELECTED = "itemSelected";
 
 
     public LeftMenuFragment() {
         // Required empty public constructor
     }
 
+
+    public void setCurrentSelectedItemId(int currentSelectedItemId) {
+        this.CurrentSelectedItemId = currentSelectedItemId;
+    }
+
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
         try {
-            mLeftMenuSelectedListner = (onLeftMenuSelectedListener) context;
+            mLeftMenuSelectedListener = (OnLeftMenuSelectedListener) context;
         } catch (ClassCastException e) {
             throw new ClassCastException(context.toString()
                     + " must implement OnHeadlineSelectedListener");
@@ -54,17 +63,22 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
 
         iv_theme = $(R.id.iv_night);
         iv_theme.setOnClickListener(this);
-        mNavigationView.setCheckedItem(R.id.nav_home);
+        mNavigationView.setCheckedItem(CurrentSelectedItemId);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.
                 OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                mLeftMenuSelectedListner.onLeftMenuSelected(itemId);
+                mLeftMenuSelectedListener.onLeftMenuSelected(itemId);
                 return false;
             }
-
         });
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        Log.d(TAG, "onDestroy");
     }
 
     @Override
@@ -78,13 +92,13 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        mLeftMenuSelectedListner.onItemClicked(v);
+        mLeftMenuSelectedListener.onItemClicked(v);
     }
 
     public void invalidateLeftMenu() {
     }
 
-    public interface onLeftMenuSelectedListener {
+    public interface OnLeftMenuSelectedListener {
         void onLeftMenuSelected(int itemId);
 
         void onItemClicked(View v);
