@@ -41,6 +41,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
 
     private void init() {
         mNavigationView = $(R.id.nv_main);
+
         iv_theme = $(R.id.iv_night);
         iv_theme.setOnClickListener(this);
         mActivity = (MainActivity) getActivity();
@@ -68,7 +69,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
                         break;
                     case R.id.nav_theme:
                         mActivity.changeTheme();
-
+//                        mNavigationView.invalidate();
 //                        mActivity.changeFragment(5);
                         break;
                     //android:checkable="false"
@@ -103,5 +104,8 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
                 mActivity.changeTheme();
                 break;
         }
+    }
+
+    public void invalidateLeftMenu() {
     }
 }

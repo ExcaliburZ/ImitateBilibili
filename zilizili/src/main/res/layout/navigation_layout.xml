@@ -6,6 +6,7 @@
     android:layout_height="match_parent"
     android:background="?attr/view_background"
     android:fitsSystemWindows="true"
+    android:foreground="?colorPrimary"
     app:headerLayout="@layout/header_layout"
     app:insetForeground="?colorPrimary"
     app:itemTextAppearance="@style/menu_item"

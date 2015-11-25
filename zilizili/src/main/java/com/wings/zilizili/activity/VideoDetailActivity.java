@@ -2,13 +2,16 @@ package com.wings.zilizili.activity;
 
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
+import android.transition.Fade;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -76,9 +79,21 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTransitionAnim();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_detail);
         init();
+    }
+
+    private void setTransitionAnim() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // inside your activity (if you did not enable transitions in your theme)
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            // set an exit transition
+            getWindow().setExitTransition(new Fade());
+            getWindow().setEnterTransition(new Fade());
+            System.out.println("setExitTransition");
+        }
     }
 
     private void init() {
@@ -184,11 +199,9 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.play:
-//                Intent intent = new Intent(this, VideoActivity.class);
                 Intent intent = new Intent(this, SystemVideoActivity.class);
                 intent.setData(Uri.parse(mVideoInfo.video_uri));
-//                intent.setData(Uri.parse(mVideoInfo.video_uri));
-                startActivity(intent);
+                StartActivityWithTransitionAnim(intent);
                 break;
         }
     }

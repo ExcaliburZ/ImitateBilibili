@@ -1,5 +1,6 @@
 package com.wings.zilizili.activity;
 
+import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
 import android.support.v4.app.Fragment;
@@ -7,16 +8,21 @@ import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.transition.Fade;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.FrameLayout;
 
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.common.api.GoogleApiClient;
 import com.wings.zilizili.R;
 import com.wings.zilizili.customView.NoScrollViewPager;
 import com.wings.zilizili.fragment.HistoryFragment;
 import com.wings.zilizili.fragment.HomeFragment;
+import com.wings.zilizili.fragment.LeftMenuFragment;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -29,20 +35,43 @@ public class MainActivity extends BaseActivity {
     private FragmentManager mFragmentManager;
     private ArrayList<Fragment> mFragmentLists;
     private DrawerLayout mDrawerLayout;
+    private LeftMenuFragment mLeftMenuFragment;
     private FrameLayout mContent;
     private NoScrollViewPager vp_content;
     private long[] mHits;
+    /**
+     * ATTENTION: This was auto-generated to implement the App Indexing API.
+     * See https://g.co/AppIndexing/AndroidStudio for more information.
+     */
+    private GoogleApiClient client;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        setTransitionAnim();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         init();
+        // ATTENTION: This was auto-generated to implement the App Indexing API.
+        // See https://g.co/AppIndexing/AndroidStudio for more information.
+        client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void setTransitionAnim() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            // inside your activity (if you did not enable transitions in your theme)
+            getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
+            // set an exit transition
+            getWindow().setExitTransition(new Fade());
+            getWindow().setEnterTransition(new Fade());
+            System.out.println("setExitTransition");
+        }
     }
 
     private void init() {
         mDrawerLayout = $(R.id.dl_main);
         vp_content = $(R.id.vp_content);
+        mLeftMenuFragment = (LeftMenuFragment)
+                getSupportFragmentManager().findFragmentByTag("com.wings.leftmenu");
         mHits = new long[2];
         mFragmentLists = new ArrayList<Fragment>() {
             {
@@ -79,7 +108,6 @@ public class MainActivity extends BaseActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
         switch (id) {
             case R.id.action_game:
                 ToastUtils.showToast(this, "game");
@@ -147,6 +175,7 @@ public class MainActivity extends BaseActivity {
 
                 if (mHits[0] >= (SystemClock.uptimeMillis() - 2000)) {
                     //在(SystemClock.uptimeMillis()- 2000) ~ SystemClock.uptimeMillis()之间
+                    //满足多击条件
                     finish();
                 } else {
                     ToastUtils.showToast(this, "再按一次退出");

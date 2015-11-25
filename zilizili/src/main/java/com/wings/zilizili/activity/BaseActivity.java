@@ -1,6 +1,8 @@
 package com.wings.zilizili.activity;
 
 import android.animation.Animator;
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.os.Build;
@@ -55,6 +57,7 @@ public class BaseActivity extends AppCompatActivity {
         if (SharedPreferencesMgr.getInt("theme", 0) == BLUE_THEME) {
             changeTheme(PINK_THEME);
             SharedPreferencesMgr.setInt("theme", PINK_THEME);
+
         } else {
             changeTheme(BLUE_THEME);
             SharedPreferencesMgr.setInt("theme", BLUE_THEME);
@@ -116,6 +119,16 @@ public class BaseActivity extends AppCompatActivity {
             }
         } else {
             ColorUiUtil.changeTheme(rootView, getTheme());
+        }
+    }
+
+    public void StartActivityWithTransitionAnim(Intent intent) {
+        //Lollipop以后启动过场动画
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+            startActivity(intent,
+                    ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
+        } else {
+            startActivity(intent);
         }
     }
 }

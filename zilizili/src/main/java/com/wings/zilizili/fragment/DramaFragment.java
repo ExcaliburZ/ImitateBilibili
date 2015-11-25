@@ -321,7 +321,7 @@ public class DramaFragment extends BaseFragment {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
                     intent.putExtra("av", "654321");
                     intent.putExtra(IMAGE, topNewsItem.topimage);
-                    startActivity(intent);
+                    mActivity.StartActivityWithTransitionAnim(intent);
                 }
             });
 
@@ -397,7 +397,7 @@ public class DramaFragment extends BaseFragment {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
                     intent.putExtra("av", "123456");
                     intent.putExtra("image", dramaItem.topimage);
-                    startActivity(intent);
+                     mActivity.StartActivityWithTransitionAnim(intent);
                 }
             });
 //            imageView.setLayoutParams(params);
@@ -476,7 +476,7 @@ public class DramaFragment extends BaseFragment {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
                     intent.putExtra("av", "123456");
                     intent.putExtra("image", recommendItem.topimage);
-                    startActivity(intent);
+                     mActivity.StartActivityWithTransitionAnim(intent);
 //                    ToastUtils.showToast(mActivity, "av :: " + mRecommendList.get(position).av);
                 }
             });
