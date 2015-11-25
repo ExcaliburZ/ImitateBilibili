@@ -211,13 +211,6 @@ public class DramaFragment extends BaseFragment {
 
             }
         });
-//        findViewInHeadView(R.id.ripple).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                // handle me
-//                ToastUtils.showToast(mActivity, "ripple");
-//            }
-//        });
     }
 
 
@@ -465,11 +458,6 @@ public class DramaFragment extends BaseFragment {
             bitmapUtils.display(imageView, recommendItem.topimage);
             holder.online.setText(recommendItem.playCount);
 
-//            TypedValue typedValue = new TypedValue();
-//            mActivity.getTheme().resolveAttribute(android.R.attr.selectableItemBackground, typedValue, true);
-//            Drawable background = getResources().getDrawable(typedValue.resourceId);
-//            Drawable background = getResources().getDrawable(R.drawable.ripple_background);
-//            holder.rootView.setBackground(background);
             holder.rootView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -477,7 +465,6 @@ public class DramaFragment extends BaseFragment {
                     intent.putExtra("av", "123456");
                     intent.putExtra("image", recommendItem.topimage);
                      mActivity.StartActivityWithTransitionAnim(intent);
-//                    ToastUtils.showToast(mActivity, "av :: " + mRecommendList.get(position).av);
                 }
             });
         }

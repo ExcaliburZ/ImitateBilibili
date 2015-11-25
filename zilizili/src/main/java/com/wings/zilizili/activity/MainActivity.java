@@ -23,6 +23,7 @@ import com.wings.zilizili.customView.NoScrollViewPager;
 import com.wings.zilizili.fragment.HistoryFragment;
 import com.wings.zilizili.fragment.HomeFragment;
 import com.wings.zilizili.fragment.LeftMenuFragment;
+import com.wings.zilizili.global.GlobalConstant;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -30,7 +31,8 @@ import java.util.ArrayList;
 /**
  * 应用的主Activity,使用MainContent部分ViewPager和侧边栏Fragment来构成主要界面
  */
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity
+        implements LeftMenuFragment.onLeftMenuSelectedListener {
 
     private FragmentManager mFragmentManager;
     private ArrayList<Fragment> mFragmentLists;
@@ -89,7 +91,7 @@ public class MainActivity extends BaseActivity {
 //        changeFragment(0);
     }
 
-    public void changeFragment(int position) {
+    private void changeFragment(int position) {
 //        mFragmentManager = getSupportFragmentManager();
 //        FragmentTransaction transaction = mFragmentManager.beginTransaction();
 //        transaction.replace(R.id.content_layout, mFragmentLists.get(position));
@@ -111,11 +113,10 @@ public class MainActivity extends BaseActivity {
         switch (id) {
             case R.id.action_game:
                 ToastUtils.showToast(this, "game");
-//                Utils.changeToTheme(this, Utils.THEME_DEFAULT);
                 return true;
-//            case R.id.action_download:
-////                Utils.changeToTheme(this, Utils.THEME_WHITE);
-//                return true;
+            case R.id.action_download:
+                ToastUtils.showToast(this, "download");
+                return true;
         }
         return super.onOptionsItemSelected(item);
 
@@ -140,6 +141,48 @@ public class MainActivity extends BaseActivity {
             closeLeftMenu();
         } else {
             openLeftMenu();
+        }
+    }
+
+    @Override
+    public void onLeftMenuSelected(int itemId) {
+        switch (itemId) {
+            case R.id.nav_home:
+                changeFragment(GlobalConstant.HOMEFRAGMENT);
+                break;
+            case R.id.nav_histories:
+                changeFragment(GlobalConstant.HISTORYFRAGMENT);
+                break;
+            case R.id.nav_favorites:
+                changeFragment(2);
+                break;
+            case R.id.nav_following:
+                changeFragment(3);
+                break;
+            case R.id.nav_pay:
+                changeFragment(4);
+                break;
+            case R.id.nav_theme:
+                changeTheme();
+//                        mNavigationView.invalidate();
+//                        changeFragment(5);
+                break;
+            //android:checkable="false"
+            //可以响应点击事件,但是不会被选中
+            case R.id.nav_offline_manager:
+                changeFragment(GlobalConstant.HOMEFRAGMENT);
+                break;
+        }
+        closeLeftMenu();
+    }
+
+    @Override
+    public void onItemClicked(View v) {
+        switch (v.getId()) {
+            case R.id.iv_night:
+            case R.id.iv_edit:
+                changeTheme();
+                break;
         }
     }
 
