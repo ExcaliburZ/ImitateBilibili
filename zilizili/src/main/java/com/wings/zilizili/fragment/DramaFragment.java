@@ -15,22 +15,19 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
-import com.lidroid.xutils.BitmapUtils;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.VideoDetailActivity;
 import com.wings.zilizili.customView.DramaRecyclerView;
-import com.wings.zilizili.customView.MyPauseOnScrollListener;
 import com.wings.zilizili.domain.Data;
 import com.wings.zilizili.domain.DataInfo;
 import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.TopNewsItem;
-import com.wings.zilizili.utils.SingleBitmapUtils;
 
 import java.util.ArrayList;
 
@@ -124,7 +121,7 @@ public class DramaFragment extends BaseFragment {
 
     @Override
     protected String initURL() {
-        return "list_1.json";
+        return "json/JsonServlet";
     }
 
     //设置各个Item之间的间距
@@ -276,12 +273,10 @@ public class DramaFragment extends BaseFragment {
 
     class TopNewsAdapter extends PagerAdapter {
 
-        private final BitmapUtils utils;
         private final Context context;
 
         TopNewsAdapter(Context context) {
             this.context = context;
-            utils = SingleBitmapUtils.getInstance().getBitmapUtils();
         }
 
         @Override
@@ -303,10 +298,9 @@ public class DramaFragment extends BaseFragment {
             position = position % topNewsList.size();
 
             View view = View.inflate(context, R.layout.item_top_news, null);
-            View iv = view.findViewById(R.id.iv_item);
-
+            NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.iv_item);
             final TopNewsItem topNewsItem = topNewsList.get(position);
-            utils.display(iv, topNewsItem.topimage);
+            imageView.setImageUrl(topNewsItem.topimage, mImageLoader);
 
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -335,14 +329,11 @@ public class DramaFragment extends BaseFragment {
 
     class DramaAdapter extends RecyclerView.Adapter<DramaViewHolder> {
         private View rootView;
-        private BitmapUtils bitmapUtils;
         public int HEADER = 0;
         public int ITEM = 1;
 
         public DramaAdapter(View mHeadView) {
-            bitmapUtils = SingleBitmapUtils.getInstance().getBitmapUtils();
             this.rootView = mHeadView;
-            mRecyclerView.addOnScrollListener(new MyPauseOnScrollListener(bitmapUtils, false, true));
         }
 
         public boolean isHeader(int position) {
@@ -378,8 +369,9 @@ public class DramaFragment extends BaseFragment {
 
             final DramaItem dramaItem = mDramaList.get(position);
             holder.title.setText(dramaItem.name);
-            ImageView imageView = holder.image;
-            bitmapUtils.display(imageView, dramaItem.topimage);
+            NetworkImageView imageView = holder.image;
+            imageView.setImageUrl(dramaItem.topimage, mImageLoader);
+
             Integer height = Integer.valueOf(dramaItem.height);
 
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
@@ -390,7 +382,7 @@ public class DramaFragment extends BaseFragment {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
                     intent.putExtra("av", "123456");
                     intent.putExtra("image", dramaItem.topimage);
-                     mActivity.StartActivityWithTransitionAnim(intent);
+                    mActivity.StartActivityWithTransitionAnim(intent);
                 }
             });
 //            imageView.setLayoutParams(params);
@@ -425,23 +417,18 @@ public class DramaFragment extends BaseFragment {
 
     private class DramaViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
-        public ImageView image;
+        public NetworkImageView image;
         public View view;
 
         public DramaViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             title = (TextView) itemView.findViewById(R.id.tv_title);
-            image = (ImageView) itemView.findViewById(R.id.iv_item);
+            image = (NetworkImageView) itemView.findViewById(R.id.iv_item);
         }
     }
 
     class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> {
-        private BitmapUtils bitmapUtils;
-
-        public RecommendAdapter() {
-            bitmapUtils = new BitmapUtils(mActivity);
-        }
 
         @Override
         public RecommendViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -454,8 +441,11 @@ public class DramaFragment extends BaseFragment {
         public void onBindViewHolder(RecommendViewHolder holder, final int position) {
             final RecommendItem recommendItem = mRecommendList.get(position);
             holder.title.setText("\u3000" + recommendItem.name);
-            ImageView imageView = holder.image;
-            bitmapUtils.display(imageView, recommendItem.topimage);
+            NetworkImageView imageView = holder.image;
+//            bitmapUtils.display(imageView, recommendItem.topimage);
+            // Get the ImageLoader through your singleton class.
+            System.out.println("ImageLoader...");
+            imageView.setImageUrl(recommendItem.topimage, mImageLoader);
             holder.online.setText(recommendItem.playCount);
 
             holder.rootView.setOnClickListener(new View.OnClickListener() {
@@ -464,7 +454,7 @@ public class DramaFragment extends BaseFragment {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
                     intent.putExtra("av", "123456");
                     intent.putExtra("image", recommendItem.topimage);
-                     mActivity.StartActivityWithTransitionAnim(intent);
+                    mActivity.StartActivityWithTransitionAnim(intent);
                 }
             });
         }
@@ -483,7 +473,7 @@ public class DramaFragment extends BaseFragment {
 
     private class RecommendViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
-        public ImageView image;
+        public NetworkImageView image;
         public TextView online;
         public View rootView;
 
@@ -491,7 +481,7 @@ public class DramaFragment extends BaseFragment {
             super(itemView);
             this.rootView = itemView;
             title = (TextView) itemView.findViewById(R.id.tv_title);
-            image = (ImageView) itemView.findViewById(R.id.iv_item);
+            image = (NetworkImageView) itemView.findViewById(R.id.iv_item);
             online = (TextView) itemView.findViewById(R.id.tv_online);
         }
     }

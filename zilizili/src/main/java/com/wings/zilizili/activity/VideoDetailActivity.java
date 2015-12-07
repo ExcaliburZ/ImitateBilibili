@@ -13,12 +13,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
-import com.lidroid.xutils.BitmapUtils;
 import com.lidroid.xutils.HttpUtils;
 import com.lidroid.xutils.exception.HttpException;
 import com.lidroid.xutils.http.ResponseInfo;
@@ -28,7 +28,7 @@ import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
 import com.wings.zilizili.fragment.DramaFragment;
 import com.wings.zilizili.global.GlobalConstant;
-import com.wings.zilizili.utils.SingleBitmapUtils;
+import com.wings.zilizili.utils.MySingleton;
 import com.wings.zilizili.utils.ToastUtils;
 
 import derson.com.multipletheme.colorUi.widget.ColorImageView;
@@ -36,7 +36,7 @@ import derson.com.multipletheme.colorUi.widget.ColorToolbar;
 
 public class VideoDetailActivity extends BaseActivity implements View.OnClickListener {
 
-    private BitmapUtils mBitmapUtils;
+    private ImageLoader mImageLoader;
 
     private ColorToolbar mColorToolbar;
     private String av;
@@ -48,7 +48,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     private ColorImageView mShare;
     private LinearLayout mActionModeBar;
 
-    private ImageView mCover;
+    private NetworkImageView mCover;
     private TextView mNick;
     private TextView mTitle;
     private TextView mInfoViews;
@@ -67,8 +67,8 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
 
         mCover = $(R.id.cover);
         String uri = getIntent().getStringExtra(DramaFragment.IMAGE);
-        mBitmapUtils.display(mCover, uri);
 
+        mCover.setImageUrl(uri, mImageLoader);
         mNick = $(R.id.nick);
         mInfoViews = $(R.id.info_views);
         mInfoDate = $(R.id.info_date);
@@ -163,8 +163,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     private void initData() {
         //读取av号
         av = getIntent().getStringExtra("av");
-        mBitmapUtils = SingleBitmapUtils.getInstance().getBitmapUtils();
-
+        mImageLoader = MySingleton.getInstance(this).getImageLoader();
     }
 
     @Override

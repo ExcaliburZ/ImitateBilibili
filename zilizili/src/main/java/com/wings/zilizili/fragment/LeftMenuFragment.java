@@ -18,14 +18,14 @@ import com.wings.zilizili.R;
  * 在MainActivity中加载的侧边栏Fragment
  */
 public class LeftMenuFragment extends Fragment implements View.OnClickListener {
+    private final static String TAG = "LeftMenuFragment";
+    private final static String ITEMSELECTED = "itemSelected";
     private NavigationView mNavigationView;
     private View mContentView;
     private ImageView iv_theme;
     private ViewGroup container;
     private OnLeftMenuSelectedListener mLeftMenuSelectedListener;
-    private int CurrentSelectedItemId = R.id.nav_home;
-    private String TAG = "LeftMenuFragment";
-    private final static String ITEMSELECTED = "itemSelected";
+    private int CurrentSelectedItemId;
 
 
     public LeftMenuFragment() {
@@ -63,7 +63,6 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
 
         iv_theme = $(R.id.iv_night);
         iv_theme.setOnClickListener(this);
-        mNavigationView.setCheckedItem(CurrentSelectedItemId);
         mNavigationView.setNavigationItemSelectedListener(new NavigationView.
                 OnNavigationItemSelectedListener() {
             @Override
@@ -73,6 +72,8 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
                 return false;
             }
         });
+        mNavigationView.setCheckedItem(
+                CurrentSelectedItemId == 0 ? R.id.nav_home : CurrentSelectedItemId);
     }
 
     @Override

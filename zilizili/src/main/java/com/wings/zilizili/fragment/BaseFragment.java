@@ -9,15 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.ImageLoader;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.customView.LowPrioritySwipeRefreshLayout;
 import com.wings.zilizili.global.GlobalConstant;
+import com.wings.zilizili.utils.MySingleton;
 
 /**
  * Created by wing on 2015/10/28.
@@ -33,6 +36,8 @@ public abstract class BaseFragment extends Fragment {
     protected MainActivity mActivity;
     protected String URL;
     protected boolean isRefreshing;
+    protected ImageLoader mImageLoader;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -60,7 +65,8 @@ public abstract class BaseFragment extends Fragment {
                 if (isRefreshing) {
                     return;
                 }
-                getDataFromServer();
+//                getDataFromServer();
+                getDataWithVolley();
             }
         });
     }
@@ -78,9 +84,11 @@ public abstract class BaseFragment extends Fragment {
                 mContentView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 mContentView.setRefreshing(true);
                 isRefreshing = true;
-                getDataFromServer();
+                getDataWithVolley();
             }
         });
+        mImageLoader = MySingleton.getInstance(mActivity).getImageLoader();
+
     }
 
     /**
@@ -90,27 +98,23 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract String initURL();
 
-
     /**
      * 根据URL从服务器获取数据,并调用解析数据和刷新界面的方法
      */
-    protected void getDataFromServer() {
-        HttpUtils http = new HttpUtils();
-        http.send(HttpRequest.HttpMethod.GET,
+    protected void getDataWithVolley() {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(mActivity);
+        StringRequest jsonRequest = new StringRequest(
+                Request.Method.GET,
                 GlobalConstant.TX_URL + URL,
-                new RequestCallBack<String>() {
+                new Response.Listener<String>() {
                     @Override
-                    public void onLoading(long total, long current, boolean isUploading) {
-                    }
-
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        final String result = responseInfo.result;
+                    public void onResponse(final String result) {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 decodeResult(result);
-                                System.out.println("over");
+                                System.out.println("over with volley");
                                 mActivity.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -120,11 +124,16 @@ public abstract class BaseFragment extends Fragment {
                             }
                         }).start();
                     }
-
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public void onFailure(HttpException error, String msg) {
+                    public void onErrorResponse(VolleyError volleyError) {
+                        System.out.println("onErrorResponse");
                     }
-                });
+                }
+        );
+        // Add the request to the RequestQueue.
+        queue.add(jsonRequest);
     }
 
     /**

@@ -86,6 +86,7 @@ public class MainActivity extends BaseActivity
         };
         vp_content.setAdapter(new MainAdapter(getSupportFragmentManager()));
         vp_content.setOffscreenPageLimit(10);
+        mFragmentManager = getSupportFragmentManager();
 //        mContent.addView(mViewPager);
 //        changeFragment(0);
     }
@@ -111,8 +112,7 @@ public class MainActivity extends BaseActivity
 
         switch (id) {
             case R.id.action_game:
-                changeTheme();
-                rebuildLeftMenuFragment();
+                ToastUtils.showToast(this, "game activity");
                 return true;
             case R.id.action_download:
                 ToastUtils.showToast(this, "download");
@@ -126,6 +126,10 @@ public class MainActivity extends BaseActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         LeftMenuFragment leftMenuFragment = new LeftMenuFragment();
         leftMenuFragment.setCurrentSelectedItemId(mItemId);
+        Fragment oldLeftMenuFragment = mFragmentManager.findFragmentByTag("com.wings.leftmenu");
+//
+//        transaction.detach(oldLeftMenuFragment);
+//        transaction.attach(oldLeftMenuFragment);
         transaction.replace(R.id.fg_left_menu, leftMenuFragment, "com.wings.leftmenu");
         transaction.commit();
     }
@@ -154,21 +158,25 @@ public class MainActivity extends BaseActivity
 
     @Override
     public void onLeftMenuSelected(int itemId) {
-        this.mItemId = itemId;
         switch (itemId) {
             case R.id.nav_home:
                 changeFragment(GlobalConstant.HOMEFRAGMENT);
+                this.mItemId = itemId;
                 break;
             case R.id.nav_histories:
                 changeFragment(GlobalConstant.HISTORYFRAGMENT);
+                this.mItemId = itemId;
                 break;
             case R.id.nav_favorites:
+                this.mItemId = itemId;
                 changeFragment(2);
                 break;
             case R.id.nav_following:
+                this.mItemId = itemId;
                 changeFragment(3);
                 break;
             case R.id.nav_pay:
+                this.mItemId = itemId;
                 changeFragment(4);
                 break;
             case R.id.nav_theme:
