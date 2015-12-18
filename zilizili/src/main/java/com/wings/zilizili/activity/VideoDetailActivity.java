@@ -16,20 +16,22 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.NetworkImageView;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
-import com.lidroid.xutils.HttpUtils;
-import com.lidroid.xutils.exception.HttpException;
-import com.lidroid.xutils.http.ResponseInfo;
-import com.lidroid.xutils.http.callback.RequestCallBack;
-import com.lidroid.xutils.http.client.HttpRequest;
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
 import com.wings.zilizili.fragment.DramaFragment;
 import com.wings.zilizili.global.GlobalConstant;
 import com.wings.zilizili.utils.MySingleton;
 import com.wings.zilizili.utils.ToastUtils;
+
 
 import derson.com.multipletheme.colorUi.widget.ColorImageView;
 import derson.com.multipletheme.colorUi.widget.ColorToolbar;
@@ -100,31 +102,31 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         initData();
         initView();
         setListener();
-        getDataFromServer();
+        getDataWithVolley();
     }
 
     private void setListener() {
         mPlayButton.setOnClickListener(this);
     }
 
-    protected void getDataFromServer() {
-        HttpUtils http = new HttpUtils();
+    /**
+     * 根据URL从服务器获取数据,并调用解析数据和刷新界面的方法
+     */
+    protected void getDataWithVolley() {
+        // Instantiate the RequestQueue.
+        RequestQueue queue = Volley.newRequestQueue(this);
         String uri = TextUtils.equals(av, "123456") ? "video_1.json" : "video_2.json";
-        http.send(HttpRequest.HttpMethod.GET,
+        StringRequest jsonRequest = new StringRequest(
+                Request.Method.GET,
                 GlobalConstant.TX_URL + uri,
-                new RequestCallBack<String>() {
+                new Response.Listener<String>() {
                     @Override
-                    public void onLoading(long total, long current, boolean isUploading) {
-                    }
-
-                    @Override
-                    public void onSuccess(ResponseInfo<String> responseInfo) {
-                        final String result = responseInfo.result;
+                    public void onResponse(final String result) {
                         new Thread(new Runnable() {
                             @Override
                             public void run() {
                                 decodeResult(result);
-                                System.out.println("over");
+                                System.out.println("over with volley");
                                 VideoDetailActivity.this.runOnUiThread(new Runnable() {
                                     @Override
                                     public void run() {
@@ -134,11 +136,16 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
                             }
                         }).start();
                     }
-
+                },
+                new Response.ErrorListener() {
                     @Override
-                    public void onFailure(HttpException error, String msg) {
+                    public void onErrorResponse(VolleyError volleyError) {
+                        System.out.println("onErrorResponse");
                     }
-                });
+                }
+        );
+        // Add the request to the RequestQueue.
+        queue.add(jsonRequest);
     }
 
     private void notifyDataRefresh() {
