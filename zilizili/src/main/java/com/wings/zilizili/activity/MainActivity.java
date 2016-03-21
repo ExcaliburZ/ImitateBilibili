@@ -24,7 +24,7 @@ import com.wings.zilizili.customView.NoScrollViewPager;
 import com.wings.zilizili.fragment.HistoryFragment;
 import com.wings.zilizili.fragment.HomeFragment;
 import com.wings.zilizili.fragment.LeftMenuFragment;
-import com.wings.zilizili.global.GlobalConstant;
+import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -42,12 +42,12 @@ public class MainActivity extends BaseActivity
     private FrameLayout mContent;
     private NoScrollViewPager vp_content;
     private long[] mHits;
+    private int mItemId;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
     private GoogleApiClient client;
-    private int mItemId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -202,24 +202,6 @@ public class MainActivity extends BaseActivity
         }
     }
 
-
-    class MainAdapter extends FragmentStatePagerAdapter {
-
-        public MainAdapter(FragmentManager fm) {
-            super(fm);
-        }
-
-        @Override
-        public Fragment getItem(int position) {
-            return mFragmentLists.get(position);
-        }
-
-        @Override
-        public int getCount() {
-            return mFragmentLists.size();
-        }
-    }
-
     private <T extends View> T $(int resId) {
         return (T) super.findViewById(resId);
     }
@@ -242,6 +224,23 @@ public class MainActivity extends BaseActivity
                 return true;
         }
         return super.onKeyDown(keyCode, event);
+    }
+
+    class MainAdapter extends FragmentStatePagerAdapter {
+
+        public MainAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return mFragmentLists.get(position);
+        }
+
+        @Override
+        public int getCount() {
+            return mFragmentLists.size();
+        }
     }
 
 }

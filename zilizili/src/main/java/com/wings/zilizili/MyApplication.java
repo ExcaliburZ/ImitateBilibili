@@ -1,4 +1,4 @@
-package com.wings.zilizili.global;
+package com.wings.zilizili;
 
 import android.app.Application;
 import android.content.Context;
@@ -12,17 +12,18 @@ import derson.com.multipletheme.colorUi.util.SharedPreferencesMgr;
 public class MyApplication extends Application {
     private static Context mContext;
 
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        SharedPreferencesMgr.init(this, "config");
-        mContext = getApplicationContext();
-    }
-
     /**
      * 提供一个全局的上下文
      */
     public static Context getContext() {
         return mContext;
+    }
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //初始化SharedPreferencesMgr
+        SharedPreferencesMgr.init(this, "config");
+        mContext = getApplicationContext();
     }
 }

@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
 import com.wings.zilizili.fragment.DramaFragment;
-import com.wings.zilizili.global.GlobalConstant;
+import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.utils.MySingleton;
 import com.wings.zilizili.utils.ToastUtils;
 

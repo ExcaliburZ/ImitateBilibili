@@ -124,7 +124,7 @@
     <string name="pref_title_voutSurfaceFormat">像素格式</string>
     <string name="search_hint">搜索视频,番剧,up主或av号</string>
     <string name="title_game">游戏中心</string>
-    <string name="title_theme_store">主题选择</string>
+    <string name="title_theme_store">切换主题</string>
     <string name="blc_device_dpi">hdpi</string>
     <string name="umeng_fb_back">Back</string>
     <string name="umeng_fb_contact_info">Contact Info</string>

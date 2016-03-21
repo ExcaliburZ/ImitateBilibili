@@ -1,4 +1,4 @@
-package com.wings.zilizili.global;
+package com.wings.zilizili;
 
 /**
  * Created by wing on 2015/10/22.

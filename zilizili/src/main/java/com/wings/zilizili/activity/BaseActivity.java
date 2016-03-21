@@ -23,8 +23,8 @@ import derson.com.multipletheme.colorUi.util.SharedPreferencesMgr;
  * 实现换肤和提供通用方法的Activity的基类
  */
 public class BaseActivity extends AppCompatActivity {
-    public final int BLUE_THEME = 0;
-    public final int PINK_THEME = 1;
+    protected final static int BLUE_THEME = 0;
+    protected final static int PINK_THEME = 1;
     protected SystemBarTintManager tintManager;
 
     @Override

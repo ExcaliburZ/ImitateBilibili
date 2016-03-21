@@ -19,7 +19,7 @@ import com.android.volley.toolbox.Volley;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.customView.LowPrioritySwipeRefreshLayout;
-import com.wings.zilizili.global.GlobalConstant;
+import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.utils.MySingleton;
 
 /**
