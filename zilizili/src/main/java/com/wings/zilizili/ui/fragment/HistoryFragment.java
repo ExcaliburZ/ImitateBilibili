@@ -1,4 +1,4 @@
-package com.wings.zilizili.fragment;
+package com.wings.zilizili.ui.fragment;
 
 
 import android.os.Bundle;

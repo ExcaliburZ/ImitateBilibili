@@ -1,4 +1,4 @@
-package com.wings.zilizili.fragment;
+package com.wings.zilizili.ui.fragment;
 
 
 import android.content.Context;
@@ -22,7 +22,7 @@ import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.VideoDetailActivity;
-import com.wings.zilizili.customView.DramaRecyclerView;
+import com.wings.zilizili.ui.widget.DramaRecyclerView;
 import com.wings.zilizili.domain.Data;
 import com.wings.zilizili.domain.DataInfo;
 import com.wings.zilizili.domain.DramaItem;
@@ -38,6 +38,8 @@ import java.util.ArrayList;
  */
 public class DramaFragment extends BaseFragment {
 
+    public static final String IMAGE = "image";
+    private static final int START_AUTO_PLAY = 0;
     private static String TAG = "DramaFragment";
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
@@ -54,13 +56,10 @@ public class DramaFragment extends BaseFragment {
     private DramaAdapter mDramaAdapter;
     private RecommendAdapter mRecommendAdapter;
     private RelativeLayout rlPointSet;
-
     private View redPoint;
     //TopNews点指示器间距
     private int itemSpacing;
     private int itemSize;
-
-    private static final int START_AUTO_PLAY = 0;
     private Handler mHandler = new Handler() {
 
         @Override
@@ -76,7 +75,6 @@ public class DramaFragment extends BaseFragment {
             }
         }
     };
-    public static final String IMAGE = "image";
 
 
     public DramaFragment() {
@@ -122,44 +120,6 @@ public class DramaFragment extends BaseFragment {
     @Override
     protected String initURL() {
         return "json/JsonServlet";
-    }
-
-    //设置各个Item之间的间距
-    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int space;
-
-        public SpacesItemDecoration(int space) {
-            this.space = space;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view,
-                                   RecyclerView parent, RecyclerView.State state) {
-
-            if (parent.getChildLayoutPosition(view) == 0) {
-                return;
-            }
-            outRect.left = space;
-            outRect.right = space;
-            outRect.bottom = space;
-            outRect.top = space;
-            // Add top margin only for the first item to avoid double space between items
-//            if (parent.getChildAdapterPosition(view) < 4) {
-//                if (parent.getChildAdapterPosition(view) % 2 == 1) {
-//                    outRect.left = 2 * space;
-//                } else {
-//                    outRect.right = 2 * space;
-//                }
-//            }else {
-//                if (parent.getChildAdapterPosition(view) % 2 == 0) {
-//                    outRect.left = 2 * space;
-//                } else {
-//                    outRect.right = 2 * space;
-//                }
-//            }
-
-        }
     }
 
     protected void setListener() {
@@ -210,7 +170,6 @@ public class DramaFragment extends BaseFragment {
         });
     }
 
-
     private void sleepMoment() {
         long endTime = SystemClock.uptimeMillis();
         if (endTime - startTime < 1500) {
@@ -232,7 +191,7 @@ public class DramaFragment extends BaseFragment {
 
         //初始化TopNews的指示器并选中第一个
         initRelativePointSet();
-        topNews.setCurrentItem(topNewsList.size() * 1000);
+        topNews.setCurrentItem(topNewsList.size() * 50);
 
         //开启自动播放
         mHandler.sendEmptyMessageDelayed(START_AUTO_PLAY, 3000);
@@ -270,6 +229,48 @@ public class DramaFragment extends BaseFragment {
         }
     }
 
+    //从HeadView中获取控件
+    private <T extends View> T findViewInHeadView(int resId) {
+        return (T) mHeadView.findViewById(resId);
+    }
+
+    //设置各个Item之间的间距
+    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
+
+        private int space;
+
+        public SpacesItemDecoration(int space) {
+            this.space = space;
+        }
+
+        @Override
+        public void getItemOffsets(Rect outRect, View view,
+                                   RecyclerView parent, RecyclerView.State state) {
+
+            if (parent.getChildLayoutPosition(view) == 0) {
+                return;
+            }
+            outRect.left = space;
+            outRect.right = space;
+            outRect.bottom = space;
+            outRect.top = space;
+            // Add top margin only for the first item to avoid double space between items
+//            if (parent.getChildAdapterPosition(view) < 4) {
+//                if (parent.getChildAdapterPosition(view) % 2 == 1) {
+//                    outRect.left = 2 * space;
+//                } else {
+//                    outRect.right = 2 * space;
+//                }
+//            }else {
+//                if (parent.getChildAdapterPosition(view) % 2 == 0) {
+//                    outRect.left = 2 * space;
+//                } else {
+//                    outRect.right = 2 * space;
+//                }
+//            }
+
+        }
+    }
 
     class TopNewsAdapter extends PagerAdapter {
 
@@ -328,9 +329,9 @@ public class DramaFragment extends BaseFragment {
     }
 
     class DramaAdapter extends RecyclerView.Adapter<DramaViewHolder> {
-        private View rootView;
         public int HEADER = 0;
         public int ITEM = 1;
+        private View rootView;
 
         public DramaAdapter(View mHeadView) {
             this.rootView = mHeadView;
@@ -484,10 +485,5 @@ public class DramaFragment extends BaseFragment {
             image = (NetworkImageView) itemView.findViewById(R.id.iv_item);
             online = (TextView) itemView.findViewById(R.id.tv_online);
         }
-    }
-
-    //从HeadView中获取控件
-    private <T extends View> T findViewInHeadView(int resId) {
-        return (T) mHeadView.findViewById(resId);
     }
 }

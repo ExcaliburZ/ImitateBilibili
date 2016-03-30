@@ -1,4 +1,4 @@
-package com.wings.zilizili.customView;
+package com.wings.zilizili.ui.widget;
 
 import android.content.Context;
 import android.support.v4.view.ViewPager;

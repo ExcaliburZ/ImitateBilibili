@@ -20,10 +20,10 @@ import android.widget.FrameLayout;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.wings.zilizili.R;
-import com.wings.zilizili.customView.NoScrollViewPager;
-import com.wings.zilizili.fragment.HistoryFragment;
-import com.wings.zilizili.fragment.HomeFragment;
-import com.wings.zilizili.fragment.LeftMenuFragment;
+import com.wings.zilizili.ui.widget.NoScrollViewPager;
+import com.wings.zilizili.ui.fragment.HistoryFragment;
+import com.wings.zilizili.ui.fragment.HomeFragment;
+import com.wings.zilizili.ui.fragment.LeftMenuFragment;
 import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.utils.ToastUtils;
 

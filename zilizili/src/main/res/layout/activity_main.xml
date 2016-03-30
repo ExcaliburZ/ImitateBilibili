@@ -12,7 +12,7 @@
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent">-->
 
-    <com.wings.zilizili.customView.NoScrollViewPager
+    <com.wings.zilizili.ui.widget.NoScrollViewPager
         android:id="@+id/vp_content"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
@@ -20,7 +20,7 @@
 
     <fragment
         android:id="@+id/fg_left_menu"
-        android:name="com.wings.zilizili.fragment.LeftMenuFragment"
+        android:name="com.wings.zilizili.ui.fragment.LeftMenuFragment"
         android:layout_width="@dimen/navigation_drawer_width"
         android:layout_height="match_parent"
         android:layout_gravity="start"

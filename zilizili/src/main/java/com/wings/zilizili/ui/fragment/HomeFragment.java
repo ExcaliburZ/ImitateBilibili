@@ -1,4 +1,4 @@
-package com.wings.zilizili.fragment;
+package com.wings.zilizili.ui.fragment;
 
 
 import android.os.Bundle;
@@ -146,6 +146,10 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         }
     }
 
+    private <T extends View> T $(int resId) {
+        return (T) mContentView.findViewById(resId);
+    }
+
     class HomeAdapter extends FragmentStatePagerAdapter {
 
         public HomeAdapter(FragmentManager fm) {
@@ -172,10 +176,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
         public void destroyItem(ViewGroup container, int position, Object object) {
 //             super.destroyItem(container, position, object);
         }
-    }
-
-    private <T extends View> T $(int resId) {
-        return (T) mContentView.findViewById(resId);
     }
 
 

@@ -17,7 +17,7 @@
         android:layout_height="40.0dip"
         android:layout_margin="8.0dip">
 
-        <com.wings.zilizili.customView.DramaRecyclerView
+        <com.wings.zilizili.ui.widget.DramaRecyclerView
             android:id="@+id/tags"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"

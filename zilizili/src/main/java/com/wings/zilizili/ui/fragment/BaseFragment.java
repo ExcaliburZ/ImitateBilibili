@@ -1,4 +1,4 @@
-package com.wings.zilizili.fragment;
+package com.wings.zilizili.ui.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
@@ -18,7 +18,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
-import com.wings.zilizili.customView.LowPrioritySwipeRefreshLayout;
+import com.wings.zilizili.ui.widget.LowPrioritySwipeRefreshLayout;
 import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.utils.MySingleton;
 

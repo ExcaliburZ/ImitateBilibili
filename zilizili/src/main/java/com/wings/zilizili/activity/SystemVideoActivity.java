@@ -29,7 +29,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.wings.zilizili.R;
-import com.wings.zilizili.customView.CustomVideoView;
+import com.wings.zilizili.ui.widget.CustomVideoView;
 import com.wings.zilizili.domain.VideoInfo;
 import com.wings.zilizili.utils.TimeUtils;
 import com.wings.zilizili.utils.ToastUtils;
@@ -118,6 +118,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private VideoInfo info;
     private AnimationDrawable rocketAnimation;
     private boolean isPrepared;
+    private boolean isPause = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -340,7 +341,6 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         getWindowManager().getDefaultDisplay().getSize(outSize);
     }
 
-
     @Override
     protected void onDestroy() {
         if (isRegister) {
@@ -379,8 +379,8 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         rocketAnimation.start();
 
         if (uri == null) {
-            mVideoView.setVideoURI(Uri.parse(info.getData()));
-            title.setText(info.getTitle());
+            mVideoView.setVideoURI(Uri.parse(info.Data));
+            title.setText(info.Title);
         } else {
             mVideoView.setVideoURI(uri);
             title.setText(uri.toString());
@@ -587,7 +587,6 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         handler.sendEmptyMessageDelayed(HIDE_LOCK, 2000);
     }
 
-
     private void changeScreenSize() {
         isFullScreen = !isFullScreen;
 //        mVideoView.isFullScreen = isFullScreen;
@@ -608,8 +607,6 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         info = mVideoInfoList.get(--position);
         setData();
     }
-
-    private boolean isPause = false;
 
     private void pause() {
         isPause = !isPause;

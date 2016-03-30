@@ -128,6 +128,8 @@ public class BaseActivity extends AppCompatActivity {
                     ActivityOptions.makeSceneTransitionAnimation(this).toBundle());
         } else {
             startActivity(intent);
+            //TODO
+
         }
     }
 }
