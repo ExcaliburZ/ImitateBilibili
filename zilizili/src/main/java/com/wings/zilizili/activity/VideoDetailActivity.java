@@ -27,9 +27,9 @@ import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
-import com.wings.zilizili.ui.fragment.DramaFragment;
+import com.wings.zilizili.ui.fragment.BangumiFragment;
 import com.wings.zilizili.GlobalConstant;
-import com.wings.zilizili.utils.MySingleton;
+import com.wings.zilizili.utils.SingletonImageLoader;
 import com.wings.zilizili.utils.ToastUtils;
 
 
@@ -68,7 +68,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         mCover = $(R.id.cover);
-        String uri = getIntent().getStringExtra(DramaFragment.IMAGE);
+        String uri = getIntent().getStringExtra(BangumiFragment.IMAGE);
 
         mCover.setImageUrl(uri, mImageLoader);
         mNick = $(R.id.nick);
@@ -170,7 +170,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     private void initData() {
         //读取av号
         av = getIntent().getStringExtra("av");
-        mImageLoader = MySingleton.getInstance(this).getImageLoader();
+        mImageLoader = SingletonImageLoader.getInstance(this).getImageLoader();
     }
 
     @Override

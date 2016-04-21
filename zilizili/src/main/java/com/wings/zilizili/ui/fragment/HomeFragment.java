@@ -101,11 +101,11 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
 
         mFragmentManager = mActivity.getSupportFragmentManager();
         mFragmentLists = new ArrayList<Fragment>() {{
-            add(new DramaFragment());
-            add(new DramaFragment());
-            add(new DramaFragment());
-            add(new DramaFragment());
-            add(new DramaFragment());
+            add(new BangumiFragment());
+            add(new BangumiFragment());
+            add(new BangumiFragment());
+            add(new BangumiFragment());
+            add(new BangumiFragment());
         }};
 
         assert mFragmentLists.size() == 5 : "mFragmentLists has error size";

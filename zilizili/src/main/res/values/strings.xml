@@ -1124,6 +1124,10 @@
     <string name="action_settings">设置</string>
     <string name="drawer_open">open</string>
     <string name="drawer_close">close</string>
+    <string name="brightness_show">亮度 : </string>
+    <string name="volume_show">音量 : </string>
+    <string name="percent_symbol">%</string>
+
 
     <string name="hello_blank_fragment">Hello blank fragment1</string>
 </resources>

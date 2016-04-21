@@ -20,7 +20,7 @@ import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.ui.widget.LowPrioritySwipeRefreshLayout;
 import com.wings.zilizili.GlobalConstant;
-import com.wings.zilizili.utils.MySingleton;
+import com.wings.zilizili.utils.SingletonImageLoader;
 
 /**
  * Created by wing on 2015/10/28.
@@ -87,7 +87,7 @@ public abstract class BaseFragment extends Fragment {
                 getDataWithVolley();
             }
         });
-        mImageLoader = MySingleton.getInstance(mActivity).getImageLoader();
+        mImageLoader = SingletonImageLoader.getInstance(mActivity).getImageLoader();
 
     }
 

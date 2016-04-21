@@ -32,15 +32,15 @@ import com.wings.zilizili.domain.TopNewsItem;
 import java.util.ArrayList;
 
 /**
- * DramaFragment,HomeFragment中的番剧标签页Fragment
+ * BangumiFragment,HomeFragment中的番剧标签页Fragment
  * 主要利用为一个RecyclerView添加头布局完成主体设计
  * 头布局中又自带一个TopNews滚动条的ViewPager和其他一些数据
  */
-public class DramaFragment extends BaseFragment {
+public class BangumiFragment extends BaseFragment {
 
     public static final String IMAGE = "image";
     private static final int START_AUTO_PLAY = 0;
-    private static String TAG = "DramaFragment";
+    private static String TAG = "BangumiFragment";
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
     private ViewPager topNews;
@@ -77,7 +77,7 @@ public class DramaFragment extends BaseFragment {
     };
 
 
-    public DramaFragment() {
+    public BangumiFragment() {
         // Required empty public constructor
     }
 
@@ -352,8 +352,7 @@ public class DramaFragment extends BaseFragment {
                 return new DramaViewHolder(rootView);
             }
             View view = LayoutInflater.from(mActivity).inflate(R.layout.item_drama, parent, false);
-            DramaViewHolder holder = new DramaViewHolder(view);
-            return holder;
+            return new DramaViewHolder(view);
         }
 
         @Override

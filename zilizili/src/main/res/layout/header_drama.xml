@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     app:layout_scrollFlags="enterAlways|scroll"
-    tools:context="com.wings.zilizili.ui.fragment.DramaFragment">
+    tools:context=".ui.fragment.BangumiFragment">
 
     <RelativeLayout
         android:layout_width="match_parent"
