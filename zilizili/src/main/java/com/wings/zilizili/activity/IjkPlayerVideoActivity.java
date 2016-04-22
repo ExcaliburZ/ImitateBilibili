@@ -9,7 +9,6 @@ import android.content.SharedPreferences;
 import android.graphics.Point;
 import android.graphics.drawable.AnimationDrawable;
 import android.media.AudioManager;
-import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -25,18 +24,20 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoInfo;
+import com.wings.zilizili.ui.widget.IjkPlayerVideoView;
 import com.wings.zilizili.utils.TimeUtils;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
 
+import tv.danmaku.ijk.media.player.IMediaPlayer;
+import tv.danmaku.ijk.media.player.IjkMediaPlayer;
 
-public class SystemVideoActivity extends Activity implements View.OnClickListener {
+
+public class IjkPlayerVideoActivity extends Activity implements View.OnClickListener {
 
     private static final int UPDATE_PROCESS = 0;
     private static final int UPDATE_TIME_BATTERY = 1;
@@ -44,7 +45,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private static final int HIDE_MESSAGE = 3;
     private static final int HIDE_LOCK = 4;
     private static final String TAG = "VideoActivity";
-    private VideoView mVideoView;
+    private IjkPlayerVideoView mVideoView;
     private TextView mTitle;
     private TextView mTime;
     private TextView mCurrentTime;
@@ -122,17 +123,98 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setNavigation();
-        setContentView(R.layout.system_activity_video);
+        setContentView(R.layout.ijk_player_activity_video);
         init();
         getData();
         setData();
         registerReceiver();
+        IjkMediaPlayer ijkMediaPlayer = new IjkMediaPlayer();
     }
 
     private void init() {
         restoreBrightnessAndVolume();
         findView();
         setListener();
+    }
+
+    private void setData() {
+        mLoadImage.setBackgroundResource(R.drawable.loading_tv_chan);
+
+        rocketAnimation = (AnimationDrawable) mLoadImage.getBackground();
+        rocketAnimation.start();
+
+        if (uri == null) {
+            mVideoView.setVideoURI(Uri.parse(info.Data));
+            mTitle.setText(info.Title);
+        } else {
+            mVideoView.setVideoURI(uri);
+            mTitle.setText(uri.toString());
+        }
+        mTime.setText(TimeUtils.getCurrentTime());
+        perY = (int) (outSize.y / maxVolume / 1.5);
+        preX = (outSize.x / 100);
+        updateVolume();
+        mVideoView.setOnPreparedListener(
+                new IMediaPlayer.OnPreparedListener() {
+                    @Override
+                    public void onPrepared(IMediaPlayer mp) {
+                        System.out.println("onPrepared");
+                        rocketAnimation.stop();
+                        mLoadingLayout.setVisibility(View.INVISIBLE);
+                        long duration = mp.getDuration();
+                        mTotalTime.setText(TimeUtils.LongToStr((long) mp.getDuration()));
+                        mProcess.setMax((int) duration);
+                        mProcess.setProgress(0);
+                        isPrepared = true;
+                    }
+                });
+
+//        mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+//            @Override
+//            public void onCompletion(MediaPlayer mp) {
+//                if (mVideoInfoList == null || isLastMovie() || mVideoInfoList.size() == 0) {
+//                    finish();
+//                }
+//
+//                playNext();
+//            }
+//        });
+//        mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
+//            @Override
+//            public boolean onError(MediaPlayer mp, int what, int extra) {
+//                Toast.makeText(IjkPlayerVideoActivity.this, "播放失败", Toast.LENGTH_SHORT).show();
+//                IjkPlayerVideoActivity.this.finish();
+//                return true;
+//            }
+//        });
+        System.out.println("start");
+        mVideoView.start();
+        mProcess.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+                if (fromUser) {
+                    mVideoView.seekTo(progress);
+                    if (isPause) {
+                        pause();
+                        Log.i(TAG, "isPause");
+                    }
+                }
+                String s = TimeUtils.LongToStr((long) progress);
+                mCurrentTime.setText(s);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+                handler.removeMessages(UPDATE_PROCESS);
+                handler.removeMessages(HIDE_CONTROLLER);
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+                handler.sendEmptyMessage(UPDATE_PROCESS);
+                handler.sendEmptyMessageDelayed(HIDE_CONTROLLER, 3000);
+            }
+        });
     }
 
     private void findView() {
@@ -303,13 +385,13 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         mMessage.setText(R.string.brightness_show + brightness + R.string.percent_symbol);
     }
 
+
     private void updateVolume() {
         int streamVolume = mAudioManager.getStreamVolume(AudioManager.STREAM_MUSIC);
         int percent = (int) ((float) streamVolume / maxVolume * 100);
         sp.edit().putInt("streamVolume", streamVolume).apply();
         mMessage.setText(getString(R.string.volume_show) + percent + getString(R.string.percent_symbol));
     }
-
 
     private void restoreBrightnessAndVolume() {
         lp = getWindow().getAttributes();
@@ -371,89 +453,6 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
 
         }
         handler.sendEmptyMessageDelayed(UPDATE_PROCESS, 400);
-    }
-
-    private void setData() {
-        System.out.println("setData");
-        mLoadImage.setBackgroundResource(R.drawable.loading_tv_chan);
-
-        rocketAnimation = (AnimationDrawable) mLoadImage.getBackground();
-        rocketAnimation.start();
-
-        if (uri == null) {
-            mVideoView.setVideoURI(Uri.parse(info.Data));
-            mTitle.setText(info.Title);
-        } else {
-            mVideoView.setVideoURI(uri);
-            mTitle.setText(uri.toString());
-        }
-        mTime.setText(TimeUtils.getCurrentTime());
-        perY = (int) (outSize.y / maxVolume / 1.5);
-        preX = (outSize.x / 100);
-        updateVolume();
-        mVideoView.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-            @Override
-            public void onPrepared(MediaPlayer mp) {
-                System.out.println("onPrepared");
-                rocketAnimation.stop();
-                mLoadingLayout.setVisibility(View.INVISIBLE);
-                long duration = mp.getDuration();
-                mTotalTime.setText(TimeUtils.LongToStr((long) mp.getDuration()));
-                mProcess.setMax((int) duration);
-                mProcess.setProgress(0);
-                isPrepared = true;
-            }
-        });
-
-        mVideoView.setOnCompletionListener(
-                new MediaPlayer.OnCompletionListener() {
-                    @Override
-                    public void onCompletion(MediaPlayer mp) {
-                        if (mVideoInfoList == null || isLastMovie() || mVideoInfoList.size() == 0) {
-                            finish();
-                        }
-
-                        playNext();
-                    }
-                }
-
-        );
-        mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-            @Override
-            public boolean onError(MediaPlayer mp, int what, int extra) {
-                Toast.makeText(SystemVideoActivity.this, "播放失败", Toast.LENGTH_SHORT).show();
-                SystemVideoActivity.this.finish();
-                return true;
-            }
-        });
-        System.out.println("start");
-        mVideoView.start();
-        mProcess.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if (fromUser) {
-                    mVideoView.seekTo(progress);
-                    if (isPause) {
-                        pause();
-                        Log.i(TAG, "isPause");
-                    }
-                }
-                String s = TimeUtils.LongToStr((long) progress);
-                mCurrentTime.setText(s);
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-                handler.removeMessages(UPDATE_PROCESS);
-                handler.removeMessages(HIDE_CONTROLLER);
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-                handler.sendEmptyMessage(UPDATE_PROCESS);
-                handler.sendEmptyMessageDelayed(HIDE_CONTROLLER, 3000);
-            }
-        });
     }
 
     private void sendHideMessage() {
@@ -604,10 +603,10 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private void changeScreenSize() {
         isFullScreen = !isFullScreen;
         if (isFullScreen) {
-//            mVideoView.setVideoSize(outSize.y, outSize.x, true);
+            mVideoView.setVideoSize(outSize.y, outSize.x, true);
         } else {
-//            mVideoView.setVideoSize(
-//                    mVideoView.getMeasuredHeight(), mVideoView.getMeasuredWidth(), true);
+            mVideoView.setVideoSize(
+                    mVideoView.getMeasuredHeight(), mVideoView.getMeasuredWidth(), true);
         }
         mFullscreen.setImageResource(isFullScreen ? R.mipmap.ic_fullscreen_exit_white_36dp
                 : R.mipmap.ic_fullscreen_white_36dp);

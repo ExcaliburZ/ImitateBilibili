@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:background="#000">
 
-        <VideoView
+        <com.wings.zilizili.ui.widget.IjkPlayerVideoView
             android:id="@+id/vv_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"

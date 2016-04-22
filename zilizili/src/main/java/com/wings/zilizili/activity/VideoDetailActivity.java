@@ -21,7 +21,6 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
@@ -30,15 +29,12 @@ import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
 import com.wings.zilizili.ui.fragment.BangumiFragment;
 import com.wings.zilizili.utils.PicassoImageLoader;
-import com.wings.zilizili.utils.SingletonImageLoader;
 import com.wings.zilizili.utils.ToastUtils;
 
 import derson.com.multipletheme.colorUi.widget.ColorImageView;
 import derson.com.multipletheme.colorUi.widget.ColorToolbar;
 
 public class VideoDetailActivity extends BaseActivity implements View.OnClickListener {
-
-    private ImageLoader mImageLoader;
 
     private ColorToolbar mColorToolbar;
     private String av;
@@ -171,7 +167,6 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     private void initData() {
         //读取av号
         av = getIntent().getStringExtra("av");
-        mImageLoader = SingletonImageLoader.getInstance(this).getImageLoader();
     }
 
     @Override
@@ -206,10 +201,15 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.play:
-                Intent intent = new Intent(this, SystemVideoActivity.class);
-                intent.setData(Uri.parse(mVideoInfo.video_uri));
-                StartActivityWithTransitionAnim(intent);
+                playVideo();
                 break;
         }
+    }
+
+    private void playVideo() {
+//        Intent intent = new Intent(this, SystemVideoActivity.class);
+        Intent intent = new Intent(this, IjkPlayerVideoActivity.class);
+        intent.setData(Uri.parse(mVideoInfo.video_uri));
+        StartActivityWithTransitionAnim(intent);
     }
 }

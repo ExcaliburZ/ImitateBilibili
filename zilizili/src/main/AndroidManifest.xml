@@ -39,12 +39,19 @@
 
         <activity
             android:name=".activity.VideoDetailActivity"
-            android:parentActivityName=".activity.MainActivity">
-        </activity>
+            android:configChanges="orientation|keyboardHidden"
+            android:parentActivityName=".activity.MainActivity" />
 
 
         <activity
             android:name=".activity.SystemVideoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreen_video" />
+
+        <activity
+            android:name=".activity.IjkPlayerVideoActivity"
+            android:configChanges="orientation|keyboardHidden"
             android:screenOrientation="landscape"
             android:theme="@style/FullScreen_video" />
 
