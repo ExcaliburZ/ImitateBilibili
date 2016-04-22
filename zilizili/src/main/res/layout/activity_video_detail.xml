@@ -61,7 +61,7 @@
                 android:background="?view_background"
                 android:padding="8.0dip">
 
-                <com.android.volley.toolbox.NetworkImageView
+                <ImageView
                     android:id="@+id/cover"
                     android:layout_width="118.0dip"
                     android:layout_height="wrap_content"

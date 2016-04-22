@@ -13,6 +13,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -21,17 +22,16 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.NetworkImageView;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
+import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
 import com.wings.zilizili.ui.fragment.BangumiFragment;
-import com.wings.zilizili.GlobalConstant;
+import com.wings.zilizili.utils.PicassoImageLoader;
 import com.wings.zilizili.utils.SingletonImageLoader;
 import com.wings.zilizili.utils.ToastUtils;
-
 
 import derson.com.multipletheme.colorUi.widget.ColorImageView;
 import derson.com.multipletheme.colorUi.widget.ColorToolbar;
@@ -50,7 +50,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     private ColorImageView mShare;
     private LinearLayout mActionModeBar;
 
-    private NetworkImageView mCover;
+    private ImageView mCover;
     private TextView mNick;
     private TextView mTitle;
     private TextView mInfoViews;
@@ -70,7 +70,8 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         mCover = $(R.id.cover);
         String uri = getIntent().getStringExtra(BangumiFragment.IMAGE);
 
-        mCover.setImageUrl(uri, mImageLoader);
+        PicassoImageLoader.getInstance()
+                .displayTopNewsImage(this, uri, mCover);
         mNick = $(R.id.nick);
         mInfoViews = $(R.id.info_views);
         mInfoDate = $(R.id.info_date);

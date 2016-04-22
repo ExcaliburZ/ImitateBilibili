@@ -13,7 +13,7 @@
     <item name="dialog_fixed_height_minor" type="dimen">100.0%</item>
     <dimen name="dialog_fixed_width_major">320.0dip</dimen>
     <dimen name="dialog_fixed_width_minor">320.0dip</dimen>
-    <dimen name="cover_width">118.0dip</dimen>
+    <dimen name="cover_width">150.0dip</dimen>
     <dimen name="item_half_spacing">4.0dip</dimen>
     <dimen name="item_spacing">8.0dip</dimen>
     <dimen name="text_size_medium">12.0sp</dimen>

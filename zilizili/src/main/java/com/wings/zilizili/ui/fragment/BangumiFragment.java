@@ -15,19 +15,20 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.android.volley.toolbox.NetworkImageView;
 import com.google.gson.Gson;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.VideoDetailActivity;
-import com.wings.zilizili.ui.widget.DramaRecyclerView;
 import com.wings.zilizili.domain.Data;
 import com.wings.zilizili.domain.DataInfo;
 import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.TopNewsItem;
+import com.wings.zilizili.ui.widget.DramaRecyclerView;
+import com.wings.zilizili.utils.PicassoImageLoader;
 
 import java.util.ArrayList;
 
@@ -40,6 +41,8 @@ public class BangumiFragment extends BaseFragment {
 
     public static final String IMAGE = "image";
     private static final int START_AUTO_PLAY = 0;
+    private static final String MATERIAL_VIDEO_CODE = "123456";
+    private static final String ANIM_VIDEO_CODE = "654321";
     private static String TAG = "BangumiFragment";
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
@@ -282,7 +285,6 @@ public class BangumiFragment extends BaseFragment {
 
         @Override
         public int getCount() {
-//            return topNewsList.size() == 0 ? 0 : Integer.MAX_VALUE;
             return Integer.MAX_VALUE;
         }
 
@@ -299,15 +301,15 @@ public class BangumiFragment extends BaseFragment {
             position = position % topNewsList.size();
 
             View view = View.inflate(context, R.layout.item_top_news, null);
-            NetworkImageView imageView = (NetworkImageView) view.findViewById(R.id.iv_item);
+            ImageView imageView = (ImageView) view.findViewById(R.id.iv_item);
             final TopNewsItem topNewsItem = topNewsList.get(position);
-            imageView.setImageUrl(topNewsItem.topimage, mImageLoader);
-
+            PicassoImageLoader.getInstance().
+                    displayTopNewsImage(getContext(), topNewsItem.topimage, imageView);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                    intent.putExtra("av", "654321");
+                    intent.putExtra("av", ANIM_VIDEO_CODE);
                     intent.putExtra(IMAGE, topNewsItem.topimage);
                     mActivity.StartActivityWithTransitionAnim(intent);
                 }
@@ -369,10 +371,10 @@ public class BangumiFragment extends BaseFragment {
 
             final DramaItem dramaItem = mDramaList.get(position);
             holder.title.setText(dramaItem.name);
-            NetworkImageView imageView = holder.image;
-            imageView.setImageUrl(dramaItem.topimage, mImageLoader);
-
+            ImageView imageView = holder.image;
             Integer height = Integer.valueOf(dramaItem.height);
+            PicassoImageLoader.getInstance().
+                    displayBangumiImage(getContext(), dramaItem.topimage, imageView);
 
             ViewGroup.LayoutParams params = imageView.getLayoutParams();
             params.height = height;
@@ -380,29 +382,12 @@ public class BangumiFragment extends BaseFragment {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                    intent.putExtra("av", "123456");
                     intent.putExtra("image", dramaItem.topimage);
                     mActivity.StartActivityWithTransitionAnim(intent);
                 }
             });
-//            imageView.setLayoutParams(params);
-
-//             = new StaggeredGridLayoutManager.LayoutParams
-//            System.out.println("position :: " + position);
-//            StaggeredGridLayoutManager.LayoutParams layoutParams =
-//                    (StaggeredGridLayoutManager.LayoutParams) holder.view.getLayoutParams();
-//            if (isLeftItem(position)) {
-//                layoutParams.setMargins(20, 10, 5, 10);
-//            } else {
-//                layoutParams.setMargins(5, 10, 20, 10);
-//            }
-//            holder.view.setLayoutParams(layoutParams);
         }
 
-
-        private boolean isLeftItem(int position) {
-            return position % 2 == 0;
-        }
 
         @Override
         public long getItemId(int position) {
@@ -417,14 +402,14 @@ public class BangumiFragment extends BaseFragment {
 
     private class DramaViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
-        public NetworkImageView image;
+        public ImageView image;
         public View view;
 
         public DramaViewHolder(View itemView) {
             super(itemView);
             view = itemView;
             title = (TextView) itemView.findViewById(R.id.tv_title);
-            image = (NetworkImageView) itemView.findViewById(R.id.iv_item);
+            image = (ImageView) itemView.findViewById(R.id.iv_item);
         }
     }
 
@@ -441,18 +426,16 @@ public class BangumiFragment extends BaseFragment {
         public void onBindViewHolder(RecommendViewHolder holder, final int position) {
             final RecommendItem recommendItem = mRecommendList.get(position);
             holder.title.setText("\u3000" + recommendItem.name);
-            NetworkImageView imageView = holder.image;
-//            bitmapUtils.display(imageView, recommendItem.topimage);
-            // Get the ImageLoader through your singleton class.
-            System.out.println("ImageLoader...");
-            imageView.setImageUrl(recommendItem.topimage, mImageLoader);
+            ImageView imageView = holder.image;
+            PicassoImageLoader.getInstance().
+                    displayRecommendImage(getContext(), recommendItem.topimage, imageView);
             holder.online.setText(recommendItem.playCount);
 
             holder.rootView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                    intent.putExtra("av", "123456");
+                    intent.putExtra("av", MATERIAL_VIDEO_CODE);
                     intent.putExtra("image", recommendItem.topimage);
                     mActivity.StartActivityWithTransitionAnim(intent);
                 }
@@ -473,7 +456,7 @@ public class BangumiFragment extends BaseFragment {
 
     private class RecommendViewHolder extends RecyclerView.ViewHolder {
         public TextView title;
-        public NetworkImageView image;
+        public ImageView image;
         public TextView online;
         public View rootView;
 
@@ -481,7 +464,7 @@ public class BangumiFragment extends BaseFragment {
             super(itemView);
             this.rootView = itemView;
             title = (TextView) itemView.findViewById(R.id.tv_title);
-            image = (NetworkImageView) itemView.findViewById(R.id.iv_item);
+            image = (ImageView) itemView.findViewById(R.id.iv_item);
             online = (TextView) itemView.findViewById(R.id.tv_online);
         }
     }

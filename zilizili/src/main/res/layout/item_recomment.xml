@@ -22,7 +22,7 @@
             android:layout_height="100dp">
 
 
-            <com.android.volley.toolbox.NetworkImageView
+            <ImageView
                 android:id="@+id/iv_item"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent" />

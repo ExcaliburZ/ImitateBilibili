@@ -30,4 +30,5 @@ dependencies {
     compile files('libs/systembartint-1.0.4.jar')
     compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/volley.jar')
+    compile 'com.squareup.picasso:picasso:2.5.2'
 }
