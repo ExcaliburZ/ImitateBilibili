@@ -207,8 +207,14 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     }
 
     private void playVideo() {
-//        Intent intent = new Intent(this, SystemVideoActivity.class);
-        Intent intent = new Intent(this, IjkPlayerVideoActivity.class);
+        //使用系统MediaPlayer的VideoView
+        Intent intent = new Intent(this, SystemVideoActivity.class);
+        //使用ijkMediaPlayer的VideoView
+//        Intent intent = new Intent(this, IjkPlayerVideoActivity.class);
+        //使用MediaPlayer和SurfaceView
+//        Intent intent = new Intent(this, NewVideoActivity.class);
+        //使用IjkMediaPlayer和SurfaceView
+//        Intent intent = new Intent(this, NewIjkVideoActivity.class);
         intent.setData(Uri.parse(mVideoInfo.video_uri));
         StartActivityWithTransitionAnim(intent);
     }

@@ -3,25 +3,26 @@ package com.wings.zilizili.ui.widget;
 import android.content.Context;
 import android.util.AttributeSet;
 import android.view.ViewGroup;
+import android.widget.VideoView;
 
 /**
  * Created by wing on 2015/9/2.
  */
-public class IjkPlayerIjkVideoView extends IjkVideoView {
+public class SystemVideoView extends VideoView {
 
     public boolean isFullScreen;
     private int mVideoWidth;
     private int mVideoHeight;
 
-    public IjkPlayerIjkVideoView(Context context) {
+    public SystemVideoView(Context context) {
         super(context);
     }
 
-    public IjkPlayerIjkVideoView(Context context, AttributeSet attrs) {
+    public SystemVideoView(Context context, AttributeSet attrs) {
         super(context, attrs);
     }
 
-    public IjkPlayerIjkVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
+    public SystemVideoView(Context context, AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
 

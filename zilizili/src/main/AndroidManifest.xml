@@ -49,6 +49,18 @@
             android:screenOrientation="landscape"
             android:theme="@style/FullScreen_video" />
 
+
+        <activity
+            android:name=".activity.NewVideoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreen_video" />
+        <activity
+            android:name=".activity.NewIjkVideoActivity"
+            android:configChanges="orientation|keyboardHidden"
+            android:screenOrientation="landscape"
+            android:theme="@style/FullScreen_video" />
+
         <activity
             android:name=".activity.IjkPlayerVideoActivity"
             android:configChanges="orientation|keyboardHidden"

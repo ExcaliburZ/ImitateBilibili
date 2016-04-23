@@ -26,10 +26,10 @@ import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.VideoView;
 
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoInfo;
+import com.wings.zilizili.ui.widget.SystemVideoView;
 import com.wings.zilizili.utils.TimeUtils;
 import com.wings.zilizili.utils.ToastUtils;
 
@@ -44,7 +44,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private static final int HIDE_MESSAGE = 3;
     private static final int HIDE_LOCK = 4;
     private static final String TAG = "VideoActivity";
-    private VideoView mVideoView;
+    private SystemVideoView mVideoView;
     private TextView mTitle;
     private TextView mTime;
     private TextView mCurrentTime;
@@ -122,7 +122,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setNavigation();
-        setContentView(R.layout.system_activity_video);
+        setContentView(R.layout.activity_system_video);
         init();
         getData();
         setData();
@@ -604,10 +604,10 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private void changeScreenSize() {
         isFullScreen = !isFullScreen;
         if (isFullScreen) {
-//            mVideoView.setVideoSize(outSize.y, outSize.x, true);
+            mVideoView.setVideoSize(outSize.y, outSize.x, true);
         } else {
-//            mVideoView.setVideoSize(
-//                    mVideoView.getMeasuredHeight(), mVideoView.getMeasuredWidth(), true);
+            mVideoView.setVideoSize(
+                    mVideoView.getMeasuredHeight(), mVideoView.getMeasuredWidth(), true);
         }
         mFullscreen.setImageResource(isFullScreen ? R.mipmap.ic_fullscreen_exit_white_36dp
                 : R.mipmap.ic_fullscreen_white_36dp);
