@@ -25,7 +25,6 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoInfo;
@@ -44,6 +43,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private static final int HIDE_MESSAGE = 3;
     private static final int HIDE_LOCK = 4;
     private static final String TAG = "VideoActivity";
+    private static boolean isErrored;
     private SystemVideoView mVideoView;
     private TextView mTitle;
     private TextView mTime;
@@ -87,7 +87,6 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
     private AnimationDrawable rocketAnimation;
     private boolean isPrepared;
     private boolean isPause = false;
-
     private Handler handler = new Handler() {
         @Override
         public void handleMessage(Message msg) {
@@ -133,6 +132,7 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         restoreBrightnessAndVolume();
         findView();
         setListener();
+        isErrored = false;
     }
 
     private void findView() {
@@ -421,8 +421,16 @@ public class SystemVideoActivity extends Activity implements View.OnClickListene
         mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
             @Override
             public boolean onError(MediaPlayer mp, int what, int extra) {
-                Toast.makeText(SystemVideoActivity.this, "播放失败", Toast.LENGTH_SHORT).show();
-                SystemVideoActivity.this.finish();
+                //如果系统播放器播放失败,尝试调用ijkPlayer去播放
+                if (!isErrored) {
+                    //使用ijkMediaPlayer的VideoView
+                    Intent intent = new Intent(SystemVideoActivity.this, IjkPlayerVideoActivity.class);
+                    intent.setData(uri);
+                    SystemVideoActivity.this.finish();
+                    Log.i(TAG, "IjkPlayerVideoActivity:  start");
+                    startActivity(intent);
+                    isErrored = true;
+                }
                 return true;
             }
         });

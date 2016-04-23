@@ -24,6 +24,7 @@ import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoInfo;
@@ -43,7 +44,7 @@ public class IjkPlayerVideoActivity extends Activity implements View.OnClickList
     private static final int HIDE_CONTROLLER = 2;
     private static final int HIDE_MESSAGE = 3;
     private static final int HIDE_LOCK = 4;
-    private static final String TAG = "VideoActivity";
+    private static final String TAG = "IjkPlayerVideoActivity";
     private IjkPlayerVideoView mVideoView;
     private TextView mTitle;
     private TextView mTime;
@@ -122,11 +123,12 @@ public class IjkPlayerVideoActivity extends Activity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setNavigation();
-        setContentView(R.layout.ijk_player_activity_video);
+        setContentView(R.layout.activity_ijk_player_video);
         init();
         getData();
         setData();
         registerReceiver();
+        Log.i(TAG, "onCreate: ijkPlayer");
     }
 
     private void init() {
@@ -164,29 +166,29 @@ public class IjkPlayerVideoActivity extends Activity implements View.OnClickList
                         mProcess.setMax((int) duration);
                         mProcess.setProgress(0);
                         isPrepared = true;
+                        mVideoView.start();
                     }
                 });
 
-//        mVideoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-//            @Override
-//            public void onCompletion(MediaPlayer mp) {
-//                if (mVideoInfoList == null || isLastMovie() || mVideoInfoList.size() == 0) {
-//                    finish();
-//                }
-//
-//                playNext();
-//            }
-//        });
-//        mVideoView.setOnErrorListener(new MediaPlayer.OnErrorListener() {
-//            @Override
-//            public boolean onError(MediaPlayer mp, int what, int extra) {
-//                Toast.makeText(IjkPlayerVideoActivity.this, "播放失败", Toast.LENGTH_SHORT).show();
-//                IjkPlayerVideoActivity.this.finish();
-//                return true;
-//            }
-//        });
-        System.out.println("start");
-        mVideoView.start();
+        mVideoView.setOnCompletionListener(new IMediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(IMediaPlayer mp) {
+                if (mVideoInfoList == null || isLastMovie() || mVideoInfoList.size() == 0) {
+                    finish();
+                }
+
+                playNext();
+            }
+        });
+        mVideoView.setOnErrorListener(new IMediaPlayer.OnErrorListener() {
+            @Override
+            public boolean onError(IMediaPlayer mp, int what, int extra) {
+                Toast.makeText(IjkPlayerVideoActivity.this, "播放失败", Toast.LENGTH_SHORT).show();
+                IjkPlayerVideoActivity.this.finish();
+                return true;
+            }
+        });
+//        System.out.println("start");
         mProcess.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {

@@ -9,4 +9,7 @@ public interface GlobalConstant {
     int HISTORYFRAGMENT = 1;
     String SERVER_URL="http://182.254.156.215:8080/";
     String TX_URL="http://182.254.156.215:8080/";
+    String VIDEO_H264 = "video_3.json";
+    String VIDEO_MPG = "video_1.json";
+    String VIDEO_MPG_BIG = "video_2.json";
 }
