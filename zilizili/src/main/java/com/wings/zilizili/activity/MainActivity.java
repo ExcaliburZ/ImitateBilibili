@@ -9,7 +9,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.transition.Fade;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -19,12 +18,12 @@ import android.widget.FrameLayout;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
-import com.wings.zilizili.ui.widget.NoScrollViewPager;
 import com.wings.zilizili.ui.fragment.HistoryFragment;
 import com.wings.zilizili.ui.fragment.HomeFragment;
 import com.wings.zilizili.ui.fragment.LeftMenuFragment;
-import com.wings.zilizili.GlobalConstant;
+import com.wings.zilizili.ui.widget.NoScrollViewPager;
 import com.wings.zilizili.utils.ToastUtils;
 
 import java.util.ArrayList;
@@ -65,8 +64,8 @@ public class MainActivity extends BaseActivity
             // inside your activity (if you did not enable transitions in your theme)
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             // set an exit transition
-            getWindow().setExitTransition(new Fade());
-            getWindow().setEnterTransition(new Fade());
+//            getWindow().setExitTransition(new Fade());
+//            getWindow().setEnterTransition(new AutoTransition());
         }
     }
 

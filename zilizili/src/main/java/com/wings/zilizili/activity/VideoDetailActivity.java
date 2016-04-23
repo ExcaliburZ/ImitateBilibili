@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 import android.text.TextUtils;
-import android.transition.Fade;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -36,6 +36,7 @@ import derson.com.multipletheme.colorUi.widget.ColorToolbar;
 
 public class VideoDetailActivity extends BaseActivity implements View.OnClickListener {
 
+    private static final String TAG = "VideoDetailActivity";
     private ColorToolbar mColorToolbar;
     private String av;
     private TabLayout mTabLayout;
@@ -45,7 +46,6 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     private ColorImageView mComment;
     private ColorImageView mShare;
     private LinearLayout mActionModeBar;
-
     private ImageView mCover;
     private TextView mNick;
     private TextView mTitle;
@@ -62,7 +62,6 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         //设置取消默认标题
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         mCover = $(R.id.cover);
         String uri = getIntent().getStringExtra(BangumiFragment.IMAGE);
 
@@ -82,6 +81,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video_detail);
         init();
+        Log.i(TAG, "onCreate: video");
     }
 
     private void setTransitionAnim() {
@@ -89,9 +89,9 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
             // inside your activity (if you did not enable transitions in your theme)
             getWindow().requestFeature(Window.FEATURE_CONTENT_TRANSITIONS);
             // set an exit transition
-            getWindow().setExitTransition(new Fade());
-            getWindow().setEnterTransition(new Fade());
-            System.out.println("setExitTransition");
+            //共享元素
+//            getWindow().setExitTransition(new Slide(Gravity.LEFT));
+            //将原先的跳转改成如下方式，注意这里面的第三个参数决定了ActivityTwo 布局中的android:transitionName的值，它们要保持一致
         }
     }
 
@@ -100,6 +100,13 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         initView();
         setListener();
         getDataWithVolley();
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Log.i(TAG, "onBackPressed: video");
+        this.finishAfterTransition();
     }
 
     private void setListener() {
@@ -112,7 +119,9 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
     protected void getDataWithVolley() {
         // Instantiate the RequestQueue.
         RequestQueue queue = Volley.newRequestQueue(this);
-        String uri = TextUtils.equals(av, "123456") ? "video_1.json" : "video_2.json";
+        String uri = TextUtils.equals(av, "123456") ?
+                GlobalConstant.VIDEO_MPG :
+                GlobalConstant.VIDEO_MPG_BIG;
         StringRequest jsonRequest = new StringRequest(
                 Request.Method.GET,
                 GlobalConstant.TX_URL + uri,
@@ -185,12 +194,16 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
             case R.id.action_other:
                 ToastUtils.showToast(this, "action_other");
                 break;
+            case android.R.id.home:
+                finishAfterTransition();
+                return true;
+
         }
         return super.onOptionsItemSelected(item);
     }
 
     private void back() {
-        this.finish();
+        this.finishAfterTransition();
     }
 
     private <T extends View> T $(int resId) {
@@ -218,4 +231,5 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         intent.setData(Uri.parse(mVideoInfo.video_uri));
         StartActivityWithTransitionAnim(intent);
     }
+
 }

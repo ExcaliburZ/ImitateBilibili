@@ -1,9 +1,11 @@
 package com.wings.zilizili.ui.fragment;
 
 
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Rect;
+import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.SystemClock;
@@ -237,6 +239,22 @@ public class BangumiFragment extends BaseFragment {
         return (T) mHeadView.findViewById(resId);
     }
 
+    private void enterVideoDetailActivity(String animVideoCode, String image, String topimage, ImageView imageView) {
+        Intent intent = new Intent(getContext(), VideoDetailActivity.class);
+        intent.putExtra("av", animVideoCode);
+        intent.putExtra(image, topimage);
+
+        //共享元素
+        intent.putExtra("transition", "share");
+
+        //将原先的跳转改成如下方式，注意这里面的第三个参数决定了ActivityTwo 布局中的android:transitionName的值，它们要保持一致
+        Bundle shareTransition = ActivityOptions.makeSceneTransitionAnimation(
+                mActivity, imageView, "shareTransition").toBundle();
+//        mActivity.StartActivityWithTransitionAnim(intent);
+        mActivity.startActivity(intent,
+                shareTransition);
+    }
+
     //设置各个Item之间的间距
     public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
 
@@ -301,17 +319,14 @@ public class BangumiFragment extends BaseFragment {
             position = position % topNewsList.size();
 
             View view = View.inflate(context, R.layout.item_top_news, null);
-            ImageView imageView = (ImageView) view.findViewById(R.id.iv_item);
+            final ImageView imageView = (ImageView) view.findViewById(R.id.iv_item);
             final TopNewsItem topNewsItem = topNewsList.get(position);
             PicassoImageLoader.getInstance().
                     displayTopNewsImage(getContext(), topNewsItem.topimage, imageView);
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                    intent.putExtra("av", ANIM_VIDEO_CODE);
-                    intent.putExtra(IMAGE, topNewsItem.topimage);
-                    mActivity.StartActivityWithTransitionAnim(intent);
+                    enterVideoDetailActivity(ANIM_VIDEO_CODE, IMAGE, topNewsItem.topimage, imageView);
                 }
             });
 
@@ -426,7 +441,7 @@ public class BangumiFragment extends BaseFragment {
         public void onBindViewHolder(RecommendViewHolder holder, final int position) {
             final RecommendItem recommendItem = mRecommendList.get(position);
             holder.title.setText("\u3000" + recommendItem.name);
-            ImageView imageView = holder.image;
+            final ImageView imageView = holder.image;
             PicassoImageLoader.getInstance().
                     displayRecommendImage(getContext(), recommendItem.topimage, imageView);
             holder.online.setText(recommendItem.playCount);
@@ -434,10 +449,8 @@ public class BangumiFragment extends BaseFragment {
             holder.rootView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-                    intent.putExtra("av", MATERIAL_VIDEO_CODE);
-                    intent.putExtra("image", recommendItem.topimage);
-                    mActivity.StartActivityWithTransitionAnim(intent);
+                    enterVideoDetailActivity(MATERIAL_VIDEO_CODE,
+                            "image", recommendItem.topimage, imageView);
                 }
             });
         }
