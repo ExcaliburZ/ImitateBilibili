@@ -7,42 +7,6 @@
     android:fitsSystemWindows="true"
     android:orientation="vertical">
 
-    <!--<derson.com.multipletheme.colorUi.widget.ColorToolbar
-        android:id="@+id/toolbar"
-        style="@style/Widget.App.Toolbar.Home"
-        android:layout_width="match_parent"
-        android:layout_height="?navigationTopBarSize"
-        android:background="?attr/colorPrimary">
-
-        &lt;!&ndash; <RelativeLayout
-             android:id="@+id/navigation"
-             android:layout_width="wrap_content"
-             android:layout_height="fill_parent"
-             android:gravity="center_vertical"
-             android:orientation="horizontal">
-
-             <ImageButton
-                 android:id="@+id/ib_menu"
-                 android:layout_width="33dp"
-                 android:layout_height="match_parent"
-                 android:layout_centerVertical="true"
-                 android:paddingLeft="15dp"
-                 android:src="@drawable/abc_ic_ab_back_mtrl_am_alpha"
-                 android:theme="@style/Widget.App.Button.ToolBar" />
-
-             <TextView
-                 style="@style/TextAppearance.App.Topbar.Title"
-                 android:layout_width="wrap_content"
-                 android:layout_height="match_parent"
-                 android:layout_marginLeft="15dp"
-                 android:layout_toRightOf="@id/ib_menu"
-                 android:gravity="center_vertical"
-                 android:text="av12345678" />
-
-
-         </RelativeLayout>&ndash;&gt;
-    </derson.com.multipletheme.colorUi.widget.ColorToolbar>-->
-
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
@@ -66,7 +30,8 @@
                     android:layout_width="118.0dip"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/bili_default_image_tv_16_10" />
+                    android:src="@drawable/bili_default_image_tv_16_10"
+                    android:transitionName="shareTransition" />
 
                 <TextView
                     android:id="@+id/text"
