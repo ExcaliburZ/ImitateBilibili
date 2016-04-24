@@ -97,7 +97,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             add("关注");
             add("发现");
         }};
-        assert mTabLists.size() == 5 : "mTabLists has error size";
 
         mFragmentManager = mActivity.getSupportFragmentManager();
         mFragmentLists = new ArrayList<Fragment>() {{
@@ -108,7 +107,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
             add(new BangumiFragment());
         }};
 
-        assert mFragmentLists.size() == 5 : "mFragmentLists has error size";
     }
 
     private void initViewPager() {

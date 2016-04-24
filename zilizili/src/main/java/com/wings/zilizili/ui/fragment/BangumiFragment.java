@@ -49,14 +49,12 @@ public class BangumiFragment extends BaseFragment {
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
     private ViewPager topNews;
-    private Data data;
     private long startTime;
     private View mHeadView;
     private ArrayList<TopNewsItem> topNewsList;
     private ArrayList<RecommendItem> mRecommendList;
     private ArrayList<DramaItem> mDramaList;
     private GridLayoutManager mGridManager;
-    private StaggeredGridLayoutManager mStaggeredGridLayoutManager;
     private TopNewsAdapter mTopNewsAdapter;
     private DramaAdapter mDramaAdapter;
     private RecommendAdapter mRecommendAdapter;
@@ -100,7 +98,7 @@ public class BangumiFragment extends BaseFragment {
 
         //初始化RecyclerView及其LayoutManager
         mRecyclerView = $(R.id.rv_drama);
-        mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
+        StaggeredGridLayoutManager mStaggeredGridLayoutManager = new StaggeredGridLayoutManager(2, StaggeredGridLayoutManager.VERTICAL);
         mRecyclerView.setLayoutManager(mStaggeredGridLayoutManager);
         //设置箭头的颜色
         mRecyclerView.setHasFixedSize(false);
@@ -227,7 +225,7 @@ public class BangumiFragment extends BaseFragment {
         Gson gson = new Gson();
         DataInfo dataInfo = gson.fromJson(result, DataInfo.class);
         if (dataInfo.retcode / 100 == 2) {
-            data = dataInfo.data;
+            Data data = dataInfo.data;
             topNewsList = data.topnews;
             mRecommendList = data.recomment;
             mDramaList = data.drama;

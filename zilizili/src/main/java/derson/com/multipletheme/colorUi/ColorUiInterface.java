@@ -10,7 +10,7 @@ import android.view.View;
 public interface ColorUiInterface {
 
 
-    public View getView();
+    View getView();
 
-    public void setTheme(Resources.Theme themeId);
+    void setTheme(Resources.Theme themeId);
 }

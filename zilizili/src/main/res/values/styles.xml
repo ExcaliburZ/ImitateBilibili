@@ -74,7 +74,7 @@
         <item name="boWenItemBackground">?android:attr/selectableItemBackground</item>
     </style>
 
-    <style name="AppTheme.Light" parent="@style/AppBaseTheme"></style>
+    <style name="AppTheme.Light" parent="@style/AppBaseTheme" />
 
 
     <style name="Widget.App.Toolbar.Home" parent="@style/Widget.App.Toolbar" />

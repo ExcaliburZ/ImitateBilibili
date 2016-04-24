@@ -351,7 +351,7 @@ public class IjkVideoView extends SurfaceView implements
         }
     }
 
-    private void openVideo() {
+    private void openVideo() throws IllegalArgumentException {
         if (mUri == null || mSurfaceHolder == null)
             return;
 
@@ -389,14 +389,6 @@ public class IjkVideoView extends SurfaceView implements
             mTargetState = STATE_ERROR;
             mErrorListener.onError(mMediaPlayer,
                     IMediaPlayer.MEDIA_ERROR_UNKNOWN, 0);
-            return;
-        } catch (IllegalArgumentException ex) {
-            DebugLog.e(TAG, "Unable to open content: " + mUri, ex);
-            mCurrentState = STATE_ERROR;
-            mTargetState = STATE_ERROR;
-            mErrorListener.onError(mMediaPlayer,
-                    IMediaPlayer.MEDIA_ERROR_UNKNOWN, 0);
-            return;
         }
     }
 
