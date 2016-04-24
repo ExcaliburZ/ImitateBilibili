@@ -7,7 +7,7 @@
         android:layout_height="match_parent"
         android:background="#000">
 
-        <com.wings.zilizili.activity.SystemVideoActivity
+        <com.wings.zilizili.ui.widget.SystemVideoView
             android:id="@+id/vv_content"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
