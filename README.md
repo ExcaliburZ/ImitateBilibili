@@ -1,8 +1,8 @@
-   #ImitateBilibili
+#ImitateBilibili
    仿制的BiliBili客户端,采用Material Design设计.  
   实现了主界面的数据展示,运行时动态换肤以及视频的播放与控制,三个模块.
-   ##apk download
-  [Download by Github](https://github.com/ExcaliburZ/ImitateBilibili/blob/master/apk/zilizili-debug.apk)
+##apk download
+  [Click Raw button](https://github.com/ExcaliburZ/ImitateBilibili/blob/master/apk/zilizili-debug.apk)  
   [Download by Vps](http://182.254.156.215:8080/zilizili-debug.apk)
 ##introduce
    - 主界面的数据展示:解决了多个ViewGroup之间的滑动冲突问题
