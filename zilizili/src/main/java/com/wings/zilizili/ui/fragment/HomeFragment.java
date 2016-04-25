@@ -126,12 +126,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private void setToggleLeftDrawer() {
         mActivity.setSupportActionBar(mToolbar);
         mActivity.getSupportActionBar().setDisplayShowTitleEnabled(false);
-        //默认带旋转效果的Toggle
-//        mActivity.getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-//        mDrawerToggle = new ActionBarDrawerToggle(mActivity, mDrawerLayout, mToolbar, R.string.drawer_open,
-//                R.string.drawer_close);
-//        mDrawerToggle.syncState();
-//        mDrawerLayout.setDrawerListener(mDrawerToggle);
     }
 
     @Override
