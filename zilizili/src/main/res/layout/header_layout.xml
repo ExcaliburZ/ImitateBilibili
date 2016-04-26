@@ -3,16 +3,16 @@
 
 <derson.com.multipletheme.colorUi.widget.ColorRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="@dimen/navigation_drawer_width"
-    android:layout_height="200dp"
+    android:layout_height="@dimen/size_title"
     android:background="?attr/colorPrimary"
     android:fitsSystemWindows="true"
-    android:paddingLeft="20dp"
+    android:paddingLeft="@dimen/padding_middle"
     android:paddingTop="@dimen/staff_group_margin_top">
 
     <ImageView
         android:id="@+id/iv_avatar"
-        android:layout_width="70dp"
-        android:layout_height="70dp"
+        android:layout_width="@dimen/avatar_size_l"
+        android:layout_height="@dimen/avatar_size_l"
         android:src="@drawable/bili_default_avatar" />
 
     <ImageView
@@ -27,14 +27,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="@dimen/padding_middle"
         android:src="@drawable/ic_switch_night" />
 
     <ImageView
         android:id="@+id/iv_edit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="@dimen/padding_middle"
         android:layout_toLeftOf="@id/iv_night"
         android:src="@drawable/ic_edit_person_info" />
 
@@ -42,8 +42,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@id/iv_avatar"
-        android:layout_marginLeft="2dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginLeft="@dimen/margin_ss"
+        android:layout_marginTop="@dimen/margin_middle"
         android:orientation="vertical">
 
         <TextView
@@ -57,10 +57,10 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/btn_user_shape"
-            android:paddingBottom="2dp"
-            android:paddingLeft="5dp"
-            android:paddingRight="5dp"
-            android:paddingTop="2dp"
+            android:paddingBottom="@dimen/margin_ss"
+            android:paddingLeft="@dimen/padding_m"
+            android:paddingRight="@dimen/padding_m"
+            android:paddingTop="@dimen/margin_ss"
             android:text="正式会员"
             android:textSize="8sp"
             android:visibility="gone" />

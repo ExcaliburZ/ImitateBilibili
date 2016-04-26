@@ -1130,4 +1130,6 @@
 
 
     <string name="hello_blank_fragment">Hello blank fragment1</string>
+    <string name="cache_all">全部缓存</string>
+    <string name="cache_list">离线列表</string>
 </resources>

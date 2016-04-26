@@ -2,13 +2,13 @@
 <android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drama_item"
-    android:layout_width="150dp"
+    android:layout_width="@dimen/cover_width"
     android:layout_height="wrap_content"
     android:layout_gravity="center_horizontal"
     android:clickable="true"
     android:focusable="true"
     android:foreground="?android:attr/selectableItemBackground"
-    app:cardElevation="5dp">
+    app:cardElevation="@dimen/elevation">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -29,10 +29,10 @@
             android:background="@android:color/white"
             android:gravity="center_vertical"
             android:maxLines="2"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="20dp"
-            android:paddingTop="10dp" />
+            android:paddingBottom="@dimen/margin_small"
+            android:paddingLeft="@dimen/margin_small"
+            android:paddingRight="@dimen/padding_middle"
+            android:paddingTop="@dimen/margin_small" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

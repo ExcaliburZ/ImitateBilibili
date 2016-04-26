@@ -73,8 +73,6 @@ public class BangumiFragment extends BaseFragment implements OnItemClickListener
                     throw new RuntimeException("can not handler null message");
             }
         }
-
-
     };
 
     public BangumiFragment() {
@@ -122,8 +120,21 @@ public class BangumiFragment extends BaseFragment implements OnItemClickListener
         //设置箭头的颜色
         mRecyclerView.setHasFixedSize(false);
 
-        int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
-        mRecyclerView.addItemDecoration(new SpacesItemDecoration(spacingInPixels));
+        mRecyclerView.addItemDecoration(new RecyclerView.ItemDecoration() {
+            @Override
+            public void getItemOffsets(Rect outRect, View view,
+                                       RecyclerView parent, RecyclerView.State state) {
+
+                if (parent.getChildLayoutPosition(view) == 0) {
+                    return;
+                }
+                int spacingInPixels = getResources().getDimensionPixelSize(R.dimen.spacing);
+                outRect.left = spacingInPixels;
+                outRect.right = spacingInPixels;
+                outRect.bottom = spacingInPixels;
+                outRect.top = spacingInPixels;
+            }
+        });
         //填充需要的数据
         itemSpacing = getResources().getDimensionPixelSize(R.dimen.spacing_item);
         itemSize = getResources().getDimensionPixelSize(R.dimen.point_item_size);
@@ -272,29 +283,4 @@ public class BangumiFragment extends BaseFragment implements OnItemClickListener
         }
 
     }
-
-    //设置各个Item之间的间距
-    public class SpacesItemDecoration extends RecyclerView.ItemDecoration {
-
-        private int space;
-
-        public SpacesItemDecoration(int space) {
-            this.space = space;
-        }
-
-        @Override
-        public void getItemOffsets(Rect outRect, View view,
-                                   RecyclerView parent, RecyclerView.State state) {
-
-            if (parent.getChildLayoutPosition(view) == 0) {
-                return;
-            }
-            outRect.left = space;
-            outRect.right = space;
-            outRect.bottom = space;
-            outRect.top = space;
-        }
-    }
-
-
 }

@@ -40,7 +40,7 @@
                     android:id="@+id/iv_drawer"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:paddingRight="15dp"
+                    android:paddingRight="@dimen/padding_small"
                     android:src="@drawable/ic_drawer_home" />
 
                 <FrameLayout
@@ -52,11 +52,11 @@
                         android:id="@+id/avatar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        app:cardCornerRadius="17dp">
+                        app:cardCornerRadius="@dimen/padding_small">
 
                         <ImageView
-                            android:layout_width="34.0dp"
-                            android:layout_height="34.0dp"
+                            android:layout_width="@dimen/avatar_size"
+                            android:layout_height="@dimen/avatar_size"
                             android:src="@drawable/bili_default_avatar" />
                     </android.support.v7.widget.CardView>
 
@@ -76,18 +76,18 @@
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="15.0dip"
                     android:singleLine="true"
-                    android:text="未登录" />
+                    android:text="@string/home_top_default_nickname" />
             </derson.com.multipletheme.colorUi.widget.ColorLinerLayout>
         </derson.com.multipletheme.colorUi.widget.ColorToolbar>
 
         <android.support.design.widget.TabLayout
             android:id="@+id/tab_layout"
             android:layout_width="match_parent"
-            android:layout_height="40.0dip"
+            android:layout_height="@dimen/size_small"
             app:tabBackground="@android:color/transparent"
             app:tabIndicatorColor="@color/white"
-            app:tabPaddingEnd="20dp"
-            app:tabPaddingStart="20dp"
+            app:tabPaddingEnd="@dimen/padding_middle"
+            app:tabPaddingStart="@dimen/padding_middle"
             app:tabSelectedTextColor="@color/white"
             app:tabTextAppearance="@style/TabText"
             app:tabTextColor="@color/white_trans" />

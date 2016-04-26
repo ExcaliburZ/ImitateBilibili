@@ -147,6 +147,9 @@
     <dimen name="text_size_large">14.0sp</dimen>
     <item name="text_size_subtitle" type="dimen">@dimen/text_size_medium</item>
     <item name="text_size_title" type="dimen">@dimen/text_size_large</item>
+    <dimen name="size_xl">118.0dip</dimen>
+    <dimen name="margin_very_small">4.0dip</dimen>
+    <dimen name="height_middle">40.0dip</dimen>
     <dimen name="text_size_xlarge">16.0sp</dimen>
     <dimen name="umeng_fb_item_content_size">14.0sp</dimen>
     <dimen name="umeng_fb_item_height">48.0dip</dimen>
@@ -161,4 +164,27 @@
     <dimen name="spacing">10dp</dimen>
     <dimen name="spacing_item">10dp</dimen>
     <dimen name="point_item_size">6dp</dimen>
+    <dimen name="padding_very_small">10dp</dimen>
+    <dimen name="padding_small">15dp</dimen>
+    <dimen name="padding_middle">20dp</dimen>
+    <dimen name="padding_large">50dp</dimen>
+    <dimen name="padding_ml">40dp</dimen>
+    <dimen name="padding_large_negative">-50dp</dimen>
+    <dimen name="margin_very_small_negative">-2dp</dimen>
+    <dimen name="margin_ss">2dp</dimen>
+    <dimen name="margin_small">10dp</dimen>
+    <dimen name="margin_s">5dp</dimen>
+    <dimen name="margin_middle">15dp</dimen>
+    <dimen name="size_middle">50dp</dimen>
+    <dimen name="size_nav">40dp</dimen>
+    <dimen name="size_small">20dp</dimen>
+    <dimen name="size_large">100dp</dimen>
+    <dimen name="size_xxl">130dp</dimen>
+    <dimen name="spacing_middle">35dp</dimen>
+    <dimen name="size_s">33dp</dimen>
+    <dimen name="padding_m">5dp</dimen>
+    <dimen name="size_xxxl">320dp</dimen>
+    <dimen name="size_title">200dp</dimen>
+    <dimen name="avatar_size_l">70dp</dimen>
+    <dimen name="size_m">60dp</dimen>
 </resources>

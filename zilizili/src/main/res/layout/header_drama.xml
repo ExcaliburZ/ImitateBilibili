@@ -10,7 +10,7 @@
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="118dp">
+        android:layout_height="@dimen/size_xl">
 
         <android.support.v4.view.ViewPager
             android:id="@+id/vp_top"
@@ -25,14 +25,14 @@
             android:layout_alignParentRight="true"
             android:layout_centerHorizontal="true"
             android:layout_marginBottom="8dp"
-            android:layout_marginRight="5dp"
+            android:layout_marginRight="@dimen/padding_m"
             android:gravity="center" />
     </RelativeLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="10dp"
+        android:layout_margin="@dimen/margin_small"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:orientation="horizontal">
@@ -40,35 +40,35 @@
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="@dimen/navigation_bottom_bar_size"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/padding_m"
             android:layout_weight="1"
             android:background="@drawable/header_ripple_background"
-            android:padding="10dp"
+            android:padding="@dimen/margin_small"
             android:src="@drawable/bangumi_timeline_text" />
 
         <ImageButton
             android:layout_width="0dp"
             android:layout_height="@dimen/navigation_bottom_bar_size"
-            android:layout_margin="5dp"
+            android:layout_margin="@dimen/padding_m"
             android:layout_weight="1"
             android:background="@drawable/header_right_ripple_background"
-            android:padding="10dp"
+            android:padding="@dimen/margin_small"
             android:src="@drawable/bangumi_index_text" />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            android:layout_marginLeft="@dimen/margin_small"
             android:src="@drawable/ic_header_online" />
 
         <TextView
@@ -76,18 +76,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingLeft="@dimen/margin_middle"
             android:text="大家都在看" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/padding_m"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginTop="@dimen/padding_m"
             android:background="@drawable/gray_background"
             android:clickable="true"
-            android:padding="5dp"
+            android:padding="@dimen/padding_m"
             android:text="进去看看"
             android:textColor="#FEFEFE" />
     </LinearLayout>
@@ -96,23 +96,23 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_grid"
         android:layout_width="match_parent"
-        android:layout_height="320dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp" />
+        android:layout_height="@dimen/size_xxxl"
+        android:paddingLeft="@dimen/margin_small"
+        android:paddingRight="@dimen/margin_small" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:layout_marginTop="@dimen/margin_small"
         android:background="?android:attr/selectableItemBackground"
         android:clickable="true"
         android:gravity="center_vertical">
 
         <ImageView
-            android:layout_width="25dp"
-            android:layout_height="25dp"
-            android:layout_marginLeft="10dp"
+            android:layout_width="@dimen/size_small"
+            android:layout_height="@dimen/size_small"
+            android:layout_marginLeft="@dimen/margin_small"
             android:src="@drawable/ic_header_hot" />
 
         <TextView
@@ -120,18 +120,18 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:paddingLeft="15dp"
+            android:paddingLeft="@dimen/margin_middle"
             android:text="推荐番剧" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="5dp"
-            android:layout_marginRight="10dp"
-            android:layout_marginTop="5dp"
+            android:layout_marginBottom="@dimen/padding_m"
+            android:layout_marginRight="@dimen/margin_small"
+            android:layout_marginTop="@dimen/padding_m"
             android:background="@drawable/gray_background"
             android:clickable="true"
-            android:padding="5dp"
+            android:padding="@dimen/padding_m"
             android:text="更多"
             android:textColor="#FEFEFE" />
     </LinearLayout>

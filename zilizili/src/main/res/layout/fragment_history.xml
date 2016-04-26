@@ -30,18 +30,18 @@
 
                 <ImageButton
                     android:id="@+id/ib_menu"
-                    android:layout_width="33dp"
+                    android:layout_width="@dimen/size_s"
                     android:layout_height="match_parent"
                     android:layout_centerVertical="true"
                     android:background="?attr/selectableItemBackgroundBorderless"
-                    android:paddingLeft="15dp"
+                    android:paddingLeft="@dimen/padding_small"
                     android:src="@drawable/ic_menu_white_24dp" />
 
                 <TextView
                     style="@style/TextAppearance.App.Topbar.Title"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
-                    android:layout_marginLeft="15dp"
+                    android:layout_marginLeft="@dimen/padding_small"
                     android:layout_toRightOf="@id/ib_menu"
                     android:gravity="center_vertical"
                     android:text="@string/title_histories" />
@@ -52,7 +52,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
                     android:layout_centerVertical="true"
-                    android:layout_marginRight="15dp"
+                    android:layout_marginRight="@dimen/padding_small"
                     android:singleLine="true"
                     android:text="@string/clear"
                     android:textAppearance="@style/TextAppearance.App.Topbar.Title" />
@@ -69,7 +69,7 @@
             style="@style/TextAppearance.App.Large"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginTop="15dp"
+            android:layout_marginTop="@dimen/padding_small"
             android:gravity="center"
             android:text="@string/no_data_tips"
             android:textColor="@color/gray_dark" />

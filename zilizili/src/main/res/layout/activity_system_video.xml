@@ -5,7 +5,7 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="#000">
+        android:background="@color/_bkgd__black">
 
         <com.wings.zilizili.ui.widget.SystemVideoView
             android:id="@+id/vv_content"
@@ -15,26 +15,26 @@
 
         <ImageView
             android:id="@+id/iv_is_lock"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/size_large"
+            android:layout_height="@dimen/size_large"
             android:layout_centerVertical="true"
-            android:layout_marginLeft="-50dp"
+            android:layout_marginLeft="@dimen/padding_large_negative"
             android:background="@drawable/shape_circle_lock"
-            android:paddingLeft="50dp"
-            android:paddingRight="15dp"
+            android:paddingLeft="@dimen/padding_large"
+            android:paddingRight="@dimen/padding_small"
             android:src="@mipmap/ic_lock_outline_white_48dp"
             android:visibility="invisible" />
 
         <ImageView
             android:id="@+id/iv_is_lock2"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/size_large"
+            android:layout_height="@dimen/size_large"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:layout_marginRight="-50dp"
+            android:layout_marginRight="@dimen/padding_large_negative"
             android:background="@drawable/shape_circle_lock"
-            android:paddingLeft="15dp"
-            android:paddingRight="50dp"
+            android:paddingLeft="@dimen/padding_small"
+            android:paddingRight="@dimen/padding_large"
             android:src="@mipmap/ic_lock_outline_white_48dp"
             android:visibility="invisible" />
 
@@ -67,13 +67,12 @@
 
             <TextView
                 android:id="@+id/tv_message"
-                style="@style/common_text"
+                style="@style/CommonText"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true"
                 android:background="@drawable/shape_message"
-                android:padding="10dp"
-                android:textSize="16sp"
+                android:padding="@dimen/padding_very_small"
                 android:visibility="invisible" />
         </RelativeLayout>
     </RelativeLayout>
@@ -86,8 +85,8 @@
 
         <ImageView
             android:id="@+id/iv_load"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="@dimen/size_large"
+            android:layout_height="@dimen/size_large"
             android:layout_centerInParent="true"
             android:scaleType="center" />
 
@@ -97,7 +96,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:padding="10dp"
+            android:padding="@dimen/padding_very_small"
             android:text="@string/VideoView_buffering" />
 
         <ImageButton
@@ -105,7 +104,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="?attr/selectableItemBackgroundBorderless"
-            android:padding="10dp"
+            android:padding="@dimen/padding_very_small"
             android:src="@drawable/ica_light_ic_action_previous_item" />
 
     </RelativeLayout>

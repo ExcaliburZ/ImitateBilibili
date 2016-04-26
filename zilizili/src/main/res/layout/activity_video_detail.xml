@@ -21,11 +21,11 @@
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="?view_background"
-                android:padding="8.0dip">
+                android:padding="@dimen/padding_very_small">
 
                 <ImageView
                     android:id="@+id/cover"
-                    android:layout_width="118.0dip"
+                    android:layout_width="@dimen/size_xl"
                     android:layout_height="wrap_content"
                     android:scaleType="centerCrop"
                     android:src="@drawable/bili_default_image_tv_16_10"
@@ -37,13 +37,13 @@
                     android:layout_height="wrap_content"
                     android:layout_alignBottom="@+id/cover"
                     android:layout_alignTop="@+id/cover"
-                    android:layout_marginLeft="8.0dip"
+                    android:layout_marginLeft="@dimen/padding_very_small"
                     android:layout_toRightOf="@+id/cover"
                     android:ellipsize="end"
                     android:gravity="center_vertical"
                     android:maxLines="3"
-                    android:paddingBottom="4.0dip"
-                    android:paddingTop="4.0dip"
+                    android:paddingBottom="@dimen/padding_very_small"
+                    android:paddingTop="@dimen/padding_very_small"
                     android:text="@string/author_video_loading"
                     android:textAppearance="@style/TextAppearance.App.Title" />
 
@@ -52,7 +52,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/cover"
-                    android:layout_marginTop="8.0dip"
+                    android:layout_marginTop="@dimen/padding_very_small"
                     android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary"
@@ -63,7 +63,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/nick"
-                    android:layout_marginTop="4.0dip"
+                    android:layout_marginTop="@dimen/margin_very_small"
                     android:minWidth="50.0dip"
                     android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
@@ -75,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/nick"
                     android:layout_marginLeft="@dimen/item_spacing"
-                    android:layout_marginTop="4.0dip"
+                    android:layout_marginTop="@dimen/margin_very_small"
                     android:layout_toRightOf="@+id/info_views"
                     android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
@@ -99,7 +99,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/info_views"
-                    android:layout_marginTop="4.0dip"
+                    android:layout_marginTop="@dimen/margin_very_small"
                     android:text=" - "
                     android:textAppearance="@style/TextAppearance.App.Subtitle"
                     android:textColor="?android:textColorSecondary" />
@@ -116,19 +116,19 @@
                 <android.support.design.widget.TabLayout
                     android:id="@+id/tabs"
                     android:layout_width="fill_parent"
-                    android:layout_height="40.0dip"
+                    android:layout_height="@dimen/height_middle"
                     android:background="?view_background" />
 
                 <View
                     android:layout_width="fill_parent"
-                    android:layout_height="2.0dip"
+                    android:layout_height="@dimen/margin_very_small"
                     android:background="@drawable/shadow_top_dig" />
 
                 <android.support.v4.view.ViewPager
                     android:id="@+id/pager"
                     android:layout_width="fill_parent"
                     android:layout_height="fill_parent"
-                    android:layout_marginTop="-2.0dip" />
+                    android:layout_marginTop="@dimen/margin_very_small_negative" />
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
@@ -196,7 +196,7 @@
                 android:layout_weight="1.0"
                 android:background="?selectableItemBackgroundBorderless"
                 android:gravity="center"
-                android:text="全部缓存"
+                android:text="@string/cache_all"
                 android:textAppearance="@style/TextAppearance.App.Title" />
 
             <derson.com.multipletheme.colorUi.widget.ColorTextView
@@ -216,7 +216,7 @@
                 android:layout_weight="1.0"
                 android:background="?selectableItemBackgroundBorderless"
                 android:gravity="center"
-                android:text="离线列表"
+                android:text="@string/cache_list"
                 android:textAppearance="@style/TextAppearance.App.Title" />
         </LinearLayout>
     </FrameLayout>
