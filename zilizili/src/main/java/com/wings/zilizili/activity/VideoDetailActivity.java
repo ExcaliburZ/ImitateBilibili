@@ -27,7 +27,6 @@ import com.google.gson.Gson;
 import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
-import com.wings.zilizili.ui.fragment.BangumiFragment;
 import com.wings.zilizili.utils.PicassoImageLoader;
 import com.wings.zilizili.utils.ToastUtils;
 
@@ -63,7 +62,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         //getSupportActionBar().setDisplayShowTitleEnabled(false);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         mCover = $(R.id.cover);
-        String uri = getIntent().getStringExtra(BangumiFragment.IMAGE);
+        String uri = getIntent().getStringExtra(GlobalConstant.IMAGE_URL);
 
         PicassoImageLoader.getInstance()
                 .displayTopNewsImage(this, uri, mCover);
