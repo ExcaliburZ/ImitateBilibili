@@ -14,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
-import android.widget.FrameLayout;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
@@ -34,11 +33,8 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity
         implements LeftMenuFragment.OnLeftMenuSelectedListener {
 
-    private FragmentManager mFragmentManager;
     private ArrayList<Fragment> mFragmentLists;
     private DrawerLayout mDrawerLayout;
-    private LeftMenuFragment mLeftMenuFragment;
-    private FrameLayout mContent;
     private NoScrollViewPager vp_content;
     private long[] mHits;
     private int mItemId;
@@ -85,9 +81,6 @@ public class MainActivity extends BaseActivity
         };
         vp_content.setAdapter(new MainAdapter(getSupportFragmentManager()));
         vp_content.setOffscreenPageLimit(10);
-        mFragmentManager = getSupportFragmentManager();
-//        mContent.addView(mViewPager);
-//        changeFragment(0);
     }
 
     private void changeFragment(int position) {
@@ -125,10 +118,6 @@ public class MainActivity extends BaseActivity
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         LeftMenuFragment leftMenuFragment = new LeftMenuFragment();
         leftMenuFragment.setCurrentSelectedItemId(mItemId);
-        Fragment oldLeftMenuFragment = mFragmentManager.findFragmentByTag("com.wings.leftmenu");
-//
-//        transaction.detach(oldLeftMenuFragment);
-//        transaction.attach(oldLeftMenuFragment);
         transaction.replace(R.id.fg_left_menu, leftMenuFragment, "com.wings.leftmenu");
         transaction.commit();
     }
@@ -159,11 +148,11 @@ public class MainActivity extends BaseActivity
     public void onLeftMenuSelected(int itemId) {
         switch (itemId) {
             case R.id.nav_home:
-                changeFragment(GlobalConstant.HOMEFRAGMENT);
+                changeFragment(GlobalConstant.HOME_FRAGMENT);
                 this.mItemId = itemId;
                 break;
             case R.id.nav_histories:
-                changeFragment(GlobalConstant.HISTORYFRAGMENT);
+                changeFragment(GlobalConstant.HISTORY_FRAGMENT);
                 this.mItemId = itemId;
                 break;
             case R.id.nav_favorites:
@@ -184,7 +173,7 @@ public class MainActivity extends BaseActivity
             //android:checkable="false"
             //可以响应点击事件,但是不会被选中
             case R.id.nav_offline_manager:
-                changeFragment(GlobalConstant.HOMEFRAGMENT);
+                changeFragment(GlobalConstant.HOME_FRAGMENT);
                 break;
         }
         closeLeftMenu();

@@ -5,8 +5,8 @@ package com.wings.zilizili;
  * 存放一些运行中需要的全局常量,如服务器的地址等
  */
 public interface GlobalConstant {
-    int HOMEFRAGMENT = 0;
-    int HISTORYFRAGMENT = 1;
+    int HOME_FRAGMENT = 0;
+    int HISTORY_FRAGMENT = 1;
     String SERVER_URL = "http://182.254.156.215:8080/";
     String TX_URL = "http://182.254.156.215:8080/";
     String VIDEO_H264 = "video_3.json";

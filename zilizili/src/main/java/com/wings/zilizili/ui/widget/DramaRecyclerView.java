@@ -37,10 +37,4 @@ public class DramaRecyclerView extends RecyclerView {
         return super.canScrollVertically(direction);
 
     }
-
-//    @Override
-//    public boolean onTouchEvent(MotionEvent e) {
-////        System.out.println("DramaRecyclerView onTouchEvent");
-//        return super.onTouchEvent(e);
-//    }
 }
