@@ -245,6 +245,7 @@ public class BangumiFragment extends BaseFragment {
     //从HeadView中获取控件
     private <T extends View> T findViewInHeadView(int resId) {
         return (T) mHeadView.findViewById(resId);
+
     }
 
 
