@@ -2,6 +2,7 @@ package com.wings.zilizili.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.domain.holder.RecommendViewHolder;
 import com.wings.zilizili.utils.PicassoImageLoader;
 
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -21,11 +24,9 @@ import java.util.List;
 public class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> {
     private Context mContext;
     private List<RecommendItem> mRecommendList;
-    private OnItemClickListener onItemClickListener;
 
-    public RecommendAdapter(Context mContext, List<RecommendItem> mRecommendList, OnItemClickListener onItemClickListener) {
+    public RecommendAdapter(Context mContext, List<RecommendItem> mRecommendList) {
         this.mContext = mContext;
-        this.onItemClickListener = onItemClickListener;
         if (mRecommendList == null) {
             this.mRecommendList = new ArrayList<>();
         } else {
@@ -56,7 +57,9 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> 
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onItemClickListener.onItemClick(v, imageView, recommendItem.topimage);
+                Log.i("Drama", "onClick: onclik");
+                EventBus.getDefault().
+                        post(new ItemClickEvent(v.getId(), imageView, recommendItem.topimage));
             }
         });
     }

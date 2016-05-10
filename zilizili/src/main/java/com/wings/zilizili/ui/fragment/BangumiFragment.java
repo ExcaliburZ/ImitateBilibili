@@ -1,10 +1,7 @@
 package com.wings.zilizili.ui.fragment;
 
 
-import android.app.ActivityOptions;
-import android.content.Intent;
 import android.graphics.Rect;
-import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.support.v4.view.ViewPager;
@@ -14,15 +11,11 @@ import android.support.v7.widget.StaggeredGridLayoutManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.google.gson.Gson;
-import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
-import com.wings.zilizili.activity.VideoDetailActivity;
 import com.wings.zilizili.adapter.DramaAdapter;
-import com.wings.zilizili.adapter.OnItemClickListener;
 import com.wings.zilizili.adapter.RecommendAdapter;
 import com.wings.zilizili.adapter.TopNewsAdapter;
 import com.wings.zilizili.domain.Data;
@@ -30,7 +23,8 @@ import com.wings.zilizili.domain.DataInfo;
 import com.wings.zilizili.domain.RecommendItem;
 import com.wings.zilizili.ui.widget.DramaRecyclerView;
 
-import java.security.InvalidParameterException;
+import org.greenrobot.eventbus.EventBus;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,7 +33,7 @@ import java.util.List;
  * 主要利用为一个RecyclerView添加头布局完成主体设计
  * 头布局中又自带一个TopNews滚动条的ViewPager和其他一些数据
  */
-public class BangumiFragment extends BaseFragment implements OnItemClickListener {
+public class BangumiFragment extends BaseFragment {
 
     public static final int START_AUTO_PLAY = 0;
     public static final int PAUSE_AUTO_PLAY = 1;
@@ -99,6 +93,7 @@ public class BangumiFragment extends BaseFragment implements OnItemClickListener
     public void onPause() {
         super.onPause();
         pausePlay();
+        EventBus.getDefault().unregister(this);
     }
 
     protected void initView() {
@@ -154,14 +149,14 @@ public class BangumiFragment extends BaseFragment implements OnItemClickListener
 
     protected void setListener() {
         super.setListener();
-        mTopNewsAdapter = new TopNewsAdapter(getContext(), null, this);
+        mTopNewsAdapter = new TopNewsAdapter(getContext(), null);
         mTopNewsViewPager.setAdapter(mTopNewsAdapter);
 
         mRecyclerView.setVisibility(View.INVISIBLE);
-        mDramaAdapter = new DramaAdapter(getContext(), mHeadView, null, this);
+        mDramaAdapter = new DramaAdapter(getContext(), mHeadView, null);
         mRecyclerView.setAdapter(mDramaAdapter);
 
-        mRecommendAdapter = new RecommendAdapter(getContext(), null, this);
+        mRecommendAdapter = new RecommendAdapter(getContext(), null);
         mGridView.setAdapter(mRecommendAdapter);
         mTopNewsViewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -252,35 +247,5 @@ public class BangumiFragment extends BaseFragment implements OnItemClickListener
         return (T) mHeadView.findViewById(resId);
     }
 
-    public void enterVideoDetailActivity(String animVideoCode, String topImage, ImageView imageView) {
-        Intent intent = new Intent(getContext(), VideoDetailActivity.class);
-        intent.putExtra("av", animVideoCode);
-        intent.putExtra(GlobalConstant.IMAGE_URL, topImage);
 
-        //共享元素
-        intent.putExtra("transition", "share");
-
-        //将原先的跳转改成如下方式，注意这里面的第三个参数决定了ActivityTwo 布局中的android:transitionName的值，它们要保持一致
-        Bundle shareTransition = ActivityOptions.makeSceneTransitionAnimation(
-                mActivity, imageView, "shareTransition").toBundle();
-        mActivity.startActivity(intent,
-                shareTransition);
-    }
-
-
-    @Override
-    public void onItemClick(View v, ImageView iv, String imageUrl) {
-        switch (v.getId()) {
-            case R.id.top_news:
-            case R.id.drama_item:
-                enterVideoDetailActivity(GlobalConstant.VIDEO_CODE_MATERIAL, imageUrl, iv);
-                break;
-            case R.id.recommend_item:
-                enterVideoDetailActivity(GlobalConstant.VIDEO_CODE_ANIM, imageUrl, iv);
-                break;
-            default:
-                throw new InvalidParameterException("error Parameter");
-        }
-
-    }
 }

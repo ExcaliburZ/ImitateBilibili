@@ -16,10 +16,10 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.ui.widget.LowPrioritySwipeRefreshLayout;
-import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.utils.SingletonImageLoader;
 
 /**
@@ -54,6 +54,7 @@ public abstract class BaseFragment extends Fragment {
     protected void init() {
         initView();
         setListener();
+//        EventBus.getDefault().register(this);
     }
 
     protected void setListener() {
@@ -154,4 +155,9 @@ public abstract class BaseFragment extends Fragment {
         return (T) mRootView.findViewById(resId);
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+//        EventBus.getDefault().unregister(this);
+    }
 }

@@ -2,6 +2,7 @@ package com.wings.zilizili.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -9,6 +10,8 @@ import android.widget.ImageView;
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.TopNewsItem;
 import com.wings.zilizili.utils.PicassoImageLoader;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +23,9 @@ public class TopNewsAdapter extends PagerAdapter {
 
     private final Context context;
     private List<TopNewsItem> topNewsList;
-    private OnItemClickListener mListener;
 
-    public TopNewsAdapter(Context context, List<TopNewsItem> topNewsList, OnItemClickListener listener) {
+    public TopNewsAdapter(Context context, List<TopNewsItem> topNewsList) {
         this.context = context;
-        this.mListener = listener;
         if (topNewsList == null) {
             this.topNewsList = new ArrayList<>();
         } else {
@@ -65,7 +66,9 @@ public class TopNewsAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mListener.onItemClick(v, imageView, topNewsItem.topimage);
+                Log.i("Drama", "onClick: onclik");
+                EventBus.getDefault().
+                        post(new ItemClickEvent(v.getId(), imageView, topNewsItem.topimage));
             }
         });
 

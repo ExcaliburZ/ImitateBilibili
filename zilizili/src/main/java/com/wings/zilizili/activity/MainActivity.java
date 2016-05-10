@@ -1,5 +1,7 @@
 package com.wings.zilizili.activity;
 
+import android.app.ActivityOptions;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.SystemClock;
@@ -9,22 +11,29 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.widget.ImageView;
 
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
+import com.wings.zilizili.adapter.ItemClickEvent;
 import com.wings.zilizili.ui.fragment.HistoryFragment;
 import com.wings.zilizili.ui.fragment.HomeFragment;
 import com.wings.zilizili.ui.fragment.LeftMenuFragment;
 import com.wings.zilizili.ui.widget.NoScrollViewPager;
 import com.wings.zilizili.utils.ToastUtils;
 
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+
+import java.security.InvalidParameterException;
 import java.util.ArrayList;
 
 /**
@@ -214,6 +223,49 @@ public class MainActivity extends BaseActivity
         return super.onKeyDown(keyCode, event);
     }
 
+    @Subscribe
+    public void onEvent(ItemClickEvent event) {
+        Log.i("Mainactivity", "onEvent: eventbus");
+        switch (event.getId()) {
+            case R.id.top_news:
+            case R.id.drama_item:
+                enterVideoDetailActivity(GlobalConstant.VIDEO_CODE_MATERIAL, event.getUrl(), event.getIv());
+                break;
+            case R.id.recommend_item:
+                enterVideoDetailActivity(GlobalConstant.VIDEO_CODE_ANIM, event.getUrl(), event.getIv());
+                break;
+            default:
+                throw new InvalidParameterException("error Parameter");
+        }
+    }
+
+    public void enterVideoDetailActivity(String animVideoCode, String topImage, ImageView imageView) {
+        Intent intent = new Intent(this, VideoDetailActivity.class);
+        intent.putExtra("av", animVideoCode);
+        intent.putExtra(GlobalConstant.IMAGE_URL, topImage);
+
+        //共享元素
+        intent.putExtra("transition", "share");
+
+        //将原先的跳转改成如下方式，注意这里面的第三个参数决定了ActivityTwo 布局中的android:transitionName的值，它们要保持一致
+        Bundle shareTransition = ActivityOptions.makeSceneTransitionAnimation(
+                this, imageView, "shareTransition").toBundle();
+        this.startActivity(intent,
+                shareTransition);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        EventBus.getDefault().unregister(this);
+    }
+
     class MainAdapter extends FragmentStatePagerAdapter {
 
         public MainAdapter(FragmentManager fm) {
@@ -230,5 +282,4 @@ public class MainActivity extends BaseActivity
             return mFragmentLists.size();
         }
     }
-
 }

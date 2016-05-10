@@ -50,7 +50,6 @@ public class BaseActivity extends AppCompatActivity {
         } else {
             changeTheme(PINK_THEME);
         }
-
     }
 
     public void changeTheme() {

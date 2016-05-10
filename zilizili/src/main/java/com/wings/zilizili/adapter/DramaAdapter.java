@@ -3,6 +3,7 @@ package com.wings.zilizili.adapter;
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.StaggeredGridLayoutManager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,8 @@ import com.wings.zilizili.R;
 import com.wings.zilizili.domain.DramaItem;
 import com.wings.zilizili.domain.holder.DramaViewHolder;
 import com.wings.zilizili.utils.PicassoImageLoader;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +28,10 @@ public class DramaAdapter extends RecyclerView.Adapter<DramaViewHolder> {
     private View rootView;
     private Context context;
     private List<DramaItem> mDramaList;
-    private OnItemClickListener listener;
 
     public DramaAdapter(Context context, View mHeadView,
-                        List<DramaItem> list, OnItemClickListener listener) {
+                        List<DramaItem> list) {
         this.context = context;
-        this.listener = listener;
         this.rootView = mHeadView;
         if (list == null) {
             this.mDramaList = new ArrayList<>();
@@ -87,7 +88,9 @@ public class DramaAdapter extends RecyclerView.Adapter<DramaViewHolder> {
         holder.view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                listener.onItemClick(v, imageView, dramaItem.topimage);
+                Log.i("Drama", "onClick: onclik");
+                EventBus.getDefault().
+                        post(new ItemClickEvent(v.getId(), imageView, dramaItem.topimage));
             }
         });
     }

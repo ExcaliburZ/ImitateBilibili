@@ -33,9 +33,9 @@ dependencies {
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.4.5.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.4.5.1'
-
     compile 'tv.danmaku.ijk.media:ijkplayer-armv5:0.4.5.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-arm64:0.4.5.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-x86:0.4.5.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-exo:0.4.5.1'
+    compile 'org.greenrobot:eventbus:3.0.0'
 }
