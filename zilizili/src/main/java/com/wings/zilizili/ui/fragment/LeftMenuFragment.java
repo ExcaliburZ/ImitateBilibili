@@ -1,11 +1,9 @@
 package com.wings.zilizili.ui.fragment;
 
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,6 +11,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 
 import com.wings.zilizili.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 /**
  * 在MainActivity中加载的侧边栏Fragment
@@ -24,7 +24,6 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     private View mContentView;
     private ImageView iv_theme;
     private ViewGroup container;
-    private OnLeftMenuSelectedListener mLeftMenuSelectedListener;
     private int CurrentSelectedItemId;
 
 
@@ -37,16 +36,6 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
         this.CurrentSelectedItemId = currentSelectedItemId;
     }
 
-    @Override
-    public void onAttach(Context context) {
-        super.onAttach(context);
-        try {
-            mLeftMenuSelectedListener = (OnLeftMenuSelectedListener) context;
-        } catch (ClassCastException e) {
-            throw new ClassCastException(context.toString()
-                    + " must implement OnHeadlineSelectedListener");
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -68,7 +57,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
             @Override
             public boolean onNavigationItemSelected(MenuItem menuItem) {
                 int itemId = menuItem.getItemId();
-                mLeftMenuSelectedListener.onLeftMenuSelected(itemId);
+                EventBus.getDefault().post(new LeftMenuClickEvent(false, itemId));
                 return false;
             }
         });
@@ -79,7 +68,6 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy");
     }
 
     @Override
@@ -93,15 +81,7 @@ public class LeftMenuFragment extends Fragment implements View.OnClickListener {
 
     @Override
     public void onClick(View v) {
-        mLeftMenuSelectedListener.onItemClicked(v);
+        EventBus.getDefault().post(new LeftMenuClickEvent(true, v.getId()));
     }
 
-    public void invalidateLeftMenu() {
-    }
-
-    public interface OnLeftMenuSelectedListener {
-        void onLeftMenuSelected(int itemId);
-
-        void onItemClicked(View v);
-    }
 }

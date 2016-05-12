@@ -28,8 +28,8 @@ dependencies {
     compile 'com.android.support:recyclerview-v7:23.1.0'
     compile files('libs/gson-2.3.1.jar')
     compile files('libs/systembartint-1.0.4.jar')
-    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile files('libs/volley.jar')
+    compile 'com.google.android.gms:play-services-appindexing:8.1.0'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'tv.danmaku.ijk.media:ijkplayer-java:0.4.5.1'
     compile 'tv.danmaku.ijk.media:ijkplayer-armv7a:0.4.5.1'

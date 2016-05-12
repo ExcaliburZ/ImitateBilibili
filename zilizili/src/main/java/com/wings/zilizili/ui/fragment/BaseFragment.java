@@ -154,10 +154,4 @@ public abstract class BaseFragment extends Fragment {
     protected <T extends View> T $(int resId) {
         return (T) mRootView.findViewById(resId);
     }
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-//        EventBus.getDefault().unregister(this);
-    }
 }

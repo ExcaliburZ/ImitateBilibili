@@ -35,7 +35,6 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     private ArrayList<Fragment> mFragmentLists;
     private MainActivity mActivity;
     private ImageView homeDrawer;
-    private HomeAdapter mHomeAdapter;
     private FrameLayout mAvatar;
 
 
@@ -110,12 +109,12 @@ public class HomeFragment extends Fragment implements View.OnClickListener {
     }
 
     private void initViewPager() {
-        mHomeAdapter = new HomeAdapter(mFragmentManager);
-        mMainContent.setAdapter(mHomeAdapter);
+        HomeAdapter homeAdapter = new HomeAdapter(mFragmentManager);
+        mMainContent.setAdapter(homeAdapter);
         mMainContent.setOffscreenPageLimit(1);
 //        mTabLayout.setTabMode(TabLayout.MODE_FIXED);//设置tab模式，当前为系统默认模式
         mTabLayout.setupWithViewPager(mMainContent);//将TabLayout和ViewPager关联起来。
-        mTabLayout.setTabsFromPagerAdapter(mHomeAdapter);//给Tabs设置适配器
+        mTabLayout.setTabsFromPagerAdapter(homeAdapter);//给Tabs设置适配器
     }
 
     private void setListener() {

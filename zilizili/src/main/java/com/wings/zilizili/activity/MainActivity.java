@@ -26,6 +26,7 @@ import com.wings.zilizili.R;
 import com.wings.zilizili.adapter.ItemClickEvent;
 import com.wings.zilizili.ui.fragment.HistoryFragment;
 import com.wings.zilizili.ui.fragment.HomeFragment;
+import com.wings.zilizili.ui.fragment.LeftMenuClickEvent;
 import com.wings.zilizili.ui.fragment.LeftMenuFragment;
 import com.wings.zilizili.ui.widget.NoScrollViewPager;
 import com.wings.zilizili.utils.ToastUtils;
@@ -39,9 +40,9 @@ import java.util.ArrayList;
 /**
  * 应用的主Activity,使用MainContent部分ViewPager和侧边栏Fragment来构成主要界面
  */
-public class MainActivity extends BaseActivity
-        implements LeftMenuFragment.OnLeftMenuSelectedListener {
+public class MainActivity extends BaseActivity {
 
+    private static final String TAG = "MainActivity";
     private ArrayList<Fragment> mFragmentLists;
     private DrawerLayout mDrawerLayout;
     private NoScrollViewPager vp_content;
@@ -153,7 +154,16 @@ public class MainActivity extends BaseActivity
         }
     }
 
-    @Override
+    @Subscribe
+    public void onEvent(LeftMenuClickEvent event) {
+        Log.i(TAG, "onEvent: leftmenu");
+        if (event.isButton()) {
+            onItemClicked(event.getItemId());
+        } else {
+            onLeftMenuSelected(event.getItemId());
+        }
+    }
+
     public void onLeftMenuSelected(int itemId) {
         switch (itemId) {
             case R.id.nav_home:
@@ -188,9 +198,8 @@ public class MainActivity extends BaseActivity
         closeLeftMenu();
     }
 
-    @Override
-    public void onItemClicked(View v) {
-        switch (v.getId()) {
+    public void onItemClicked(int itemId) {
+        switch (itemId) {
             case R.id.iv_night:
             case R.id.iv_edit:
                 changeTheme();
@@ -225,7 +234,6 @@ public class MainActivity extends BaseActivity
 
     @Subscribe
     public void onEvent(ItemClickEvent event) {
-        Log.i("Mainactivity", "onEvent: eventbus");
         switch (event.getId()) {
             case R.id.top_news:
             case R.id.drama_item:
@@ -238,6 +246,7 @@ public class MainActivity extends BaseActivity
                 throw new InvalidParameterException("error Parameter");
         }
     }
+
 
     public void enterVideoDetailActivity(String animVideoCode, String topImage, ImageView imageView) {
         Intent intent = new Intent(this, VideoDetailActivity.class);

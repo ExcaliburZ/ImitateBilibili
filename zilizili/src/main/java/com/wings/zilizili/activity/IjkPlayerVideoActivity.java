@@ -114,6 +114,8 @@ public class IjkPlayerVideoActivity extends Activity implements View.OnClickList
                 case HIDE_LOCK:
                     dismissLock();
                     break;
+                default:
+                    throw new RuntimeException("unknown message");
 
             }
         }
@@ -128,7 +130,6 @@ public class IjkPlayerVideoActivity extends Activity implements View.OnClickList
         getData();
         setData();
         registerReceiver();
-        Log.i(TAG, "onCreate: ijkPlayer");
     }
 
     private void init() {
@@ -188,7 +189,6 @@ public class IjkPlayerVideoActivity extends Activity implements View.OnClickList
                 return true;
             }
         });
-//        System.out.println("start");
         mProcess.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
