@@ -2,7 +2,6 @@ package com.wings.zilizili.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
@@ -66,7 +65,6 @@ public class TopNewsAdapter extends PagerAdapter {
         view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Drama", "onClick: onclik");
                 EventBus.getDefault().
                         post(new ItemClickEvent(v.getId(), imageView, topNewsItem.topimage));
             }

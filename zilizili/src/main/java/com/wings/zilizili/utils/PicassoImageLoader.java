@@ -7,7 +7,7 @@ import com.squareup.picasso.Picasso;
 import com.wings.zilizili.R;
 
 /**
- * Created by wing on 2016/4/22.
+ * 单例的Picasso图片加载器
  */
 public class PicassoImageLoader {
     public static final String ANDROID_RESOURCE = "android.resource://";

@@ -37,6 +37,9 @@ import java.util.ArrayList;
 import tv.danmaku.ijk.media.player.IMediaPlayer;
 
 
+/**
+ * 使用IjkPlayer的Activity
+ */
 public class IjkPlayerVideoActivity extends Activity implements View.OnClickListener {
 
     private static final int UPDATE_PROCESS = 0;

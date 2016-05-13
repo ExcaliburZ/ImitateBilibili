@@ -41,7 +41,6 @@ public class BangumiFragment extends BaseFragment {
     private DramaRecyclerView mRecyclerView;
     private RecyclerView mGridView;
     private ViewPager mTopNewsViewPager;
-    private long startTime;
     private View mHeadView;
     private ArrayList<RecommendItem> mRecommendList;
     private GridLayoutManager mGridManager;
@@ -245,8 +244,6 @@ public class BangumiFragment extends BaseFragment {
     //从HeadView中获取控件
     private <T extends View> T findViewInHeadView(int resId) {
         return (T) mHeadView.findViewById(resId);
-
     }
-
 
 }

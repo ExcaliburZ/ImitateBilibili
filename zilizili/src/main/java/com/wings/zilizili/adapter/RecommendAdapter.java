@@ -2,7 +2,6 @@ package com.wings.zilizili.adapter;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,7 +56,6 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> 
         holder.rootView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.i("Drama", "onClick: onclik");
                 EventBus.getDefault().
                         post(new ItemClickEvent(v.getId(), imageView, recommendItem.topimage));
             }

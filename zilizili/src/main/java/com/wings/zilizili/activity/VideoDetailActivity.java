@@ -33,6 +33,9 @@ import com.wings.zilizili.utils.ToastUtils;
 import derson.com.multipletheme.colorUi.widget.ColorImageView;
 import derson.com.multipletheme.colorUi.widget.ColorToolbar;
 
+/**
+ * Video详情页
+ */
 public class VideoDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "VideoDetailActivity";

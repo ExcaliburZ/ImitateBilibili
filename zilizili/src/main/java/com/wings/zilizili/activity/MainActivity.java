@@ -11,7 +11,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -45,7 +44,7 @@ public class MainActivity extends BaseActivity {
     private static final String TAG = "MainActivity";
     private ArrayList<Fragment> mFragmentLists;
     private DrawerLayout mDrawerLayout;
-    private NoScrollViewPager vp_content;
+    private NoScrollViewPager mViewPagerContent;
     private long[] mHits;
     private int mItemId;
     /**
@@ -77,7 +76,7 @@ public class MainActivity extends BaseActivity {
 
     private void init() {
         mDrawerLayout = $(R.id.dl_main);
-        vp_content = $(R.id.vp_content);
+        mViewPagerContent = $(R.id.vp_content);
         mHits = new long[2];
         mFragmentLists = new ArrayList<Fragment>() {
             {
@@ -89,8 +88,8 @@ public class MainActivity extends BaseActivity {
                 add(new HistoryFragment());
             }
         };
-        vp_content.setAdapter(new MainAdapter(getSupportFragmentManager()));
-        vp_content.setOffscreenPageLimit(10);
+        mViewPagerContent.setAdapter(new MainAdapter(getSupportFragmentManager()));
+        mViewPagerContent.setOffscreenPageLimit(10);
     }
 
     private void changeFragment(int position) {
@@ -98,7 +97,7 @@ public class MainActivity extends BaseActivity {
 //        FragmentTransaction transaction = mFragmentManager.beginTransaction();
 //        transaction.replace(R.id.content_layout, mFragmentLists.get(position));
 //        transaction.commit();
-        vp_content.setCurrentItem(position, false);
+        mViewPagerContent.setCurrentItem(position, false);
     }
 
     @Override
@@ -156,10 +155,11 @@ public class MainActivity extends BaseActivity {
 
     @Subscribe
     public void onEvent(LeftMenuClickEvent event) {
-        Log.i(TAG, "onEvent: leftmenu");
         if (event.isButton()) {
+            //按钮被点击
             onItemClicked(event.getItemId());
         } else {
+            //侧边栏条目被点击
             onLeftMenuSelected(event.getItemId());
         }
     }

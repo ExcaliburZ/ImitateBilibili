@@ -3,7 +3,7 @@ package com.wings.zilizili.adapter;
 import android.widget.ImageView;
 
 /**
- * Created by wing on 2016/5/10.
+ * 番剧页中各种View被点击的Event
  */
 public class ItemClickEvent {
     private int id;

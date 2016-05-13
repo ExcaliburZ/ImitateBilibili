@@ -35,6 +35,9 @@ import com.wings.zilizili.utils.ToastUtils;
 import java.util.ArrayList;
 
 
+/**
+ * 使用系统播放器进行播放的Activity
+ */
 public class SystemVideoActivity extends Activity implements View.OnClickListener {
 
     private static final int UPDATE_PROCESS = 0;

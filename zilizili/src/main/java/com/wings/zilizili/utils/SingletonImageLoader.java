@@ -10,7 +10,7 @@ import com.android.volley.toolbox.ImageLoader;
 import com.android.volley.toolbox.Volley;
 
 /**
- * Created by wing on 2015/12/7.
+ * 自己实现的简单三级缓存图片加载器,使用Picasso替代
  */
 public class SingletonImageLoader {
     private static SingletonImageLoader mInstance;

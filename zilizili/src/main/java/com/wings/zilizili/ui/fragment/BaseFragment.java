@@ -29,8 +29,6 @@ import com.wings.zilizili.utils.SingletonImageLoader;
  */
 public abstract class BaseFragment extends Fragment {
 
-    //TODO
-    //refresh may cause ANR ,caused by input event,need fixed.
     protected LowPrioritySwipeRefreshLayout mContentView;
     protected View mRootView;
     protected MainActivity mActivity;
@@ -54,7 +52,6 @@ public abstract class BaseFragment extends Fragment {
     protected void init() {
         initView();
         setListener();
-//        EventBus.getDefault().register(this);
     }
 
     protected void setListener() {
@@ -66,7 +63,6 @@ public abstract class BaseFragment extends Fragment {
                 if (isRefreshing) {
                     return;
                 }
-//                getDataFromServer();
                 getDataWithVolley();
             }
         });

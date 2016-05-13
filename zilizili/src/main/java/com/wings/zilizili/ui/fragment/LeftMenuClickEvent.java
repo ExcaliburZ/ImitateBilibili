@@ -1,7 +1,7 @@
 package com.wings.zilizili.ui.fragment;
 
 /**
- * Created by wing on 2016/5/12.
+ * 侧边栏各种Item被点击的Event
  */
 public class LeftMenuClickEvent {
     private int itemId;
