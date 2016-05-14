@@ -4,6 +4,7 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,7 +21,17 @@ import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.ui.widget.LowPrioritySwipeRefreshLayout;
+import com.wings.zilizili.utils.OkHttpClientManager;
 import com.wings.zilizili.utils.SingletonImageLoader;
+
+import java.io.IOException;
+
+import okhttp3.Call;
+import okhttp3.Callback;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by wing on 2015/10/28.
@@ -29,6 +40,7 @@ import com.wings.zilizili.utils.SingletonImageLoader;
  */
 public abstract class BaseFragment extends Fragment {
 
+    private static final String TAG = "BaseFragment";
     protected LowPrioritySwipeRefreshLayout mContentView;
     protected View mRootView;
     protected MainActivity mActivity;
@@ -63,7 +75,7 @@ public abstract class BaseFragment extends Fragment {
                 if (isRefreshing) {
                     return;
                 }
-                getDataWithVolley();
+                getDataWithOkHttp();
             }
         });
     }
@@ -81,7 +93,7 @@ public abstract class BaseFragment extends Fragment {
                 mContentView.getViewTreeObserver().removeGlobalOnLayoutListener(this);
                 mContentView.setRefreshing(true);
                 isRefreshing = true;
-                getDataWithVolley();
+                getDataWithOkHttp();
             }
         });
         mImageLoader = SingletonImageLoader.getInstance(mActivity).getImageLoader();
@@ -132,6 +144,54 @@ public abstract class BaseFragment extends Fragment {
         // Add the request to the RequestQueue.
         queue.add(jsonRequest);
     }
+
+    /**
+     * 根据URL从服务器获取数据,利用RxJava调用解析数据和刷新界面的方法
+     */
+    protected void getDataWithOkHttp() {
+
+        String url = GlobalConstant.TX_URL + URL;
+        OkHttpClientManager.getInstance().getAsync(url, new Callback() {
+            @Override
+            public void onResponse(Call call, final okhttp3.Response response) throws IOException {
+                Observable.create(new Observable.OnSubscribe<Void>() {
+                    @Override
+                    public void call(Subscriber<? super Void> subscriber) {
+                        try {
+                            String result = response.body().string();
+                            decodeResult(result);
+                            Log.i(TAG, "call: get with okHttp");
+                            subscriber.onCompleted();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            subscriber.onError(e);
+                        }
+                    }
+                }).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Void>() {
+                            @Override
+                            public void onNext(Void aVoid) {
+                            }
+
+                            @Override
+                            public void onCompleted() {
+                                notifyDataRefresh();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                            }
+                        });
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.i(TAG, "onFailure: failed");
+            }
+        });
+    }
+
 
     /**
      * 获取到的数据解析完毕,可以刷新界面了

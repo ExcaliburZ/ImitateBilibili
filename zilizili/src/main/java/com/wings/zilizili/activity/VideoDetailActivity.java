@@ -17,21 +17,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.google.gson.Gson;
 import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
 import com.wings.zilizili.domain.VideoDetailInfo;
+import com.wings.zilizili.utils.OkHttpClientManager;
 import com.wings.zilizili.utils.PicassoImageLoader;
 import com.wings.zilizili.utils.ToastUtils;
 
+import java.io.IOException;
+
 import derson.com.multipletheme.colorUi.widget.ColorImageView;
 import derson.com.multipletheme.colorUi.widget.ColorToolbar;
+import okhttp3.Call;
+import okhttp3.Callback;
+import rx.Observable;
+import rx.Subscriber;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.schedulers.Schedulers;
 
 /**
  * Video详情页
@@ -39,6 +42,7 @@ import derson.com.multipletheme.colorUi.widget.ColorToolbar;
 public class VideoDetailActivity extends BaseActivity implements View.OnClickListener {
 
     private static final String TAG = "VideoDetailActivity";
+    private static final String VIDEO_CODE = "123456";
     private ColorToolbar mColorToolbar;
     private String av;
     private TabLayout mTabLayout;
@@ -101,7 +105,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         initData();
         initView();
         setListener();
-        getDataWithVolley();
+        getDataWithOkHttp();
     }
 
     @Override
@@ -115,45 +119,50 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         mPlayButton.setOnClickListener(this);
     }
 
-    /**
-     * 根据URL从服务器获取数据,并调用解析数据和刷新界面的方法
-     */
-    protected void getDataWithVolley() {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(this);
-        String uri = TextUtils.equals(av, "123456") ?
+    protected void getDataWithOkHttp() {
+        String videoUrl = TextUtils.equals(av, VIDEO_CODE) ?
                 GlobalConstant.VIDEO_MPG :
                 GlobalConstant.VIDEO_MPG_BIG;
-        StringRequest jsonRequest = new StringRequest(
-                Request.Method.GET,
-                GlobalConstant.TX_URL + uri,
-                new Response.Listener<String>() {
+        String url = GlobalConstant.TX_URL + videoUrl;
+        OkHttpClientManager.getInstance().getAsync(url, new Callback() {
+            @Override
+            public void onResponse(Call call, final okhttp3.Response response) throws IOException {
+                Observable.create(new Observable.OnSubscribe<Void>() {
                     @Override
-                    public void onResponse(final String result) {
-                        new Thread(new Runnable() {
+                    public void call(Subscriber<? super Void> subscriber) {
+                        try {
+                            String result = response.body().string();
+                            decodeResult(result);
+                            Log.i(TAG, "call: get with okHttp");
+                            subscriber.onCompleted();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                            subscriber.onError(e);
+                        }
+                    }
+                }).subscribeOn(Schedulers.io())
+                        .observeOn(AndroidSchedulers.mainThread())
+                        .subscribe(new Subscriber<Void>() {
                             @Override
-                            public void run() {
-                                decodeResult(result);
-                                System.out.println("over with volley");
-                                VideoDetailActivity.this.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        notifyDataRefresh();
-                                    }
-                                });
+                            public void onNext(Void aVoid) {
                             }
-                        }).start();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println("onErrorResponse");
-                    }
-                }
-        );
-        // Add the request to the RequestQueue.
-        queue.add(jsonRequest);
+
+                            @Override
+                            public void onCompleted() {
+                                notifyDataRefresh();
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+                            }
+                        });
+            }
+
+            @Override
+            public void onFailure(Call call, IOException e) {
+                Log.i(TAG, "onFailure: failed");
+            }
+        });
     }
 
     private void notifyDataRefresh() {

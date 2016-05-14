@@ -16,4 +16,7 @@ public class ApplicationTest extends ApplicationTestCase<Application> {
     public void test1() {
         System.out.println(new Solution().addDigits(5));
     }
+
+    public void testOkHttp() {
+    }
 }
