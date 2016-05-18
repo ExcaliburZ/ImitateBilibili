@@ -10,19 +10,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewTreeObserver;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.ImageLoader;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 import com.wings.zilizili.GlobalConstant;
 import com.wings.zilizili.R;
 import com.wings.zilizili.activity.MainActivity;
 import com.wings.zilizili.ui.widget.LowPrioritySwipeRefreshLayout;
 import com.wings.zilizili.utils.OkHttpClientManager;
-import com.wings.zilizili.utils.SingletonImageLoader;
 
 import java.io.IOException;
 
@@ -46,7 +38,6 @@ public abstract class BaseFragment extends Fragment {
     protected MainActivity mActivity;
     protected String URL;
     protected boolean isRefreshing;
-    protected ImageLoader mImageLoader;
 
 
     @Override
@@ -71,7 +62,6 @@ public abstract class BaseFragment extends Fragment {
         mContentView.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override //刷新时回调方法
             public void onRefresh() {
-                System.out.println("onRefresh");
                 if (isRefreshing) {
                     return;
                 }
@@ -96,8 +86,6 @@ public abstract class BaseFragment extends Fragment {
                 getDataWithOkHttp();
             }
         });
-        mImageLoader = SingletonImageLoader.getInstance(mActivity).getImageLoader();
-
     }
 
     /**
@@ -107,43 +95,6 @@ public abstract class BaseFragment extends Fragment {
      */
     protected abstract String initURL();
 
-    /**
-     * 根据URL从服务器获取数据,并调用解析数据和刷新界面的方法
-     */
-    protected void getDataWithVolley() {
-        // Instantiate the RequestQueue.
-        RequestQueue queue = Volley.newRequestQueue(mActivity);
-        StringRequest jsonRequest = new StringRequest(
-                Request.Method.GET,
-                GlobalConstant.TX_URL + URL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(final String result) {
-                        new Thread(new Runnable() {
-                            @Override
-                            public void run() {
-                                decodeResult(result);
-                                System.out.println("over with volley");
-                                mActivity.runOnUiThread(new Runnable() {
-                                    @Override
-                                    public void run() {
-                                        notifyDataRefresh();
-                                    }
-                                });
-                            }
-                        }).start();
-                    }
-                },
-                new Response.ErrorListener() {
-                    @Override
-                    public void onErrorResponse(VolleyError volleyError) {
-                        System.out.println("onErrorResponse");
-                    }
-                }
-        );
-        // Add the request to the RequestQueue.
-        queue.add(jsonRequest);
-    }
 
     /**
      * 根据URL从服务器获取数据,利用RxJava调用解析数据和刷新界面的方法

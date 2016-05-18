@@ -35,6 +35,7 @@ import org.greenrobot.eventbus.Subscribe;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 应用的主Activity,使用MainContent部分ViewPager和侧边栏Fragment来构成主要界面
@@ -42,7 +43,9 @@ import java.util.ArrayList;
 public class MainActivity extends BaseActivity {
 
     private static final String TAG = "MainActivity";
-    private ArrayList<Fragment> mFragmentLists;
+
+    public List<Fragment> mFragmentLists;
+
     private DrawerLayout mDrawerLayout;
     private NoScrollViewPager mViewPagerContent;
     private long[] mHits;
