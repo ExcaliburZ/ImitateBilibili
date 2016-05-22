@@ -12,13 +12,11 @@ import com.wings.zilizili.R;
 public class PicassoImageLoader {
     public static final String ANDROID_RESOURCE = "android.resource://";
     public static final String FOREWARD_SLASH = "/";
-    private static PicassoImageLoader instance = new PicassoImageLoader();
-
     private PicassoImageLoader() {
     }
 
     public static PicassoImageLoader getInstance() {
-        return instance;
+        return SingletonHolder.INSTANCE;
     }
 
     public void displayRecommendImage(Context context, String uri, ImageView view) {
@@ -43,5 +41,10 @@ public class PicassoImageLoader {
                 .load(uri)
                 .placeholder(R.drawable.bili_default_image_tv_32_10)
                 .into(view);
+    }
+
+    //Singleton
+    private static class SingletonHolder {
+        private static final PicassoImageLoader INSTANCE = new PicassoImageLoader();
     }
 }
