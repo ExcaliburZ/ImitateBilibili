@@ -18,7 +18,7 @@ import okhttp3.Response;
  */
 public class OkHttpClientManager {
     private static final String TAG = "OkHttpClientManager";
-    private static OkHttpClientManager mInstance;
+    private static volatile OkHttpClientManager mInstance;
     private OkHttpClient mOkHttpClient;
     private Handler mDelivery;
     private Gson mGson;
@@ -41,6 +41,7 @@ public class OkHttpClientManager {
         return mInstance;
     }
 
+    //Demo how to use okHttp
     public static void getDataWithOkHttp() {
         //创建okHttpClient对象
         OkHttpClient mOkHttpClient = new OkHttpClient();

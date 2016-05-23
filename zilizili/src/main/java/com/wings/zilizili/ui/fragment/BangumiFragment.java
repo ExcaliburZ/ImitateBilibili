@@ -198,7 +198,7 @@ public class BangumiFragment extends BaseFragment {
 
         //初始化TopNews的指示器并选中第一个
         initRelativePointSet();
-        mTopNewsViewPager.setCurrentItem(mTopNewsAdapter.getTopNewsList().size() * 50);
+        mTopNewsViewPager.setCurrentItem(0);
 
         //开启自动播放
         startPlay();

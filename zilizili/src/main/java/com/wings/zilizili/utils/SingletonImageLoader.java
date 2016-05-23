@@ -21,11 +21,15 @@ public class SingletonImageLoader {
     private SingletonImageLoader(Context context) {
         mCtx = context;
         mRequestQueue = getRequestQueue();
-
         mImageLoader = new ImageLoader(mRequestQueue,
                 new ImageLoader.ImageCache() {
                     private final LruCache<String, Bitmap>
-                            cache = new LruCache<String, Bitmap>(20);
+                            cache = new LruCache<String, Bitmap>((int) (Runtime.getRuntime().maxMemory() / 8)) {
+                        @Override
+                        protected int sizeOf(String key, Bitmap value) {
+                            return value.getRowBytes() * value.getHeight();
+                        }
+                    };
 
                     @Override
                     public Bitmap getBitmap(String url) {

@@ -20,9 +20,12 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.Response;
 import rx.Observable;
 import rx.Subscriber;
 import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.functions.Func1;
 import rx.schedulers.Schedulers;
 
 /**
@@ -104,36 +107,9 @@ public abstract class BaseFragment extends Fragment {
         String url = GlobalConstant.TX_URL + URL;
         OkHttpClientManager.getInstance().getAsync(url, new Callback() {
             @Override
-            public void onResponse(Call call, final okhttp3.Response response) throws IOException {
-                Observable.create(new Observable.OnSubscribe<Void>() {
-                    @Override
-                    public void call(Subscriber<? super Void> subscriber) {
-                        try {
-                            String result = response.body().string();
-                            decodeResult(result);
-                            Log.i(TAG, "call: get with okHttp");
-                            subscriber.onCompleted();
-                        } catch (IOException e) {
-                            e.printStackTrace();
-                            subscriber.onError(e);
-                        }
-                    }
-                }).subscribeOn(Schedulers.io())
-                        .observeOn(AndroidSchedulers.mainThread())
-                        .subscribe(new Subscriber<Void>() {
-                            @Override
-                            public void onNext(Void aVoid) {
-                            }
-
-                            @Override
-                            public void onCompleted() {
-                                notifyDataRefresh();
-                            }
-
-                            @Override
-                            public void onError(Throwable e) {
-                            }
-                        });
+            public void onResponse(Call call, final Response response) throws IOException {
+                String responseStr = response.body().string();
+                notifyDataMap(responseStr);
             }
 
             @Override
@@ -143,6 +119,59 @@ public abstract class BaseFragment extends Fragment {
         });
     }
 
+    private void notifyData(final Response response) {
+        Observable.create(new Observable.OnSubscribe<Void>() {
+            @Override
+            public void call(Subscriber<? super Void> subscriber) {
+                try {
+                    String result = response.body().string();
+                    decodeResult(result);
+                    Log.i(TAG, "call: get with okHttp");
+                    subscriber.onCompleted();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    subscriber.onError(e);
+                }
+            }
+        }).subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Subscriber<Void>() {
+                    @Override
+                    public void onNext(Void aVoid) {
+                    }
+
+                    @Override
+                    public void onCompleted() {
+                        notifyDataRefresh();
+                    }
+
+                    @Override
+                    public void onError(Throwable e) {
+                    }
+                });
+    }
+
+    private void notifyDataMap(String response) {
+        Observable.just(response)
+                .observeOn(Schedulers.io())
+                .map(new Func1<String, Void>() {
+                    @Override
+                    public Void call(String s) {
+                        decodeResult(s);
+                        Log.i(TAG, "call: MAP");
+                        return null;
+                    }
+                })
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(new Action1<Void>() {
+                    @Override
+                    public void call(Void aVoid) {
+                        notifyDataRefresh();
+                    }
+                });
+
+    }
 
     /**
      * 获取到的数据解析完毕,可以刷新界面了
