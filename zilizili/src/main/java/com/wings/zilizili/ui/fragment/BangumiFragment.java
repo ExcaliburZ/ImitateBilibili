@@ -205,6 +205,7 @@ public class BangumiFragment extends BaseFragment {
     }
 
     private void startPlay() {
+        mHandler.removeCallbacksAndMessages(null);
         mHandler.sendEmptyMessageDelayed(START_AUTO_PLAY, 3000);
     }
 

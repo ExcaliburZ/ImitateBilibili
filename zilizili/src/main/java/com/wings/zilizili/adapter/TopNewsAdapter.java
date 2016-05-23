@@ -42,7 +42,7 @@ public class TopNewsAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return topNewsList.size() * 2;
+        return 12;
     }
 
     @Override
