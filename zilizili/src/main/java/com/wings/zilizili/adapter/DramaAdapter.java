@@ -79,7 +79,7 @@ public class DramaAdapter extends RecyclerView.Adapter<DramaViewHolder> {
         holder.title.setText(dramaItem.name);
         final ImageView imageView = holder.image;
         Integer height = Integer.valueOf(dramaItem.height);
-        PicassoImageLoader.getInstance().
+        PicassoImageLoader.INSTANCE.
                 displayBangumiImage(context, dramaItem.topimage, imageView);
 
         ViewGroup.LayoutParams params = imageView.getLayoutParams();

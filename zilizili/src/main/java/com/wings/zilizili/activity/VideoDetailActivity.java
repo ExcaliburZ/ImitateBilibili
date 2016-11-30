@@ -71,7 +71,7 @@ public class VideoDetailActivity extends BaseActivity implements View.OnClickLis
         mCover = $(R.id.cover);
         String uri = getIntent().getStringExtra(GlobalConstant.IMAGE_URL);
 
-        PicassoImageLoader.getInstance()
+        PicassoImageLoader.INSTANCE
                 .displayTopNewsImage(this, uri, mCover);
         mNick = $(R.id.nick);
         mInfoViews = $(R.id.info_views);

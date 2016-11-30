@@ -72,16 +72,6 @@ public class BangumiFragment extends BaseFragment {
         // Required empty public constructor
     }
 
-    private void pausePlay() {
-        mHandler.removeCallbacksAndMessages(null);
-    }
-
-    private void ResumePlay() {
-        int currentItem = mTopNewsViewPager.getCurrentItem();
-        mTopNewsViewPager.setCurrentItem(++currentItem);
-        startPlay();
-    }
-
     @Override
     public void onResume() {
         super.onResume();
@@ -93,6 +83,16 @@ public class BangumiFragment extends BaseFragment {
         super.onPause();
         pausePlay();
         EventBus.getDefault().unregister(this);
+    }
+
+    private void pausePlay() {
+        mHandler.removeCallbacksAndMessages(null);
+    }
+
+    private void ResumePlay() {
+        int currentItem = mTopNewsViewPager.getCurrentItem();
+        mTopNewsViewPager.setCurrentItem(++currentItem);
+        startPlay();
     }
 
     protected void initView() {

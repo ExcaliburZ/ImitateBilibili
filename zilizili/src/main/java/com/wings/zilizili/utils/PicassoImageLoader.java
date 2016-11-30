@@ -9,15 +9,10 @@ import com.wings.zilizili.R;
 /**
  * 单例的Picasso图片加载器
  */
-public class PicassoImageLoader {
-    public static final String ANDROID_RESOURCE = "android.resource://";
-    public static final String FOREWARD_SLASH = "/";
-    private PicassoImageLoader() {
-    }
-
-    public static PicassoImageLoader getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
+public enum PicassoImageLoader {
+    INSTANCE;
+    String ANDROID_RESOURCE = "android.resource://";
+    String FOREWARD_SLASH = "/";
 
     public void displayRecommendImage(Context context, String uri, ImageView view) {
         Picasso
@@ -43,8 +38,4 @@ public class PicassoImageLoader {
                 .into(view);
     }
 
-    //Singleton
-    private static class SingletonHolder {
-        private static final PicassoImageLoader INSTANCE = new PicassoImageLoader();
-    }
 }

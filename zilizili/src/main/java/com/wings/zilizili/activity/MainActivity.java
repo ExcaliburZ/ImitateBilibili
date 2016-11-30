@@ -32,6 +32,7 @@ import com.wings.zilizili.utils.ToastUtils;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.security.InvalidParameterException;
 import java.util.ArrayList;
@@ -156,7 +157,7 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    @Subscribe
+    @Subscribe(threadMode = ThreadMode.MAIN, sticky = true)
     public void onEvent(LeftMenuClickEvent event) {
         if (event.isButton()) {
             //按钮被点击

@@ -49,7 +49,7 @@ public class RecommendAdapter extends RecyclerView.Adapter<RecommendViewHolder> 
         final RecommendItem recommendItem = mRecommendList.get(position);
         holder.title.setText("\u3000" + recommendItem.name);
         final ImageView imageView = holder.image;
-        PicassoImageLoader.getInstance().
+        PicassoImageLoader.INSTANCE.
                 displayRecommendImage(mContext, recommendItem.topimage, imageView);
         holder.online.setText(recommendItem.playCount);
 

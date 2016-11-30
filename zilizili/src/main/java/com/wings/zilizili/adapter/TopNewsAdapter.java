@@ -60,7 +60,7 @@ public class TopNewsAdapter extends PagerAdapter {
         View view = View.inflate(context, R.layout.item_top_news, null);
         final ImageView imageView = (ImageView) view.findViewById(R.id.iv_item);
         final TopNewsItem topNewsItem = topNewsList.get(position);
-        PicassoImageLoader.getInstance().
+        PicassoImageLoader.INSTANCE.
                 displayTopNewsImage(context, topNewsItem.topimage, imageView);
         view.setOnClickListener(new View.OnClickListener() {
             @Override
